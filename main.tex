@@ -31,7 +31,7 @@
 
 
 %Roba per il titolo
-\titolo{Appunti Esempio}
+\titolo{Appunti di Controllo di Sistemi Meccanici}
 \autore{Tiziano Costa}
 %comando della miaclasse per il titolo
 \primapag
@@ -44,29 +44,13 @@
 
 
 %se voglio posso mettere l'indice togliendo le percentuali
-\renewcommand*\contentsname{Indice}
-\tableofcontents
+%\renewcommand*\contentsname{Indice}
+%\tableofcontents
 
-
-
-%Posso scrivere roba qui
-
- 
 %...%
 
-
-% o in alternativa posso scrivere roba su un altro file libero 
-% \input{appunti_esempio}
-%oppure se ho una cartella con vari file uso import (richiede il pkg import)
-\import{Sottofile/}{file1}
-
-\chapter{Fuori da sottofile}
-Devo scrivere qui?
-
-\section{Fuori da sottofile}
-Tanto per vedere se va bene, numero sezione: \thesection
-\section{Fuori da sottofile2}
-Tanto per vedere se va bene, numero sezione: \thesection
+\import{Sottofile/}{Introduzione}
+\import{Sottofile/}{Modellistica}
 
 
 \end{document}

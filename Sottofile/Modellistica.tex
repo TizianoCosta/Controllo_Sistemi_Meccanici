@@ -1,0 +1,74 @@
+\capitolo{Modellistica di sistemi meccanici}
+In seguito saranno esposti una serie di modelli utili per diversi aspetti fisici presenti nei sistemi meccanici.
+
+\sezione{Bilancio di Potenza}
+Per studiare i sistemi meccanici viene utilizzato il bilancio di potenza, per cui vi sia variazione di energia cinetica.
+$$\sum_i W_i = \derivata{E_c}{t}$$
+La somma delle potenze (erogate e assorbite) dalle forze esterne è uguale alla derivata nel tempo dell'energia cinetica dell'intero sistema.
+
+\paragrafo{Potenza:}
+La potenza nel caso di forza e velocità applicate in un punto di moto cartesiano è: $W_i=\pm F_i \cdot v_{i,//}$, dove il segno è scelto in base alla concordanza o discordanza dei segni delle convezioni\footnote{Quando si parla di convenzioni si intende una scelta arbitraria di segni che potrebbe o meno rappresentare il verso fisico della grandezza rappresentata.} dei segni di forza e velocità tangente;
+Nel caso di coppia e velocità angolari applicate rispetto un asse di rotazione è: $W_i = \pm C_i \cdot \VelAng_i$, dove anche in questo caso il segno viene scelto in base alla concordanza o discordanza dei segni delle convenzioni di coppia e velocità angolare.
+
+\paragrafo{Energia Cinetica:}
+L'energia cinetica nella formula è quella totale del sistema che è pari alla sommatoria delle singole energie cinetiche.
+
+\sottosezione{Step di convenzione}
+In seguito sono esposti i passi tipici da effettuare quando si vuole scegliere una convenzione in un sistema:
+
+\begin{enumerate}
+    \item Convenzione di positività di $C_m$
+    \item Convenzione di velocità degli alberi, con $\VelAng_m$ concorde a $C_m$
+    \item Di conseguenza al punto 2 determinare $\VelAng_c$ in base al riduttore e in particolare se sia invertente o meno
+    \item Introduzione del rapporto di trasmissione $\tau_r=\frac{\VelAng_c}{\VelAng_m}$, per cui, considerando il rapporto costante vale anche $\tau_r=\frac{\AccAng_c}{\AccAng_m}$
+    \item Infine scelgo la convenzione per la coppia di carico $C_c$, che tendenzialmente sarà opposta alla convenzione di velocità $\VelAng_c$.
+\end{enumerate}
+
+\sottosezione{Motore Riduttore Carico}
+Esempio classico di sistema meccatronico, in prima approssimazione valutato con idealità di riduttore (senza gioco, senza perdite di potenza, momento di inerzia nullo) e momento di inerzia del carico costante.
+
+%% aggiungere figura, creare una figura senza alcun verso, da tenere come base per altre considerazioni future, cercare di farla quanto più generica possibile, poi inserire qua quella coi versi delle forze e velocità come a pag 1
+
+\begin{itemize}
+    \item $J_c$: momento di inerzia del carico rispetto il suo asse di rotazione\footnote{NB: L'asse attorno cui viene calcolato il momento di inerzia va sempre specificato!!}
+    \item $J_m$: momento di inerzia del motore rispetto il suo asse di rotazione
+    \item $C_m$: coppia erogata dal motore, considerata come coppia esterna perché "applicata" dallo statore al rotore
+    \item $C_c$: coppia applicata al carico.
+\end{itemize}
+
+\paragrafo{Bilancio potenza:}
+La potenza delle forze esterne del sistema è data dalla potenza erogata dal motore e quella assorbita dal carico: $\sum_i W_i=C_m \VelAng_m -C_c \VelAng_c=\left(C_m -C_c \tau_r\right)\VelAng_m$. L'energia cinetica è data dalla somma delle singole energie cinetiche, quindi contributo di inerzia del motore e del carico: $E_c=\mezzo \left(J_m + J_c\tau_r^2 \right)\VelAng_m^2=\mezzo J_{eq} \VelAng_m^2$.
+La derivata della energia cinetica diventa quindi $\derivata{E_c}{t}=\mezzo J_{eq}\derivata{\VelAng_m^2}{t}=J_{eq}\VelAng_m \AccAng_m$.
+Considerando quindi che solitamente del carico sono note o ricavabili le specifiche, determino la coppia erogata dal motore, a seguito di semplificazioni: $$C_m=\left(J_m+J_c\tau_r^2\right)\AccAng_m+C_c\tau_r$$.
+
+\paragrafo{Trasmissioni in serie:}
+Nel caso vi fossero nel sistema trasmissioni in serie quanto detto sopra sarebbe ancora valido, la differenza sostanziale si vedrebbe nel momento di inerzia equivalente.
+Nel caso di un riduttore avente in serie un sistema vite madrevite, su cui è posato un carico da traslare, si otterrebbe $J_{eq}=J_m+J_v \tau^2_r + M \tau_r^2 \tau_v^2$, in questo caso inoltre il carico non sarebbe una coppia, bensì una forza: $C_m=J_{eq}\AccAng_m + F_r \tau_r \tau_v$.
+
+\sottosezione{Perdite di potenza in trasmissione}
+Una trasmissione reale avrà una certa perdita di potenza legata a fenomeni di attrito, che possono essere raggruppati in un unico contributo: $\sum_i W_i - W_p = \derivata{E_c}{t}$, con $W_p>0$.
+Inoltre è possibile definire un rendimento: $\eta=\frac{|W_{out}|}{W_{in}}$.
+
+\paragrafo{Fattori critici per rendimento:} 
+I fattori che influenzano maggiormente il rendimento sono:
+\begin{itemize}
+    \item Tipo di trasmissione, quindi il tipo di geometria e di strisciamento superficiale
+    \item Stato delle superfici: tipo di materiale, rugosità, lubrificazione, trattamenti superficiali, pulizia
+    \item Condizioni operative come temperatura, coppia/forza/velocità trasmessa
+\end{itemize}
+Nonostante ciò a catalogo è tipico trovare un unico valore, tendenzialmente la condizione migliore, nominale.
+
+\paragrafo{Verso del flusso di potenza:}
+Il riduttore ha un verso preferenziale per cui il rendimento è migliore, ed è cosa comune nei casi in cui vi sia una differenza di velocità.
+Per rotismi epicicloidali il rendimento migliore è quello da riduttore; per viti madreviti, quello migliore è da rotazione a traslazione.
+Esiste una relazione empirica tra rendimento preferenziale e non:
+\[
+\eta_\textup{non preferenziale} = 
+\begin{cases} 
+    2 - \frac{1}{\eta_\textup{pref}} & \text{se } \eta_\textup{pref} \geqslant 0.5 \\
+    0 & \text{se } \eta_\textup{pref} \leqslant 0.5
+\end{cases}
+\]
+Rendimento nullo significa irreversibilità del moto.
+
+% pag 4 zona di calcolo della potenza persa nel caso mot+rid+carico
