@@ -1,0 +1,43 @@
+\usepackage[utf8]{inputenc}
+
+%da usare per subfile
+\usepackage[subpreambles=true]{standalone}
+%se ho subfile tex dentro cartelle
+%\usepackage{import} 
+
+\usepackage{color}
+
+%American Mathematic Society Symbols, sono simboli matematici particolari extra
+%\usepackage{amssymb}
+\usepackage{amsmath}   % <-- for \eqref
+
+%Per mettere link dentro i file
+%Per permettere una table of content cliccabile
+\usepackage[hidelinks]{hyperref}
+
+\hypersetup{
+    colorlinks=false, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=black,  %choose some color if you want links to stand out
+}
+
+%Simboli molto particolari tipo il pallino o note musicali
+%\usepackage{textcomp}
+
+%\usepackage{svg}
+\usepackage{graphicx}
+
+\usepackage{mathtools}
+
+% Estensione per le funzioni array e tabular
+%\usepackage{array}
+
+%\usepackage{circuitikz}
+%\usepackage{tikz}
+%\usepackage{wrapfig} 
+
+\graphicspath{{./Immagini/}} %percorso immagini
+
+
+%Subfile per funzionare bene va caricato alla fine di tutto
+%\usepackage{subfiles}

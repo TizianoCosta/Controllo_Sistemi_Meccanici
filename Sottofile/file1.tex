@@ -1,0 +1,39 @@
+%se voglio compilare solo questo file servono le seguenti righe
+\documentclass[class=miaclasse, crop=false]{standalone}
+\usepackage[subpreambles=true]{standalone}
+
+%se voglio compilare questo file come file a sè mi servono i pkgs, uso import
+\usepackage{import}
+\import{Sottofile/}{pacchetti}
+
+
+%begin document posso cavarlo se non mi interessa compilare questo file singolarmente
+\begin{document}
+	
+ \capitolo{Ciao}
+ Ciao come precaojda
+  dajojia
+  \sezione{Ciao0.1}
+  Blabla bal bla blla
+  Verifico numero sezione: \thesection
+  
+  \sottosezione{Ciao0.0.1}
+  Blabla  bla bla
+  Verifico numero sottosezione: \thesubsection
+  
+  \paragrafo{Ciao0.0.0.1}
+  Blablablaaaa
+  Verifico numero paragrafo: \theparagraph
+  
+  \sottoparagrafo{Ciao 0.0.0.0.1}
+  BLaaaahajda
+  Verifico numero sottoparagrafo: \thesubparagraph
+  
+  
+  \capitolo{Ciao1}
+  Lorem ipsum ciao ciao ciao
+  
+  \section{Ciao1.1}
+  Verifico numero sezione: \thesection
+  
+\end{document}

@@ -1,0 +1,17 @@
+Comando per i capitoli:
+
+%capitolo
+%\def\@makechapterhead#1{%
+%  \vspace*{10\p@}% <----------------- Space from top of page to Chapter #
+%  {\parindent \z@ \raggedright \normalfont
+%    \ifnum \c@secnumdepth >\m@ne
+%        \huge\bfseries \thechapter. %\@chapapp\space % <-- Chapter #
+        %\par\nobreak
+        %\vskip 10\p@% <-------------- Space between Chapter # and title
+%    \fi
+%    \interlinepenalty\@M
+%    \huge \bfseries #1\par\nobreak% <------------------ Chapter title
+%    \vskip 15\p@% <------------------ Space between chapter title and first paragraph
+%  }}
+
+Su miaclasse.cls c'è il pacchetto titlesec che probabilmente modifica il sectioning, quindi le sezioni non hanno il numerino indicatore, indagare in merito.

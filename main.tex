@@ -1,0 +1,72 @@
+%...%
+
+%Nel root del file .tex deve esserci la cartella miaclasse.cls e
+%il file pacchetti.tex nella cartella Sottofile/, poi è una buona idea avere una cartella apposta per le immagini e
+%un altro file .tex in cui scrivere il corpo del testo (anche se non è necessario)
+%nel corpo del testo non deve esserci nulla più del testo
+
+\documentclass{miaclasse}
+
+%...%
+
+%se mi serve la funzione import
+\usepackage{import}
+
+%Percorso immagini
+%\graphicspath{{Immagini/}}
+
+%...%
+
+%Ho fatto un file con tutti i package usati per rendere più snello il file
+\import{Sottofile/}{pacchetti}
+
+
+%...%
+
+%...%
+
+%Inizio documento
+
+\begin{document}
+
+
+%Roba per il titolo
+\titolo{Appunti Esempio}
+\autore{Tiziano Costa}
+%comando della miaclasse per il titolo
+\primapag
+
+\pagestyle{fancy}
+
+
+%...%
+
+
+
+%se voglio posso mettere l'indice togliendo le percentuali
+\renewcommand*\contentsname{Indice}
+\tableofcontents
+
+
+
+%Posso scrivere roba qui
+
+ 
+%...%
+
+
+% o in alternativa posso scrivere roba su un altro file libero 
+% \input{appunti_esempio}
+%oppure se ho una cartella con vari file uso import (richiede il pkg import)
+\import{Sottofile/}{file1}
+
+\chapter{Fuori da sottofile}
+Devo scrivere qui?
+
+\section{Fuori da sottofile}
+Tanto per vedere se va bene, numero sezione: \thesection
+\section{Fuori da sottofile2}
+Tanto per vedere se va bene, numero sezione: \thesection
+
+
+\end{document}
