@@ -104,9 +104,9 @@
 \pagestyle{fancy}
 \makeatletter
 \fancyhf{} % Clear header and footer
-\lhead{\@titolo}
+\lhead{\leftmark}
 \rhead{Pagina \thepage}
-\lfoot{\@autore}
+\lfoot{\@titolo} %{\@autore}
 \rfoot{A.A. 2024/2025}
 \renewcommand{\footrulewidth}{0.1pt}
 \renewcommand{\headrulewidth}{0.1pt}

@@ -1,1 +1,70 @@
 \capitolo{Dimensionamento e Scelta dei Riduttori}
+Con dimensionamento di riduttori si intende la valutazione di aspetti strutturali. La scelta dei riduttori invece coinvolge valutazioni differenti quali dinamiche, di controllo e come si relazionano.
+
+\paragrafo{Come mai i riduttori?}
+La scelta di utilizzare riduttori è legata a diversi aspetti:
+\begin{enumerate}
+    \item Adattamento del campo operativo di motore e carico. Solitamente i motori hanno coppie minori di quelle che sono richieste al carico, mentre possono fornire velocità molto superiori quelle di operazione, in questi casi il riduttore permette di ridurre la velocità e di ottenere una maggior coppia.
+    \item Ottimizzazione del sistema. Un riduttore opportunamento scelto permette di ridurre costi, ingombro, consumo energetico e facilitare il controllo
+    \item Facilita il controllo. Un riduttore ben scelto permette di linearizzare la dinamica del sistema. Per esempio avendo un carico di momento di inerzia variabile con la posizione, l'uso del riduttore permette di vedere dal motore una $J_{eq}=J_m+J_c\tau_r^2\simeq J_m$, quindi un momento di inerzia minore e circa costante.  
+\end{enumerate}
+
+%% aggiungere immagine dell'adattamento del campo operativo
+
+\paragrafo{Riduttori Epicicloidali:}
+Il riduttore più impiegato nell'industria è quello epicicloidale, questa tipologia è caratterizzata da: buona riduzione; compattezza in termini di rapporto coppia volume; buona distribuzione delle forze; non è invertente; alberi di ingresso e uscita sono coassiali (permettendo una maggior facilità di layout).
+
+% inserire immagine di riduttore epicicloidale
+
+\paragrafo{Parametri Progettuali:}
+I parametri di progetto di un riduttore noti sono quelli del carico ($J_c$, $C_c$) e legge oraria ($\theta_c(t)$, $\VelAng_c(t)$, $\AccAng_c(t)$); quelli ignoti sono quelli di motore ($J_m$, $C_m$) e riduttore ($\tau_r$, $J_r$, $\eta_r$).
+Perciò nel caso di motore riduttore, carico una formulazione più utile, e solitamente usata per determinare la coppia del motore è: 
+\[C_m = \left(J_m+J_r\right)\frac{\AccAng_c}{\tau_r} + (C_c + J_c \AccAng_c)\frac{\tau_r}{\eta_r}\]
+Il momento di inerzia del riduttore è unione di diversi contributi, ed è fondamentale capire quale sia l'albero a cui è riportato (di solito quello veloce).
+
+\sezione{Step di Dimensionamento}
+Per il dimensionamento del riduttore la prima cosa da fare è determinare la taglia, cioè la coppia erogabile $C_r$.
+Dipende da considerazioni "strutturali" di tipo normativo\footnote{Non nel senso di legalmente vincolante, più come modo tipico di fare il dimensionamento.} e valutazioni di tipo dinamico (vibrazioni).
+
+\sottosezione{Normativa:}
+Il dimensionamento è basato su coppia e velocità, verificando in base al duty cycle la potenza trasmessa dal riduttore per un dato ciclo di riferimento ripetitivo.
+In particolare in base al duty cycle vi sono due categorie: 
+\begin{itemize}
+    \item Regime Intermittente per $<60\%$, per cui occorrono valutazioni su coppia e velocità massime; 
+    \item Regime Continuativo per $>60\%$, per cui occorrono valutazioni su coppia e velocità massime e medie.
+\end{itemize}
+In particolare le valutazioni per coppie e velocità massime andranno effettuate per punti di maggior criticità, ossia la coppia all'albero lento, la velocità all'albero veloce.
+
+\sottosottosezione{Coppia albero lento}
+All'albero lento ho la coppia maggiore, quindi è il punto critico. 
+Definisco $T_2$ coppia (torque) dell'albero lento (2) la risultante delle coppie applicate sull'albero lento (es coppia e coppia dell'inerzia di carico).
+Di $T_2$ è tutto noto, perciò si può procedere subito a questo conto, il cui valore risultante va confrontato con il valore di massima coppia erogata all'albero lento: 
+\[1.2\cdot \max{\abs{T_2(t)}}\cdot f_s < T_{2,B}\]
+dove:
+\begin{itemize}
+    \item $1.2$ è un fattore di sicurezza legato alle incertezze di conoscenza dei parametri, valori tipici possono essere $[20\%\div 35\%]$
+    \item $f_s$ è un fattore di servizio, valore a catalogo che viene interpretato in modo diverso da ciascun costruttore
+    \item $T_{2,B}$ è la coppia massima, è un valore a catalogo e caratterizza la taglia del riduttore. La "B" sta per Bound, in italiano Limite.
+\end{itemize}
+
+\paragrafo{Coppia Media:}
+Per determinare la coppia media si fa una media cubica ponderata lo spazio di modo che rappresenti la fatica a ciclo variabile, gli effetti termici, calcolata come:
+\[
+T_{2,media} = \sqrt[3]{\frac{\int^{T_{ciclo}}_0 \abs{T_2^3(t)\VelAng_c(t)dt}}{\int^{T_{ciclo}}_0 \abs{\VelAng_c(t)}dt}}
+\]
+Anche per questa si va ad applicare un fattore di sicurezza rispetto il punto di funzionamento ottimale $1.2\cdot T_{2,media}<T_{2,nom}$.
+
+\paragrafo{Catalogo:}
+Da catalogo COBRA è chiaro come indipendentemente dal numero di stadi la coppia rimanga simile, ed è proprio perché è quella che definisce la taglia. 
+Inoltre la maggior parte dei parametri sono simili all'interno di un unica taglia.
+Per forti riduzioni (1/10 e 1/100) si nota come le coppie $T_{2,B}$ e $T_{2,N}$ siano differenti tra loro, questo perché la geometria delle ruote saranno molto diverse portando ad avere un ingranamento qualitativamente peggiore.
+
+\sottoparagrafo{Coppia di Arresto:}
+La coppia di arresto $T_{2,not}$ è la massima coppia che il riduttore può sopportare in caso di arresto di emergenza (circa 100 volte in vita)\footnote{NB: La coppia di arresto non è quella da usare per la frenata all'interno del ciclo operativo!}.
+
+\sottosottosezione{Velocità all'albero veloce}
+Il limite di velocità massima è legato a problemi di sbilanciamento, ruotando crea una forzante armonica pari alla velocità di rotazione e cresce con velocità e sbilanciamento. Diventa problematica non appena $\VelAng \simeq \omega_{N, flessionale}$.
+Un aspetto da non sottovalutare è la presenza di eventuali sovraelongazioni nella forma d'onda di velocità legate a controllo reale.
+
+\paragrafo{Velocità media:}
+La velocità media deve essere limitata per limitare fenomeni termici e $T_{2,media}$. La velocità media è data dallo spazio totale percorso (in assoluto) su tempo ciclo totale, questo permette di considerare i momenti di arresto marcia in cui il riduttore va a raffreddarsi. La velocità media dev'essere inferiore al valore a catalogo $v_{media} < m_{1,N}$.
