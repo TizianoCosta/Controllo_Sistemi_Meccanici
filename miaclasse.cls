@@ -63,9 +63,9 @@
 % \newcommand*{\integrale}[4]{\int_{#1}^{#2} #3 d(#4)}
 % \newcommand*{\unitamisura}[2]{\left[\frac{\textup#1}{\textup#2}\right]}
 % \newcommand*{\Pa}{\left[\textup{Pa}\right]}
-% \newcommand*{\abs}[1]{\left|#1\right|}
+\newcommand*{\abs}[1]{\left|#1\right|}
 % \newcommand*{\cost}{\textup{cost}}
-
+\newcommand*{\sign}[1]{\textup{sign}\left(#1\right)}
 %\newcommand*{\roma}[1]{\expandafter\@slowromancap\romannumeral #1@}
 
 
@@ -107,9 +107,9 @@
 \lhead{\@titolo}
 \rhead{Pagina \thepage}
 \lfoot{\@autore}
-\rfoot{Anno Scolastico 2023/2024}
-\renewcommand{\footrulewidth}{0.3pt}
-\renewcommand{\headrulewidth}{0.3pt}
+\rfoot{A.A. 2024/2025}
+\renewcommand{\footrulewidth}{0.1pt}
+\renewcommand{\headrulewidth}{0.1pt}
 \makeatother 
 
 %formattazione capitoli, sezioni, paragrafi

@@ -3,7 +3,7 @@ In seguito saranno esposti una serie di modelli utili per diversi aspetti fisici
 
 \sezione{Bilancio di Potenza}
 Per studiare i sistemi meccanici viene utilizzato il bilancio di potenza, per cui vi sia variazione di energia cinetica.
-$$\sum_i W_i = \derivata{E_c}{t}$$
+\[\sum_i W_i = \derivata{E_c}{t}\]
 La somma delle potenze (erogate e assorbite) dalle forze esterne è uguale alla derivata nel tempo dell'energia cinetica dell'intero sistema.
 
 \paragrafo{Potenza:}
@@ -39,11 +39,13 @@ Esempio classico di sistema meccatronico, in prima approssimazione valutato con 
 \paragrafo{Bilancio potenza:}
 La potenza delle forze esterne del sistema è data dalla potenza erogata dal motore e quella assorbita dal carico: $\sum_i W_i=C_m \VelAng_m -C_c \VelAng_c=\left(C_m -C_c \tau_r\right)\VelAng_m$. L'energia cinetica è data dalla somma delle singole energie cinetiche, quindi contributo di inerzia del motore e del carico: $E_c=\mezzo \left(J_m + J_c\tau_r^2 \right)\VelAng_m^2=\mezzo J_{eq} \VelAng_m^2$.
 La derivata della energia cinetica diventa quindi $\derivata{E_c}{t}=\mezzo J_{eq}\derivata{\VelAng_m^2}{t}=J_{eq}\VelAng_m \AccAng_m$.
-Considerando quindi che solitamente del carico sono note o ricavabili le specifiche, determino la coppia erogata dal motore, a seguito di semplificazioni: $$C_m=\left(J_m+J_c\tau_r^2\right)\AccAng_m+C_c\tau_r$$.
+Considerando quindi che solitamente del carico sono note o ricavabili le specifiche, determino la coppia erogata dal motore, a seguito di semplificazioni: \[C_m=\left(J_m+J_c\tau_r^2\right)\AccAng_m+C_c\tau_r\]
 
 \paragrafo{Trasmissioni in serie:}
 Nel caso vi fossero nel sistema trasmissioni in serie quanto detto sopra sarebbe ancora valido, la differenza sostanziale si vedrebbe nel momento di inerzia equivalente.
-Nel caso di un riduttore avente in serie un sistema vite madrevite, su cui è posato un carico da traslare, si otterrebbe $J_{eq}=J_m+J_v \tau^2_r + M \tau_r^2 \tau_v^2$, in questo caso inoltre il carico non sarebbe una coppia, bensì una forza: $C_m=J_{eq}\AccAng_m + F_r \tau_r \tau_v$.
+Nel caso di un riduttore avente in serie un sistema vite madrevite, su cui è posato un carico da traslare, si otterrebbe $J_{eq}=J_m+J_v \tau^2_r + M \tau_r^2 \tau_v^2$, in questo caso inoltre il carico non sarebbe una coppia, bensì una forza: $C_m=J_{eq}\AccAng_m + F_r \tau_r \tau_v + C_a \tau_r$. \label{TrasmissioneSerie}
+
+% valutare se inserire immagine
 
 \sottosezione{Perdite di potenza in trasmissione}
 Una trasmissione reale avrà una certa perdita di potenza legata a fenomeni di attrito, che possono essere raggruppati in un unico contributo: $\sum_i W_i - W_p = \derivata{E_c}{t}$, con $W_p>0$.
@@ -69,6 +71,89 @@ Esiste una relazione empirica tra rendimento preferenziale e non:
     0 & \text{se } \eta_\textup{pref} \leqslant 0.5
 \end{cases}
 \]
-Rendimento nullo significa irreversibilità del moto.
 
-% pag 4 zona di calcolo della potenza persa nel caso mot+rid+carico
+\sottoparagrafo{Irreversibilità:}
+Rendimento nullo significa irreversibilità del moto, si parla di irreversibilità quando la potenza trasmessa ha un unica direzione possibile. Questo può essere un fenomeno voluto, es crick della macchina o vite di tenuta in una struttura, o meno.
+
+\paragrafo{Motore Riduttore Carico, Moto Diretto:}
+A differenza di quanto visto in precedenza, in questo caso la potenza che entra nel riduttore e quella che esce non è la stessa, una parte della potenza in ingresso $W_{in}$ sarà dissipata per effetti di attrito unificati all'interno di $W_p$. 
+Noto che $W_p=(1-\eta_r) W_{in}$\footnote{Valida sia per moto diretto sia per moto retrogrado.}, considerando la potenza sia erogata dal motore il riduttore vede in ingresso una potenza $W_{in}=C_m \VelAng_m - J_m \VelAng_m \AccAng_m$, mentre la potenza di uscita dal riduttore, quindi quella che arriva al carico, è data da $W_{out}=W_{in}-W_p$, infine, a seguito di semplici passaggi, a partire dal bilancio di potenza: $C_m \VelAng_m - J_m \VelAng_m \AccAng_m - W_p^{dir} - J_c \VelAng_c \AccAng_c - C_c \VelAng_c = 0$, si ottiene la seguente espressione della coppia del motore:
+\[ C_m = \left(J_m+J_c\frac{\tau^2_r}{\eta_r^{dir}}\right) \AccAng_m + C_c\frac{\tau_r}{\eta_r^{dir}} \]
+In cui è chiaro come il rendimento vada a influenzare unicamente i termini a valle del riduttore, e come, essendo $0<\eta_r^{dir}<1$, vada ad aumentare la coppia che il motore deve erogare, come atteso.
+
+\paragrafo{Motore Riduttore Carico, Moto Retrogrado:}
+In modo simile al caso di moto diretto, nel moto retrogrado la potenza in ingresso al riduttore è data da $W_{in}=-C_c\VelAng_c - J_c \VelAng_c \AccAng_c$, mentre la potenza di uscita è $W_{out}=W_{in}-W_p^{retr}$, a partire dal bilancio di potenze, a seguito di manipolazioni, si ottiene la seguente espressione della coppia del motore:
+\[ C_m = \left(J_m + J_c \tau_r^2\eta_r^{retr} \right)\AccAng_m + C_c\tau_r \eta_r^{retr} \]
+In cui è evidente che l'attrito vada ad aiutare il motore a frenare il carico, come atteso.
+
+\sottoparagrafo{Caso Moto Retrogrado, Riduttore Irreversibile:}
+Nel caso in cui $\eta_r^{retr}=0$, l'attrito del riduttore va ad annullare il carico visto dal motore (a meno dell'inerzia del rotore stesso), si parla quindi di carico autofrenante.
+
+%inserire figura unica in cui si vedano due copie dello stesso sistema con le freccie sotto indicanti i rispettivi versi della potenza
+
+\paragrafo{Moto Diretto vs Retrogrado:}
+Per distinguere tra i due casi occorre valutare il carico, in particolare determinare se assorbe o eroga potenza:
+\[
+\begin{cases}
+    -C_c\VelAng_c - J_c \VelAng_c \AccAng_c < 0 \text{ il carico assorbe potenza: moto diretto} \\
+    -C_c\VelAng_c - J_c \VelAng_c \AccAng_c > 0 \text{ il carico eroga potenza: moto retrogrado}
+\end{cases}
+\]
+
+\paragrafo{Rendimento generalizzato:}
+Per semplificare l'utilizzo del rendimento negli esercizi, in cui è facile avere situazioni di continuo scambio tra modo diretto e retrogrado, è opportuno introdurre un rendimento generalizzato, che vada quindi a rappresentare i possibili casi con scrittura più compatta, evitando quindi di scrivere le stesse espressioni due volte.
+Viene quindi definito:
+\[
+\eta_r = 
+\begin{cases}
+    \eta_r^d \text{ se e solo se moto diretto } -C_c\VelAng_c - J_c \VelAng_c\AccAng_c < 0 \\
+    \frac{1}{\eta_r^r} \text{ se moto retrogrado o condizioni statiche } -C_c\VelAng_c - J_c \VelAng_c\AccAng_c \geqslant 0
+\end{cases}
+\]
+Questo andrebbe utilizzato all'interno della espressione della coppia del motore come fosse rendimento di moto diretto, sostituendo l'opportuno valore in base al caso:
+\[
+C_m = \left(J_m+J_c\frac{\tau^2_r}{\eta_r}\right) \AccAng_m + C_c\frac{\tau_r}{\eta_r}
+\]
+
+\paragrafo{Rendimento per trasmissioni serie:}
+Riprendendo il caso visto in sezione \ref{TrasmissioneSerie} pagina \pageref{TrasmissioneSerie} di riduttore con in serie un sistema vite madrevite, facendo considerazioni simili al caso a singolo stadio, considerando un bilancio di potenze in cui vengano introdotti gli effetti delle perdite per ciascuno dei riduttori, a seguito di semplici di manipolazioni si ottiene l'espressione:
+\[
+C_m=\left(J_m+J_v \frac{\tau^2_r}{\eta_r^d} + M \frac{\tau_r^2 \tau_v^2}{\eta_r^d \eta^d_{v-mv}}\right)\AccAng_m + F_r \frac{\tau_r \tau_v}{\eta_r^d \eta^d_{v-mv}} + C_a \frac{\tau_r}{\eta_r^d}
+\]
+Questa soluzione è compatibile con quanto atteso, quindi che la potenza richiesta al motore aumenti con l'aumentare dell'attrito nel riduttore in condizioni di moto diretto.
+In modo del tutto simile si ottiene la coppia del motore in condizione di moto retrogrado:
+\[
+C_m=\left(J_m+J_v \tau^2_r\eta_r^d + M \tau_r^2 \tau_v^2\eta_r^d \eta^d_{v-mv}\right)\AccAng_m + F_r \tau_r \tau_v\eta_r^d \eta^d_{v-mv} + C_a \tau_r\eta_r^d
+\]
+
+\sezione{Attrito}
+L'attrito è sempre resistente e si oppone al moto.
+Un classico modello detto Coulombiano di attrito lo divide in 3 termini:
+\begin{enumerate}
+    \item Secco o Coulombiano: Legato ad atttrito tra superfici rugose caratterizzate da "micro-incastri". Ha due possibili regimi:
+    \begin{enumerate}
+        \item Statico, in assenza di moto relativo
+        \item Dinamico, in presenza di moto relativo
+    \end{enumerate}
+    \item Viscoso
+    \item Aerodinamico: Proporzionale a velocità al quadrato e a area della sezione, solitamente in impianti industriali è trascurabile, anche se ci sono applicazioni in cui va tenuto da conto.
+\end{enumerate}
+
+\sottosezione{Attrito Secco:}
+Una forza normale alla superficie permette di mantenere il contatto e genera una forza parallela alla velocità e verso opposto, seguendo questa convenzione è definita la forza di attrito dinamico coulombiano: $F_{Cou}^d = N f_{Cou}^d \sign{v}$.
+Il coefficiente di attrito dinamico dipende da: materiale; stato superficiale (rugosità, pulizia, lubrificazione).
+Il coefficiente di attrito dinamico NON dipende da: area di contatto; velocità relativa \footnote{Ci sarà una minima dipendenza, tuttavia sarà relativamente ridotta rispetto altri fenomeni.}.
+
+\paragrafo{Attrito Statico Coulombiano:}
+A partire dalle condizioni statiche serve una forza maggiore per rompere il legame tra le superfici, quindi è corretto aspettarsi $f_{Cou}^s>f_{Cou}^d$. In questo caso la forza si "adatta" alla forza da vincere, ed è caratterizzata da un termine massimo, l'espressione rappresentativa è una disequazione: $\abs{F_{Cou}} \leqslant f_{Cou}^s N$.
+La forza esterna che tende a spostare il corpo, tenuto fermo dall'attrito, inizierà a muoversi non appena $F_{ext}>\abs{F_{Cou}^s}$, momento oltre il quale l'attrito passerà dall'essere statico all'essere dinamico.
+
+\paragrafo{Catalogo:}
+Nel caso di guide a strisciamento ci si può aspettare un attrito superiore a quello necessario per guide a sfere, perché tendenzialmente l'attrito legato al rotolamento è inferiore a quello di strisciamento.
+Tuttavia costruttivamente le sfere devono essere mantenute in posizione e al sicuro dalle polveri e per fare ciò è necessario utilizzare delle guarnizioni di tenuta, che aggiungono quindi una forza resistenze che a seconda del caso specifico potrebbe essere deleteria.
+Nel caso di attuatori lineari a cinghia l'attrito a vuoto è legato soprattutto al precarico della cinghia stessa, questo porterà ad avere una coppia di no load derivata da un modello di attrito Coulombiano. Anche in questo caso l'utilizzo di sfere permette di ridurre l'attrito rispetto lo strisciamento.
+In qualunque sia l'applicazione, tendenzialmente, aumentare la taglia\footnote{La taglia è la coppia/forza erogabile.} comporta un aumento di attrito.
+
+\sottosezione{Attrito Viscoso}
+L'attrito viscoso è legato alla viscosità del lubrificante, quindi alla resistenza di taglio, ossia allo scorrimento del fluido, ed è legato a una differenza di velocità, prendendo una convenzione con attrito viscoso di verso opposto alla velocità, si può scrivere come: $F_v=f_v \dot{x}$.
+A basse velocità l'attrito viscoso è trascurabile, diventa molto rilevante ad alte velocità; il discrimante per determinare quando sia trascurabile o meno dipende dal coefficiente di attrito viscoso e dall'applicazione.
