@@ -9,12 +9,14 @@ La scelta di utilizzare riduttori è legata a diversi aspetti:
     \item Facilita il controllo. Un riduttore ben scelto permette di linearizzare la dinamica del sistema. Per esempio avendo un carico di momento di inerzia variabile con la posizione, l'uso del riduttore permette di vedere dal motore una $J_{eq}=J_m+J_c\tau_r^2\simeq J_m$, quindi un momento di inerzia minore e circa costante.  
 \end{enumerate}
 
-%% aggiungere immagine dell'adattamento del campo operativo
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.2\textwidth]{Immagini/campo_operativo_riduttore.png}
+    \includegraphics[width=0.18\textwidth,angle=-5]{Immagini/riduttore_epicicloidale.png}
+\end{figure}
 
 \paragrafo{Riduttori Epicicloidali:}
 Il riduttore più impiegato nell'industria è quello epicicloidale, questa tipologia è caratterizzata da: buona riduzione; compattezza in termini di rapporto coppia volume; buona distribuzione delle forze; non è invertente; alberi di ingresso e uscita sono coassiali (permettendo una maggior facilità di layout).
-
-% inserire immagine di riduttore epicicloidale
 
 \paragrafo{Parametri Progettuali:}
 I parametri di progetto di un riduttore noti sono quelli del carico ($J_c$, $C_c$) e legge oraria ($\theta_c(t)$, $\VelAng_c(t)$, $\AccAng_c(t)$); quelli ignoti sono quelli di motore ($J_m$, $C_m$) e riduttore ($\tau_r$, $J_r$, $\eta_r$).

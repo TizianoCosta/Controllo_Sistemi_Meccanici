@@ -27,7 +27,11 @@ In seguito sono esposti i passi tipici da effettuare quando si vuole scegliere u
 \sottosezione{Motore Riduttore Carico}
 Esempio classico di sistema meccatronico, in prima approssimazione valutato con idealità di riduttore (senza gioco, senza perdite di potenza, momento di inerzia nullo) e momento di inerzia del carico costante.
 
-%% aggiungere figura, creare una figura senza alcun verso, da tenere come base per altre considerazioni future, cercare di farla quanto più generica possibile, poi inserire qua quella coi versi delle forze e velocità come a pag 1
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{Immagini/motoreriduttorecarico_id.png}
+\end{figure}
+
 
 \begin{itemize}
     \item $J_c$: momento di inerzia del carico rispetto il suo asse di rotazione\footnote{NB: L'asse attorno cui viene calcolato il momento di inerzia va sempre specificato!!}
@@ -45,7 +49,11 @@ Considerando quindi che solitamente del carico sono note o ricavabili le specifi
 Nel caso vi fossero nel sistema trasmissioni in serie quanto detto sopra sarebbe ancora valido, la differenza sostanziale si vedrebbe nel momento di inerzia equivalente.
 Nel caso di un riduttore avente in serie un sistema vite madrevite, su cui è posato un carico da traslare, si otterrebbe $J_{eq}=J_m+J_v \tau^2_r + M \tau_r^2 \tau_v^2$, in questo caso inoltre il carico non sarebbe una coppia, bensì una forza: $C_m=J_{eq}\AccAng_m + F_r \tau_r \tau_v + C_a \tau_r$. \label{TrasmissioneSerie}
 
-% valutare se inserire immagine
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Immagini/mrc_vite_madrevite.png}
+\end{figure}
+
 
 \sottosezione{Perdite di potenza in trasmissione}
 Una trasmissione reale avrà una certa perdita di potenza legata a fenomeni di attrito, che possono essere raggruppati in un unico contributo: $\sum_i W_i - W_p = \derivata{E_c}{t}$, con $W_p>0$.
@@ -89,7 +97,10 @@ In cui è evidente che l'attrito vada ad aiutare il motore a frenare il carico, 
 \sottoparagrafo{Caso Moto Retrogrado, Riduttore Irreversibile:}
 Nel caso in cui $\eta_r^{retr}=0$, l'attrito del riduttore va ad annullare il carico visto dal motore (a meno dell'inerzia del rotore stesso), si parla quindi di carico autofrenante.
 
-%inserire figura unica in cui si vedano due copie dello stesso sistema con le freccie sotto indicanti i rispettivi versi della potenza
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Immagini/mrc_moti_diretti_vs_retrogrado.png}
+\end{figure}
 
 \paragrafo{Moto Diretto vs Retrogrado:}
 Per distinguere tra i due casi occorre valutare il carico, in particolare determinare se assorbe o eroga potenza:
@@ -158,4 +169,7 @@ In qualunque sia l'applicazione, tendenzialmente, aumentare la taglia\footnote{L
 L'attrito viscoso è legato alla viscosità del lubrificante, quindi alla resistenza di taglio, ossia allo scorrimento del fluido, ed è legato a una differenza di velocità, prendendo una convenzione con attrito viscoso di verso opposto alla velocità, si può scrivere come: $F_v=f_v \dot{x}$.
 A basse velocità l'attrito viscoso è trascurabile, diventa molto rilevante ad alte velocità; il discrimante per determinare quando sia trascurabile o meno dipende dal coefficiente di attrito viscoso e dall'applicazione.
 
-%% immagine somma dei contributi dei due attriti
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.3\textwidth]{Immagini/somma_effetti_attrito.png}
+\end{figure}
