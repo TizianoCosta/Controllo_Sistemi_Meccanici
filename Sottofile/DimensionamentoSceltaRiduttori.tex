@@ -13,6 +13,7 @@ La scelta di utilizzare riduttori è legata a diversi aspetti:
     \centering
     \includegraphics[width=0.2\textwidth]{Immagini/campo_operativo_riduttore.png}
     \includegraphics[width=0.18\textwidth,angle=-5]{Immagini/riduttore_epicicloidale.png}
+    \caption{Campo operativo (sx), Schema riduttore epicicloidale (dx)}
 \end{figure}
 
 \paragrafo{Riduttori Epicicloidali:}
@@ -96,8 +97,6 @@ Ci sono diversi aspetti strutturali da considerare per la scelta di un riduttore
 \sottosottosezione{Dimensione dei vari stadi in un multistadio:}
 In un riduttore multistadio le dimensioni dei singoli stadi non sono le stesse, perché le coppie che devono sopportare sono differenti, perciò non è esattamente come considerare due singolo stadio.
 
-% inserire immagine rappresentativa
-
 \sottosottosezione{Massa}
 La massa del riduttore è proporzionale alla taglia e al numero di stadi. 
 In generale maggiore massa comporta un maggior costo, nonostante ciò l'uso di multistadio può portare un calo del costo del motore e quindi dell'energia (vedi lezione su $\tau$ ottimo).
@@ -108,7 +107,13 @@ Le differenze sono legate alle dimensioni delle ruote quindi satelliti e sole, d
 Tra le varie taglie invece il momento di inerzia aumenta in modo è più che lineare, quasi quadratico.
 A parità di taglia, per diverso numero di stadi, nonostante la massa aumenti nel multistadio, il momento di inerzia cala, perché va considerata l'inerzia equivalente all'albero veloce, quindi: $J_r=J_{1st}+J_{2st}\tau_{1st}^2$.
 
-%inserire immagine con grafico quasi quadratico e momento di inerzia equivalente
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.15\textwidth]{Immagini/ridutt_2st_diff_dim.png}
+    \includegraphics[width=0.35\textwidth]{Immagini/momento_inerzia_stadi.png}
+    \includegraphics[width=0.4\textwidth]{Immagini/momento_inerzia_albero_veloce.png}
+    \caption{Riduttori bistadio (sx); Grafici inerzia (centro); Schema equivalente inerzia (dx)}
+\end{figure}
 
 \sottosottosezione{Rendimento}
 Il rendimento varia con l'aumentare del numero di stadi, perché $\eta_r=\Pi_i \eta_i$, valori tipici sono:
@@ -125,7 +130,11 @@ Il sistema passa ad avere due gradi di libertà, non è più valida l'espression
 \[\theta_c(s)=s \theta_m \tau_r + T(s)\]
 Nel caso multistadio la rigidezza da considerare è una rigidezza equivalente data dalla serie, perciò sarà minore delle rigidezze dei singoli stadi: $K_r=\frac{1}{\frac{\tau_2^2}{k_1}+\frac{1}{k_2}}<k_1,k_2$.
 
-% inserire immagine modello nuovo e caso multistadio
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Immagini/rigidezza_1_2_stadi.png}
+    \caption{Schema equivalente rigidezza}
+\end{figure}
 
 \paragrafo{Cataloghi:}
 Nei cataloghi la rigidezza è definita all'albero lento, perché permette di fare calcoli più semplice come deformazione vista dal carico.
