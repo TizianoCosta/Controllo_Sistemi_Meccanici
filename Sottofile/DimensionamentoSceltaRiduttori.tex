@@ -65,8 +65,68 @@ Per forti riduzioni (1/10 e 1/100) si nota come le coppie $T_{2,B}$ e $T_{2,N}$ 
 La coppia di arresto $T_{2,not}$ è la massima coppia che il riduttore può sopportare in caso di arresto di emergenza (circa 100 volte in vita)\footnote{NB: La coppia di arresto non è quella da usare per la frenata all'interno del ciclo operativo!}.
 
 \sottosottosezione{Velocità all'albero veloce}
-Il limite di velocità massima è legato a problemi di sbilanciamento, ruotando crea una forzante armonica pari alla velocità di rotazione e cresce con velocità e sbilanciamento. Diventa problematica non appena $\VelAng \simeq \omega_{N, flessionale}$.
+Il limite di velocità massima è legato a problemi di sbilanciamento, ruotando crea una forzante armonica pari alla velocità di rotazione e cresce con velocità e sbilanciamento. 
+Deve valere $\max{\VelAng_m(t)}< n_{1,max}$ massima velocità ammissibile, cui aggiungere un fattore di sicurezza.
+Diventa problematica non appena $\VelAng \simeq \omega_{N, flessionale}$.
 Un aspetto da non sottovalutare è la presenza di eventuali sovraelongazioni nella forma d'onda di velocità legate a controllo reale.
+Aumentare la taglia aumenta la massa e la dimensione, perciò aumenta lo sbilanciamento e quindi cala $n_{1,max}$.
 
-\paragrafo{Velocità media:}
-La velocità media deve essere limitata per limitare fenomeni termici e $T_{2,media}$. La velocità media è data dallo spazio totale percorso (in assoluto) su tempo ciclo totale, questo permette di considerare i momenti di arresto marcia in cui il riduttore va a raffreddarsi. La velocità media dev'essere inferiore al valore a catalogo $v_{media} < m_{1,N}$.
+\paragrafo{Velocità media all'albero veloce:}
+La velocità media deve essere limitata per limitare fenomeni termici e $T_{2,media}$. La velocità media è data dallo spazio totale percorso (in assoluto) su tempo ciclo totale, questo permette di considerare i momenti di arresto marcia in cui il riduttore va a raffreddarsi. La velocità media dev'essere inferiore al valore a catalogo $v_{media} < n_{1,N}$. Anche in questo caso si utilizza un coefficiente di sicurezza del $20\%$. Alcuni costruttori tuttavia usano convenzioni differenti per determinare la velocità media, prestare attenzione alla definizione a catalogo.
+Aumentare la taglia aumenta la massa, quindi l'attrito, ossia il calore generato perciò cala anche la $n_{1,N}$, ma in modo poco marcato.
+
+\sottosottosezione{Rapporto di riduzione}
+Le velocità sono critiche all'albero veloce, tuttavia $\VelAng_m=\frac{\VelAng_c}{\tau_r}$ di cui a noi è nota solo la velocità del carico. Questo è coerente con il tipo di dimensionamento voluto, perché lo studio di $\tau_r$ si associa ad ulteriori ragionamenti, il vincolo legato a quell'espressione sarà usato per fare una ottimizzazione vincolata.
+
+\paragrafo{Velocità massima all'albero veloce:}
+$n_{1,max}>\max{\VelAng_m(t)}$, che in termini di rapporto di velocità diventa $\tau_r>\frac{\max{\VelAng_c}}{n_{1,max}}$.
+
+\paragrafo{Velocità media all'albero veloce:}
+$n_{1,N}>\VelAng_m^{media}$, che in termini di rapporto di velocità diventa $\tau_r > \frac{\VelAng_c^{media}}{n_{1,N}}$.
+
+\paragrafo{Velocità limite:}
+Tuttavia anche in queste ultime disequazioni è nota la velocità di carico, per le velocità limite bisogna considerare di aver già determinato la coppia, quindi la taglia del riduttore, da cui posso determinare dei valori di velocità limite che saranno abbastanza simili a quelli poi usati effettivamente.
+
+\sottoparagrafo{Se la taglia di quel costruttore non ha valori che vadano bene?}
+Se la taglia del costruttore disponibile ha valori di velocità che non sono compatibili con quelli richiesti: per la velocità media c'è poco da fare, nel senso che è determinata dalla legge oraria, cioè dal tipo di funzionalità richiesta e variarla significa non dare al cliente ciò che ha richiesto; per la velocità massima invece c'è più margine di scelta perché il coefficiente di sicurezza è maggiore.
+
+\sottosezione{Valutazioni su Riduttore}
+Ci sono diversi aspetti strutturali da considerare per la scelta di un riduttore.
+
+\sottosottosezione{Dimensione dei vari stadi in un multistadio:}
+In un riduttore multistadio le dimensioni dei singoli stadi non sono le stesse, perché le coppie che devono sopportare sono differenti, perciò non è esattamente come considerare due singolo stadio.
+
+% inserire immagine rappresentativa
+
+\sottosottosezione{Massa}
+La massa del riduttore è proporzionale alla taglia e al numero di stadi. 
+In generale maggiore massa comporta un maggior costo, nonostante ciò l'uso di multistadio può portare un calo del costo del motore e quindi dell'energia (vedi lezione su $\tau$ ottimo).
+
+\sottosottosezione{Momento di inerzia dell'albero veloce}
+All'interno di una stessa taglia i valori di inerzia sono molto simili perché le ruote hanno modulo di denti e sezioni sugli alberi simili se non identici, quindi la massa nonché l'inerzia saranno circa uguali.
+Le differenze sono legate alle dimensioni delle ruote quindi satelliti e sole, dove il sole porta ad avere un momento di inerzia leggermente maggiore, quindi $J_{1/10}<J_{1/3}$.
+Tra le varie taglie invece il momento di inerzia aumenta in modo è più che lineare, quasi quadratico.
+A parità di taglia, per diverso numero di stadi, nonostante la massa aumenti nel multistadio, il momento di inerzia cala, perché va considerata l'inerzia equivalente all'albero veloce, quindi: $J_r=J_{1st}+J_{2st}\tau_{1st}^2$.
+
+%inserire immagine con grafico quasi quadratico e momento di inerzia equivalente
+
+\sottosottosezione{Rendimento}
+Il rendimento varia con l'aumentare del numero di stadi, perché $\eta_r=\Pi_i \eta_i$, valori tipici sono:
+\begin{itemize}
+    \item 1 stadio: $96\% \div 98\%$
+    \item 2 stadio: $94\% \div 95\%$
+    \item 3 stadio: $90\% \div 92\%$
+\end{itemize}
+
+\sottosottosezione{Rigidezza}
+In condizioni ideali bloccare l'albero veloce comporta il blocco dell'albero lento, tuttavia in condizioni reali presenterà una variazione circa lineare di tipo elastico (soprattutto nella zona di lavoro), a cui si va ad aggiungere una componente non lineare legata al gioco.
+Perciò può essere introdotto un nuovo modello per il riduttore che consideri la rigidezza reale considerandolo come una molla.
+Il sistema passa ad avere due gradi di libertà, non è più valida l'espressione $\VelAng_m \neq \frac{\VelAng_c}{\tau_r}$, ma diventerà, considerando $T(s)$ funzione di trasferimento:
+\[\theta_c(s)=s \theta_m \tau_r + T(s)\]
+Nel caso multistadio la rigidezza da considerare è una rigidezza equivalente data dalla serie, perciò sarà minore delle rigidezze dei singoli stadi: $K_r=\frac{1}{\frac{\tau_2^2}{k_1}+\frac{1}{k_2}}<k_1,k_2$.
+
+% inserire immagine modello nuovo e caso multistadio
+
+\paragrafo{Cataloghi:}
+Nei cataloghi la rigidezza è definita all'albero lento, perché permette di fare calcoli più semplice come deformazione vista dal carico.
+Nel caso del costruttore visto a lezione $k=R_d$, si nota come aumenti con la taglia in modo circa lineare, perché aumentare la sezione e massa del riduttore aumenta la resistenza torsionale. \footnote{Esistono riduttori epicicloidali con rigidezze particolarmente elevate sfruttanto una rivisitazione dei riduttori epicicloidali classici, vedi: Galaxie della Wittenstein e Cyclodrive della Sumimoto.}
