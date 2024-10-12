@@ -140,7 +140,20 @@
 
 %...%
 
+\newcommand{\intro}{%
+  % Temporaneamente definisce uno stile per l'introduzione senza numerazione
+  \titleformat{\chapter}[display]
+    {\normalfont\huge\scshape}{}% Nessun numero per l'introduzione
+    {1ex}{\huge}% Stile del titolo dell'introduzione
+  \chapter*{Introduzione}% Crea il capitolo non numerato con il titolo "Introduzione"
+  \addcontentsline{toc}{chapter}{Introduzione}% Aggiunge "Introduzione" all'indice
 
+  % Ripristina lo stile dei capitoli numerati per i successivi
+  \titleformat{\chapter}
+    {\normalfont\huge\scshape}
+    {\usefont{U}{ArtNouvc}{xl}{n}\thechapter}
+    {1ex}{\huge}
+}
 \newcommand*{\capitolo}[1]{\chapter{#1}}
 \newcommand*{\sezione}[1]{\section{#1}}
 \newcommand*{\sottosezione}[1]{\subsection{#1}}
