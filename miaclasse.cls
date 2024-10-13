@@ -67,7 +67,7 @@
 % \newcommand*{\cost}{\textup{cost}}
 \newcommand*{\sign}[1]{\textup{sign}\left(#1\right)}
 %\newcommand*{\roma}[1]{\expandafter\@slowromancap\romannumeral #1@}
-
+\renewcommand*{\max}[1]{\textup{max}\left(#1\right)}
 
 %geometria pagina
 \RequirePackage[a4paper,width=16.5cm,top=2.5cm,bottom=2.5cm]{geometry}
