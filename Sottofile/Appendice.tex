@@ -1,0 +1,59 @@
+\capitolo{Controlli Automatici}
+Ripasso di controlli automatici con focus su: Trasformata di Laplace; Diagrammi di Bode; Luogo delle radici; Criteri di stabilità; Analisi di sistemi nel tempo e in frequenza.
+
+\sezione{Trasformata di Laplace}
+La trasformata di Laplace bilatera del segnale $x:\mathbb{R} \rightarrow \mathbb{C}$ è la funzione $X:\mathbb{C} \rightarrow \mathbb{C}$, $s \rightarrow X(s) := \int^\infty_{-\infty} x(t)e^{-st} dt $, per ogni $s=\sigma + j\omega\in \mathbb{C}$ per cui l'integrale converge. Si denota come $\laplace{x(t)} = X(s)$.
+
+\sottosezione{Proprietà}
+Principali proprietà della trasformata di Laplace.
+\begin{itemize}
+    \item Traslazione in t: $\laplace{x(t+\beta)} = e^{s\beta}X(s)$
+    \item Traslazione in s: $\laplace{e^{s_0t}x(t)} = X(s-s_0)$
+    \item Cambio di scala: $\laplace{x(at)} = \frac{1}{\abs{a}}X(\frac{s}{a})$
+    \item Derivata in s: $\laplace{tx(t)}=-\derivata{X(s)}{s}$
+    \item Convoluzione: $\laplace{v(t)*w(t)} = V(s)W(s)$
+    \item Integrazione in t: $\laplace{\int^t_{-\infty} x(\tau) d\tau }=\frac{X(s)}{s}$
+    \item Antritrasformata di Laplace: $x(t)=\frac{1}{2\pi} \int^\infty_{-\infty}X(\sigma+j\omega) e^{(\sigma+j\omega)t} d\omega$
+    \item Derivata in t: $\laplace{\derivata{x(t)}{t}} = s X(s)$
+\end{itemize}
+
+%% valutare di copiarne altre da appunti di controlli
+
+\sottosezione{Funzione di Trasferimento}
+%% Inserire definizione di funzione di trasferimento su appunti
+
+\sezione{Diagrammi di Bode}
+Per rappresentare le risposte armoniche si utilizza una coppia di diagrammi detti di Bode:
+\begin{enumerate}
+    \item $\abs{G(j\omega)}$ funzione di $\omega$
+    \item $\arg{G(j\omega)}$ funzione di $\omega$
+\end{enumerate}
+
+Sono diagrammi semilogaritmici (anche logaritmici) utili per rappresentare ampi intervalli di pulsazioni e quindi permettono di osservare facilmente amplificazioni e attenuazioni.
+
+\sottosottosezione{Decibel}
+Il decibel, adimensionale perché indica rapporti di grandezze equivalenti dimensionalmente, è definito per le ampiezze come $G_{dB} = 20\log_{10}{\abs{H(j\omega)}}$. Il decibel è usato nei diagrammi di Bode per rappresentare le ampiezze delle risposte in esame.
+
+\sottosottosezione{Fasi}
+Le fasi $\arg{1+j\omega \tau}=\arctan{\omega \tau}$, 
+
+\sottosottosezione{Regole di tracciamento}
+Nel caso di ampiezze:
+\begin{enumerate}
+    \item Costanti: rette orizzontali
+    \item Poli: Per ogni ordine n hanno pendenza di $-n\cdot 20dB$ per decade 
+    \item Zeri: Per ogni ordine n hanno pendenza di $+n\cdot 20dB$ per decade
+\end{enumerate}
+
+Nel caso di fasi:
+\begin{enumerate}
+    \item Costanti: $0 rd$
+    \item Poli: Per ogni ordine n hanno pendenza di $-n\cdot \frac{\pi}{4}$ per decade, per una durata totale di due decadi
+    \item Zeri: Per ogni ordine n hanno pendenza di $n\cdot \frac{\pi}{4}$ per decade, per una durata totale di due decadi
+\end{enumerate}
+
+\sezione{Luogo delle radici}
+Strumento che consente di valutare l'andamento delle radici del denominatore di una funzione di trasferimento ottenuta mettendo in retroazione il blocco di andata costituito da $G(s)$ e blocco proporzionale $K$, e il blocco di retroazione $1$. 
+Definito $G(s)=\frac{N(s)}{D(s)}$, monico e coprimo; il polinomio caratteristico del sistema in retroazione unitaria è dato da $D(s) + K N(s) = 0$, e rappresenta i poli di $W(s)=\frac{K N(s)}{D(s) + K N(s)}$. Al variare di $K$, con il luogo delle radici, è possibile analizzare la posizione dei poli del sistema a catena chiusa $W(s)$.
+
+%% finire luogo delle radici
