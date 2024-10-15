@@ -139,3 +139,72 @@ Nel caso multistadio la rigidezza da considerare è una rigidezza equivalente da
 \paragrafo{Cataloghi:}
 Nei cataloghi la rigidezza è definita all'albero lento, perché permette di fare calcoli più semplici in termini di deformazione vista dal carico.
 Nel caso del costruttore visto a lezione $k=R_d$, si nota come aumenti con la taglia in modo circa lineare, perché aumentare la sezione e massa del riduttore aumenta la resistenza torsionale. \footnote{Esistono riduttori epicicloidali con rigidezze particolarmente elevate sfruttando una rivisitazione dei riduttori epicicloidali classici, vedi: Galaxie della Wittenstein e Cyclodrive della Sumimoto.}
+
+\sottosottosezione{Gioco}
+Il gioco (o backlash) nei riduttori è lo spazio tra dente e dente nella circonferenza primitiva. Il gioco è legato alla dimensione del vano della ruota e dalla dimensione del dente, dipende soprattutto dalla tolleranza che ha la lavorazione.
+Si misura in arcmin, dove $1'=\frac{1}{60}^°$.
+Può portare a una ridotta precisione, accuratezza o a micro-urti causa di vibrazioni o usura. 
+
+\paragrafo{Posizioni dei denti:}
+Ci sono due possibilità di contatto tra i denti, in entrambi i casi avviene in un punto, che varia istante per istante, e che garantisce lo scambio di forze, quindi è presente l'accoppiamento e vale $J_{eq}=J_m+\tau_r^2 J_c$. 
+Tuttavia è possibile che non vi sia alcun contatto tra i denti, in questo caso non ci sarebbe nè scambio di forze nè accoppiamento, in questa condizione vale $J_{eq}=J_m$, complicando il controllo, perché può risultare essere elemento di instabilità o di semplice stabilità.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Immagini/config_denti_gioco.png}
+    \caption{1 - Contatto sx; 2 - Contatto dx; 3 - No contatto}
+\end{figure}
+
+\paragrafo{Multistadio:}
+Il gioco nei riduttori multistadio viene calcolato come valore a catalogo\footnote{Non è detto che il gioco effettivo sia quello di catalogo, come accennato, agisce anche il controllo, perciò occorreranno fare altre valutazioni in un secondo momento.} a partire da uno spostamento sull'albero veloce, da riportare sull'albero lento noti i giochi dei singoli stadi, perciò $\delta \theta_{out} = \tau_1\tau_2\delta \theta_{in} + \epsilon_2 +\tau_2\epsilon_1$, ossia il gioco aumenta con l'aumentare degli stadi.
+
+\paragrafo{Catalogo:}
+Confronto catalogo Wittenstein standard e alto costo. In alcuni dei riduttori ad alto costo viene raggiunto gioco nullo, tuttavia non è sempre la soluzione ideale perché non avere gioco significa mantenere un maggiore contatto, quindi aumenta l'attrito. Significa anche che deve aumentare la manutenzione per evitare che polveri si infilino tra le ruote e che vi sia una opportuna lubrificazione. 
+Il valore del gioco viene proposto come disuguaglianza in cui il valore viene garantito sotto un massimo.
+La vita utile dei riduttori è determinata soprattutto dai cuscinetti che vanno sostituiti a determinati intervalli.
+
+\sezione{Esercizio di Dimensionamento}
+Si consideri il sistema in esame formato da motore, riduttore, vite, madrevite, carico e con una legge di moto come in figura.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Immagini/esercizio1_dim_rid_vite.png}
+    \caption{Esercizio 1 dimensionamento: schema e legge oraria}
+\end{figure}
+
+\sottosezione{Step di risoluzione}
+\begin{enumerate}[label=\roman*.]
+    \item Convenzioni di segno (intanto raggruppando le forze applicate su uno stesso punto)
+    \item Modello (cinematico, dinamico)
+    \item Manipolazione algebrica del modello per evidenziare $T_2$ ed eventualmente le forze che vanno a determinare il tipo di moto (diretto vs retrogrado)
+    \item Analisi di ogni fase
+    \item Valutazione del duty cycle
+    \item Definizione $T_2$, scelta taglia
+    \item Calcolo limitazioni alla scelta di $\tau_r$
+    \item Scelta di $\tau_r$
+\end{enumerate}
+
+\paragrafo{Attrito moto diretto vs retrogrado}
+Per il calcolo delle forze di attrito in regime di moto variabile potrebbe servire esplicitare le forze che vanno a determinare il tipo di moto nelle espressioni della coppia di motore.
+
+\sottosezione{Tabella}
+Per autarsi nella esecuzione dei passaggi è consigliato l'utilizzo di una tabella in cui siano distinte le varie tipologie operative divise per le rispettive durate di modo da schematizzare l'esercitazione.
+
+\begin{table}[h]
+\centering
+    \begin{tabular}{l|l|l|l|l|l|l|l|l|l}
+    \hline
+    $\Delta t$ $[s]$ & $0.4$ & $1.2$ & $0.4$ & $0.4$ & $0.3$ & $0.9$ & $0.3$ & $0.6$ & \hspace{1cm} \\ \hline
+    $\dot x$ $[m/s]$ &  &  &  &  &  &  &  &  & \\ \cline{1-1}
+    $\Ddot x$ $[m/s^2]$ &  &  &  &  &  &  &  &  &  \\ \cline{1-1}
+    $M$ $[Kg]$ &  &  &  &  &  &  &  &  &  \\ \cline{1-1}
+    $M \Ddot x$ $[N]$ &  &  &  &  &  &  &  &  &  \\ \cline{1-1}
+    $F_{p,\parallel}$ $[N]$ &  &  &  &  &  &  &  &  &  \\ \cline{1-1}
+    $F_{cou}$ $[N]$ &  &  &  &  &  &  &  &  &  \\ \cline{1-1}
+    $\Delta F_{cou}^s$ $[N]$ &  &  &  &  &  &  &  &  &  \\ \cline{1-1}
+     &  &  &  &  &  &  &  &  &  \\ \cline{1-1}
+     &  &  &  &  &  &  &  &  &  \\ \cline{1-1}
+     &  &  &  &  &  &  &  &  &  \\ \cline{1-1}
+    \end{tabular}
+    \caption{Tabella riassuntiva per i calcoli effettuati}
+\end{table}
