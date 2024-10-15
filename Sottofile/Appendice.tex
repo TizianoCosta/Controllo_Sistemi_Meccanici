@@ -53,7 +53,42 @@ Nel caso di fasi:
 \end{enumerate}
 
 \sezione{Luogo delle radici}
-Strumento che consente di valutare l'andamento delle radici del denominatore di una funzione di trasferimento ottenuta mettendo in retroazione il blocco di andata costituito da $G(s)$ e blocco proporzionale $K$, e il blocco di retroazione $1$. 
+Strumento che consente di valutare graficamente l'andamento delle radici del denominatore di una funzione di trasferimento ottenuta mettendo in retroazione il blocco di andata costituito da $G(s)$ e blocco proporzionale $K$, e il blocco di retroazione $1$. 
 Definito $G(s)=\frac{N(s)}{D(s)}$, monico e coprimo; il polinomio caratteristico del sistema in retroazione unitaria è dato da $D(s) + K N(s) = 0$, e rappresenta i poli di $W(s)=\frac{K N(s)}{D(s) + K N(s)}$. Al variare di $K$, con il luogo delle radici, è possibile analizzare la posizione dei poli del sistema a catena chiusa $W(s)$.
 
-%% finire luogo delle radici
+\sottosezione{Step}
+\begin{enumerate}[label=\roman*.]
+    \item Funzione di trasferimento del sistema ad anello aperto: Scrivere la funzione di trasferimento del sistema ad anello aperto $G(s)H(s)$, dove: $G(s)H(s)=N(s)D(s)$; $N(s)$: numeratore del sistema; $D(s)$: denominatore del sistema. Questa funzione è solitamente espressa in termini di poli e zeri del sistema.
+
+    \item Trovare i poli e gli zeri: Determinare i poli (tali che $D(s)=0$) e gli zeri (tali che $N(s)=0$) del sistema ad anello aperto. I poli determinano le posizioni iniziali delle traiettorie del luogo delle radici, mentre gli zeri ne determinano le destinazioni finali.
+
+    \item Determinare la quantità di traiettorie: Il numero di rami (traiettorie del luogo delle radici) è uguale al numero di poli del sistema ad anello aperto. Ogni ramo inizia da un polo del sistema e tende verso uno zero del sistema, o verso l'infinito se ci sono più poli che zeri.
+
+    \item Trovare l'asse reale coinvolto nel luogo delle radici: Determinare i tratti dell'asse reale che fanno parte del luogo delle radici. Un segmento sull'asse reale fa parte del luogo delle radici se alla sua destra ci sono un numero dispari di poli e zeri.
+
+    \item Determinare i punti di separazione e arrivo (Asintoti): Se ci sono più poli che zeri, calcolare gli asintoti delle traiettorie del luogo delle radici, che indicano dove i rami tendono all'infinito. Gli asintoti possono essere trovati con: $\textup{Angoli degli asintoti}=(2k+1)\pi n-m$
+    Dove $n$ è il numero di poli, $m$ è il numero di zeri e $k=0,1,2,…$. Il punto di intersezione con l'asse reale è dato da: $\sigma_a=\frac{\sum \textup{Poli}-\sum \textup{Zeri}}{n-m}$
+
+    \item Trovare i punti di rottura sull'asse reale: Se due o più rami si uniscono o si separano sull'asse reale, questo avviene in punti detti punti di rottura. Per determinare tali punti, risolvere la derivata della funzione caratteristica del sistema: $\derivata{​(1+KG(s)H(s))}{s}=0$
+
+    \item Calcolare gli angoli di partenza e arrivo: Determinare l'angolo di partenza per i rami che si staccano dai poli complessi e l'angolo di arrivo per quelli che si avvicinano agli zeri complessi. Questi angoli sono calcolati con le equazioni basate sulla posizione relativa di poli e zeri complessi rispetto al polo o allo zero in questione.
+
+    \item Determinare i punti di intersezione con l'asse immaginario (criterio di Routh-Hurwitz): Verificare se i rami del luogo delle radici attraversano l'asse immaginario. Questo può essere fatto utilizzando il criterio di Routh-Hurwitz per trovare i valori di KK per cui il sistema ha poli con parte reale nulla (ossia poli puramente immaginari).
+
+    \item Tracciare il luogo delle radici: Con tutte le informazioni raccolte, tracciare il diagramma del luogo delle radici:
+    \begin{enumerate}
+        \item Parti dai poli ad anello aperto.
+        \item Disegna i rami lungo l'asse reale e seguendo gli asintoti.
+        \item Mostra come i rami si avvicinano agli zeri o tendono all'infinito.
+        \item Indica chiaramente i punti di rottura, intersezioni con l'asse immaginario e altri dettagli chiave.
+    \end{enumerate}
+\end{enumerate}
+
+\sottosezione{Esempio}
+Per esempio fare il luogo delle radici di $G(s) = \frac{s + 3}{(s + 1)(s + 5)(s + 10)}$ risulta nel seguente grafico:
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{Immagini/luogo_delle_radici.png}
+\end{figure}
+
+%% Rivedere parte su luogo delle radici
