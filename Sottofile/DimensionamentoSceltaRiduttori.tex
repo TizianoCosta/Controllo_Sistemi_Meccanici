@@ -127,7 +127,7 @@ Il rendimento varia con l'aumentare del numero di stadi, perché $\eta_r=\Pi_i \
 In condizioni ideali bloccare l'albero veloce comporta il blocco dell'albero lento, tuttavia in condizioni reali presenterà una variazione circa lineare di tipo elastico (soprattutto nella zona di lavoro), a cui si va ad aggiungere una componente non lineare legata al gioco.
 Perciò può essere introdotto un nuovo modello per il riduttore che consideri la rigidezza reale considerandolo come una molla.
 Il sistema passa ad avere due gradi di libertà, non è più valida l'espressione $\VelAng_m \neq \frac{\VelAng_c}{\tau_r}$, ma diventerà, considerando $T(s)$ funzione di trasferimento:
-\[\theta_c(s)=s \theta_m \tau_r + T(s)\]
+\[s \theta_c(s)=s \theta_m \tau_r + T(s)\]
 Nel caso multistadio la rigidezza da considerare è una rigidezza equivalente data dalla serie, perciò sarà minore delle rigidezze dei singoli stadi: $K_r=\frac{1}{\frac{\tau_2^2}{k_1}+\frac{1}{k_2}}<k_1,k_2$.
 
 \begin{figure}[h]
@@ -145,6 +145,8 @@ Il gioco (o backlash) nei riduttori è lo spazio tra dente e dente nella circonf
 Si misura in arcmin, dove $1'=\frac{1}{60}^°$.
 Può portare a una ridotta precisione, accuratezza o a micro-urti causa di vibrazioni o usura. 
 
+Nei cataloghi il gioco viene valutato all'albero lento (2) per dare un'idea di quanto possa influenzare lo spostamento nel carico, tuttavia agiscono diversi fattori.\footnote{Non è detto che il gioco effettivo sia quello di catalogo, perché c'è dipendenza anche dal controllo. Occorreranno fare approfondite valutazioni in un secondo momento.}
+
 \paragrafo{Posizioni dei denti:}
 Ci sono due possibilità di contatto tra i denti, in entrambi i casi avviene in un punto, che varia istante per istante, e che garantisce lo scambio di forze, quindi è presente l'accoppiamento e vale $J_{eq}=J_m+\tau_r^2 J_c$. 
 Tuttavia è possibile che non vi sia alcun contatto tra i denti, in questo caso non ci sarebbe nè scambio di forze nè accoppiamento, in questa condizione vale $J_{eq}=J_m$, complicando il controllo, perché può risultare essere elemento di instabilità o di semplice stabilità.
@@ -156,9 +158,9 @@ Tuttavia è possibile che non vi sia alcun contatto tra i denti, in questo caso 
 \end{figure}
 
 \paragrafo{Multistadio:}
-Il gioco nei riduttori multistadio viene calcolato come valore a catalogo\footnote{Non è detto che il gioco effettivo sia quello di catalogo, come accennato, agisce anche il controllo, perciò occorreranno fare altre valutazioni in un secondo momento.} a partire da uno spostamento sull'albero veloce, da riportare sull'albero lento noti i giochi dei singoli stadi, perciò \( \Delta \theta_{out} = \tau_1\tau_2\Delta \theta_{in} + \epsilon_2 +\tau_2\epsilon_1 \), ossia il gioco aumenta con l'aumentare degli stadi.
+Il gioco nei riduttori multistadio viene calcolato come valore a catalogo a partire da uno spostamento sull'albero veloce, da riportare sull'albero lento noti i giochi dei singoli stadi, perciò \( \Delta \theta_{out} = \tau_1\tau_2\Delta \theta_{in} + \epsilon_2 +\tau_2\epsilon_1 \), ossia il gioco aumenta con l'aumentare degli stadi.
 
-\paragrafo{Catalogo:}
+\paragrafo{Catalogo Wittenstein:}
 Confronto catalogo Wittenstein standard e alto costo. In alcuni dei riduttori ad alto costo viene raggiunto gioco nullo, tuttavia non è sempre la soluzione ideale perché non avere gioco significa mantenere un maggiore contatto, quindi aumenta l'attrito. Significa anche che deve aumentare la manutenzione per evitare che polveri si infilino tra le ruote e che vi sia una opportuna lubrificazione. 
 Il valore del gioco viene proposto come disuguaglianza in cui il valore viene garantito sotto un massimo.
 La vita utile dei riduttori è determinata soprattutto dai cuscinetti che vanno sostituiti a determinati intervalli.
