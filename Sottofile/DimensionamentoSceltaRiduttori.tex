@@ -89,7 +89,9 @@ $n_{1,N}>\VelAng_m^{media}$, che in termini di rapporto di velocità diventa $\t
 Tuttavia anche in queste ultime disequazioni è nota la velocità di carico, per le velocità limite bisogna considerare di aver già determinato la coppia, quindi la taglia del riduttore, da cui posso determinare dei valori di velocità limite che saranno abbastanza simili a quelli poi usati effettivamente.
 
 \sottoparagrafo{Se la taglia di quel costruttore non ha valori che vadano bene?}
-Se la taglia del costruttore disponibile ha valori di velocità che non sono compatibili con quelli richiesti: per la velocità media c'è poco da fare, nel senso che è determinata dalla legge oraria, cioè dal tipo di funzionalità richiesta e variarla significa non dare al cliente ciò che ha richiesto; per la velocità massima invece c'è più margine di scelta perché il coefficiente di sicurezza è maggiore. \label{rivalutazione_coeff_sic}
+Se la taglia del costruttore disponibile ha valori di velocità che non sono compatibili con quelli richiesti: per la velocità media c'è poco da fare, nel senso che è determinata dalla legge oraria, cioè dal tipo di funzionalità richiesta e variarla significa non dare al cliente ciò che ha richiesto.
+Potrebbe essere possibile modificare il coefficiente di sicurezza di modo da rientrare nella taglia inferiore di riduttore disponibile, ma va fatto coscienti del significato delle implicazioni: la velocità media, moltiplicata la coppia media $T_{2,media}$, è la potenza media $W_{media}$, usata per fare valutazioni termiche, che devono essere rispettate.
+Per la velocità massima invece c'è più margine di scelta perché il coefficiente di sicurezza è maggiore. \label{rivalutazione_coeff_sic}
 
 \sottosezione{Valutazioni su Riduttore}
 Ci sono diversi aspetti strutturali da considerare per la scelta di un riduttore.
@@ -122,6 +124,7 @@ Il rendimento varia con l'aumentare del numero di stadi, perché $\eta_r=\Pi_i \
     \item 2 stadio: $94\% \div 95\%$
     \item 3 stadio: $90\% \div 92\%$
 \end{itemize}
+I valori vengono presi in condizioni nominali, il rendimento è una curva che dipende dal punto di lavoro.
 
 \sottosottosezione{Rigidezza}
 In condizioni ideali bloccare l'albero veloce comporta il blocco dell'albero lento, tuttavia in condizioni reali presenterà una variazione circa lineare di tipo elastico (soprattutto nella zona di lavoro), a cui si va ad aggiungere una componente non lineare legata al gioco.
@@ -132,9 +135,11 @@ Nel caso multistadio la rigidezza da considerare è una rigidezza equivalente da
 
 \begin{figure}[h]
     \centering
+    \includegraphics[width=0.4\textwidth]{Immagini/efficiency_torque.png}
     \includegraphics[width=0.5\textwidth]{Immagini/rigidezza_1_2_stadi.png}
-    \caption{Schema equivalente rigidezza}
+    \caption{Caratteristica esempio rendimento sx; Schema equivalente rigidezza dx}
 \end{figure}
+
 
 \paragrafo{Cataloghi:}
 Nei cataloghi la rigidezza è definita all'albero lento, perché permette di fare calcoli più semplici in termini di deformazione vista dal carico.
@@ -240,6 +245,5 @@ Per verificare di aver utilizzato tutte le convezioni corrette conviene partire 
 Nell'esempio occorrerà valutare il segno dell'inerzia resistente e motrice nelle condizioni di salita e discesa.
 
 \paragrafo{Rivalutazione coefficiente di sicurezza:}
-Facendo l'esercizio ci si accorge che utilizzando un coefficiente di sicurezza del $20\%$ non si trova un riduttore tra quelli a disposizione perché la velocità media richiesta è troppo elevata. L'unica opzione\footnote{Vedi quanto detto a pagina \pageref{rivalutazione_coeff_sic}} è modificare il coefficiente di sicurezza. 
-Ma va fatto coscienti del significato delle implicazioni: l'aumento di velocità media, moltiplicata la coppia media $T_{2,media}$, è la potenza media $W_{media}$, usata per fare valutazioni termiche.
+Facendo l'esercizio ci si accorge che utilizzando un coefficiente di sicurezza del $20\%$ non si trova un riduttore tra quelli a disposizione perché la velocità media richiesta è troppo elevata. L'unica opzione\footnote{Vedi quanto detto a pagina \pageref{rivalutazione_coeff_sic}} è modificare il coefficiente di sicurezza.
 In questo caso particolare la $T_{2,media}$ è circa la metà di quella nominale, perciò termicamente il rischio è minimo, quindi è possibile abbassare il coefficiente di sicurezza relativo alla velocità media.
