@@ -70,7 +70,7 @@
 \renewcommand*{\max}[1]{\operatorname{max}\left(#1\right)}
 \newcommand*{\laplace}[1]{\mathcal{L}\left(#1\right)}
 \renewcommand*{\arg}[1]{\operatorname{arg}\left(#1\right)}
-
+\newcommand*{\DperN}{\text{"D}\times \text{n"}}
 
 %geometria pagina
 \RequirePackage[a4paper,width=16.5cm,top=2.5cm,bottom=2.5cm]{geometry}

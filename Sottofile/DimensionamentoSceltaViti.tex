@@ -72,8 +72,78 @@ Come regola generale conviene avere meno sfere più grandi che tenderanno a ragg
     \caption{Dipendenza volume sfere}
 \end{figure}
 
-\sottosottosezione{Velocità limite delle sfere}
+\sottosezione{Velocità limite delle sfere}
 Durante il moto le sfere ruotano tra le due gole di vite e chiocciola, ma in questo movimento vanno anche a strisciare tra loro. Per velocità elevate risulta un aumento di riscaldamento e un aumento usura legato alla formazione di particolato di sfere.
 La relazione da verificare è \( v_{sfere} = \VelAng_v \frac{d}{2} < v_{lim} \) dove \(d\) è la distanza tra centri delle due sfere opposte, e con velocità limite specifica della chiocciola.
 
-Nei cataloghi non si tiene conto della velocità della sfera, ma del doppio, e viene chiamata "D \(\times\) n" \(= \VelAng_v\cdot d \), quindi  il limite diventa: \(d\VelAng_v < \text{"D}\times \text{n"}_{lim} \alpha = S \).  
+Nei cataloghi non si tiene conto della velocità della sfera, ma del doppio, e viene chiamata "D \(\times\) n" \(= \VelAng_v\cdot d \), quindi  il limite diventa: \(d \cdot \VelAng_v < \text{"D}\times \text{n"}_{lim} \alpha = S \).
+
+\sottosottosezione{Sfere di Acciaio e Ceramica}
+In alternativa alle sfere solo di acciaio, esistono viti a ricircolo di sfere in cui sono alternate sfere di acciaio e di ceramica. In particolare le seconde oltre a essere costruite con un volume leggermente inferiore, hanno una massa inferiore, perciò quando vengono messe in movimento le sfere di acciaio quelle di ceramica vanno in contro-rotazione, così facendo il contatto tra sfere vede anch'esso rotazione, mentre permane lo strisciamento sui punti di contatto tra sfere cercamiche e gola. Questa configurazione permette di raggiungere velocità limite della singola sfera \( \DperN_{lim} \) molto superiori, anche doppi.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.2\textwidth]{Immagini/Viti_A_C.png}
+    \caption{Viti a ricircolo di sfere in acciaio e ceramica}
+\end{figure}
+
+\sottosottosezione{Vincolo 1 su p,d}
+A partire da \( d\cdot \VelAng_v \leqslant S = \DperN_{lim} \alpha \), sostituendo la velocità della vite con la velocità del carico traslante, ed esplicitando il passo della vite, si ottiene una relazione di vincolo per passo e diametro della vite:
+\[ p \geqslant \frac{\Ddot{x_{max}} 2\pi }{S} d \]
+
+Nota bene che \(\Ddot{x_{max}}\) solitamente non è un dato progettuale, è possibile sceglierlo entro limiti termici/strutturali.
+
+\sottosezione{Velocità critica della vite}
+La vite è naturalmente sbilanciata, ruotando crea una forzante armonica alla frequenza della velocità di rotazione \( \VelAng_v \), che di valori prossimi alla velocità naturale flessionale \(\omega_{N,flex}\) porta ad avere forti vibrazioni.
+Per ridurre gli effetti delle vibrazioni si possono adottare due soluzioni.
+
+\sottosottosezione{Viti smorzate}
+Per limitare le vibrazioni è possibile utilizzare viti con un anima in elastomero che vada a smorzare le vibrazioni, inoltre essendo al centro del diametro della vite non andrà a comprometterne la rigidità. Valori tipici di smorzamento di viti smorzate sono \(\epsilon \simeq 0.3 \div 0.5\), contro i \(\epsilon \simeq 0.0x \) di viti normali.
+
+\sottosottosezione{Limitare la velocità di rotazione}
+Per evitare di ottenere sulla vite vibrazioni elevate basta evitare di passare per frequenze naturali, cioè \( \VelAng_v < \omega_{N,flex}(x) \), dove \( \omega_{N,flex}(x) \) è dipendente dalla posizione in cui si trova la chiocciola, perché questa solitamente scorre su di una guida in modo da evitare sia la vite a dover sopportare il peso del carico, e quindi va ad aumentare la rigidezza localmente. Il problema risulta complicato.
+
+\paragrafo{Applicazioni velocità in funzione di x:}
+Noto il modello elastodinamico della vite, o effettuate opportune misurazioni, è possibile ottenere l'andamento della pulsazione naturale per le varie posizioni della chiocciola \(x\), quindi è possibile variare la  velocità massima della vite in funzione di \(x\). Non semplice.
+
+\paragrafo{Approccio conservativo:}
+In alternativa è possibile utilizzare un approccio conservativo in cui si va a limitare la velocità della vite alla minore delle pulsazioni naturali flessionali \( \VelAng_v < \omega_{N,flex}^{min} \). Non è la soluzione ottimale.
+
+Considerando la massa della sola vite\footnote{Carico e madrevite andranno a gravare sulla guida.} la pulsazione naturale flessionale vale:
+\[ \omega_{N,flex} = K_v \sqrt{\frac{E \cdot I_f}{M_v \cdot L^3}} \]
+con \( K_v \) coefficiente legato al tipo di vincolo; \( E \) modulo di Joung del materiale; \( I_f = \frac{\pi}{64}d^4 \) momento di inerzia; \( M_v \) massa della vite; \( L \) lunghezza della vite.
+
+\sottoparagrafo{Coefficiente di vincolo:}
+Il coefficiente di vincolo dipende dal tipo di vincolo presente all'estremo della vite, può essere: libero; appoggio; incastro\footnote{Nota bene non è un incastro di tipo strutturale, è un incastro solo in termini flessionali, non necessariamente andrà a limitare la rotazione della vite.}.
+Queste tre possibilità risultano in 4 combinazioni:
+\begin{itemize}
+    \item Incastro + Libero: \(K_v = 3.5\)
+    \item Appoggio + Appoggio: \(K_v = \pi^2\)
+    \item Appoggio + Incastro: \(K_v = 15.4\), soluzione preferita.
+    \item Incastro + Incastro: \(K_v = 22.4\), questa è la soluzione col coeffiente maggiore, tuttavia se la vite si riscalda e dilata tende a spanciare, inoltre richiede montaggio preciso.
+\end{itemize}
+
+\sottoparagrafo{Vincolo 2 su p,d}
+A partire dalla disequazione \( \VelAng_v^{max} \geqslant \omega_{N,flex}^{min} \alpha \), con \( \alpha \simeq 0.6\div 0.8 \) coefficiente di sicurezza che considera come l'ampiezza inizi a salire prima del valore esatto di pulsazione naturale, sostituisco i vari elementi, effettuo qualche manipolazione e si ottiene:
+\[ p \leqslant \frac{8\pi L^2 \Ddot{x}^{max} \sqrt{\rho}}{K_v \alpha \sqrt{E}} \cdot \frac{1}{d} \]
+Disequazione per cui risulta evidente la dipendenza inversa tra passo e diametro; quindi che per velocità superiori il vincolo peggiora; che per lunghezze superiori il vincolo peggiora quadraticamente; che per coefficienti di vincoli inferiori il vincolo peggiora.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{Immagini/vel_critica_vite_2sol.png}
+    \includegraphics[width=0.3\textwidth]{Immagini/vite_guida_MV.png}
+\end{figure}
+
+\sottosezione{Vincoli su passo e diametro della vite}
+Andando a unire i due vincoli ricavati: \(p \geqslant \frac{\Ddot{x_{max}} 2\pi }{S} d\) e \( p \leqslant \frac{8\pi L^2 \Ddot{x}^{max} \sqrt{\rho}}{K_v \alpha \sqrt{E}} \cdot \frac{1}{d} \), la curva ottenuta sarà come in figura. Va evidenziato il forte limite per diametri ridotti.
+
+\sottosottosezione{Esempio}
+Fosse richiesto un \( C_D \) "basso", e quindi occorra utilizzare \(d\) "piccoli". In questo caso utilizzare viti acciaio e ceramica non ha senso, perché andrebbe a influenzare unicamente valori di diametro superiori. In questo caso utilizzare vincoli più rigidi potrebbe aiutare, perché porterebbero ad un aumento del numero di punti utilizzabili, tuttavia occorre valutare se i valori aggiunti possano essere utilizzati nell'applicazione in esame o meno.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Immagini/viti_ricir_vincoli_p_d.png}
+    \includegraphics[width=0.25\textwidth]{Immagini/viti_ricir_esempio_vincoli.png}
+    \caption{1-3 relative a vincolo e dipendenze, 4 relativa all'esempio}
+\end{figure}
+% inserire immagini di esempio di unione vincoli e esercizio
