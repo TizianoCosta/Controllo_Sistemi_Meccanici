@@ -35,7 +35,7 @@ risultante delle forze assiali applicate alla chiocciola (equivalente a \( T_2 \
 
 \sottosottosezione{Forza assiale media}
 Anche in questo caso nel regime stazionario si fanno valutazioni sulla media, e in modo simile a \( T_{2,media} \) si ottiene:
-\[ F_{a, media} = \sqrt[3]{\frac{\int^{T_{ciclo}}_0 \abs{F_a^3(t)\Ddot{x}_c(t)dt}}{\int^{T_{ciclo}}_0 \abs{\Ddot{x}_c(t)}dt}} \]
+\[ F_{a, media} = \sqrt[3]{\frac{\int^{T_{ciclo}}_0 \abs{F_a^3(t)\dot{x}_c(t)dt}}{\int^{T_{ciclo}}_0 \abs{\dot{x}_c(t)}dt}} \]
 E anche in questo caso per moto ad andamento trapezoidale l'integrale diventerà una sommatoria.
 
 \sottosottosezione{Capacità di Carico Dinamico}
@@ -83,15 +83,15 @@ In alternativa alle sfere solo di acciaio, esistono viti a ricircolo di sfere in
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.2\textwidth]{Immagini/Viti_A_C.png}
+    \includegraphics[width=0.12\textwidth]{Immagini/Viti_A_C.png}
     \caption{Viti a ricircolo di sfere in acciaio e ceramica}
 \end{figure}
 
 \sottosottosezione{Vincolo 1 su p,d}
 A partire da \( d\cdot \VelAng_v \leqslant S = \DperN_{lim} \alpha \), sostituendo la velocità della vite con la velocità del carico traslante, ed esplicitando il passo della vite, si ottiene una relazione di vincolo per passo e diametro della vite:
-\[ p \geqslant \frac{\Ddot{x_{max}} 2\pi }{S} d \]
+\[ p \geqslant \frac{\dot{x}_{max} 2\pi }{S} d \]
 
-Nota bene che \(\Ddot{x_{max}}\) solitamente non è un dato progettuale, è possibile sceglierlo entro limiti termici/strutturali.
+Nota bene che \(\dot{x}_{max}\) solitamente non è un dato progettuale, è possibile sceglierlo entro limiti termici/strutturali.
 
 \sottosezione{Velocità critica della vite}
 La vite è naturalmente sbilanciata, ruotando crea una forzante armonica alla frequenza della velocità di rotazione \( \VelAng_v \), che di valori prossimi alla velocità naturale flessionale \(\omega_{N,flex}\) porta ad avere forti vibrazioni.
@@ -125,25 +125,24 @@ Queste tre possibilità risultano in 4 combinazioni:
 
 \sottoparagrafo{Vincolo 2 su p,d:}
 A partire dalla disequazione \( \VelAng_v^{max} \geqslant \omega_{N,flex}^{min} \alpha \), con \( \alpha \simeq 0.6\div 0.8 \) coefficiente di sicurezza che considera come l'ampiezza inizi a salire prima del valore esatto di pulsazione naturale, sostituisco i vari elementi, effettuo qualche manipolazione e si ottiene:
-\[ p \leqslant \frac{8\pi L^2 \Ddot{x}^{max} \sqrt{\rho}}{K_v \alpha \sqrt{E}} \cdot \frac{1}{d} \]
+\[ p \leqslant \frac{8\pi L^2 \dot{x}^{max} \sqrt{\rho}}{K_v \alpha \sqrt{E}} \cdot \frac{1}{d} \]
 Disequazione per cui risulta evidente la dipendenza inversa tra passo e diametro; quindi che per velocità superiori il vincolo peggiora; che per lunghezze superiori il vincolo peggiora quadraticamente; che per coefficienti di vincoli inferiori il vincolo peggiora.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.4\textwidth]{Immagini/vel_critica_vite_2sol.png}
-    \includegraphics[width=0.3\textwidth]{Immagini/vite_guida_MV.png}
+    \includegraphics[width=0.2\textwidth]{Immagini/vite_guida_MV.png}
 \end{figure}
 
 \sottosezione{Vincoli su passo e diametro della vite}
-Andando a unire i due vincoli ricavati: \(p \geqslant \frac{\Ddot{x_{max}} 2\pi }{S} d\) e \( p \leqslant \frac{8\pi L^2 \Ddot{x}^{max} \sqrt{\rho}}{K_v \alpha \sqrt{E}} \cdot \frac{1}{d} \), la curva ottenuta sarà come in figura. Va evidenziato il forte limite per diametri ridotti.
+Andando a unire i due vincoli ricavati: \(p \geqslant \frac{\dot{x_{max}} 2\pi }{S} d\) e \( p \leqslant \frac{8\pi L^2 \dot{x}^{max} \sqrt{\rho}}{K_v \alpha \sqrt{E}} \cdot \frac{1}{d} \), la curva ottenuta sarà come in figura. Va evidenziato il forte limite per diametri ridotti.
 
 \sottosottosezione{Esempio}
 Fosse richiesto un \( C_D \) "basso", e quindi occorra utilizzare \(d\) "piccoli". In questo caso utilizzare viti acciaio e ceramica non ha senso, perché andrebbe a influenzare unicamente valori di diametro superiori. In questo caso utilizzare vincoli più rigidi potrebbe aiutare, perché porterebbero ad un aumento del numero di punti utilizzabili, tuttavia occorre valutare se i valori aggiunti possano essere utilizzati nell'applicazione in esame o meno.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.75\textwidth]{Immagini/viti_ricir_vincoli_p_d.png}
-    \includegraphics[width=0.25\textwidth]{Immagini/viti_ricir_esempio_vincoli.png}
+    \includegraphics[width=0.6\textwidth]{Immagini/viti_ricir_vincoli_p_d.png}
+    \includegraphics[width=0.2\textwidth]{Immagini/viti_ricir_esempio_vincoli.png}
     \caption{1-3 relative a vincolo e dipendenze, 4 relativa all'esempio}
 \end{figure}
-% inserire immagini di esempio di unione vincoli e esercizio

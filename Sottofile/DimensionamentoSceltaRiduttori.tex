@@ -130,7 +130,7 @@ I valori vengono presi in condizioni nominali, il rendimento è una curva che di
 In condizioni ideali bloccare l'albero veloce comporta il blocco dell'albero lento, tuttavia in condizioni reali presenterà una variazione circa lineare di tipo elastico (soprattutto nella zona di lavoro), a cui si va ad aggiungere una componente non lineare legata al gioco.
 Perciò può essere introdotto un nuovo modello per il riduttore che consideri la rigidezza reale considerandolo come una molla.
 Il sistema passa ad avere due gradi di libertà, non è più valida l'espressione $\VelAng_m \neq \frac{\VelAng_c}{\tau_r}$, ma diventerà, considerando $T(s)$ funzione di trasferimento:
-\[s \theta_c(s)=s \theta_m \tau_r + T(s)\]
+\[s \theta_c(s)=s \theta_m \tau_r T(s)\]
 Nel caso multistadio la rigidezza da considerare è una rigidezza equivalente data dalla serie, perciò sarà minore delle rigidezze dei singoli stadi: $K_r=\frac{1}{\frac{\tau_2^2}{k_1}+\frac{1}{k_2}}<k_1,k_2$.
 
 \begin{figure}[h]
