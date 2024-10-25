@@ -146,3 +146,67 @@ Fosse richiesto un \( C_D \) "basso", e quindi occorra utilizzare \(d\) "piccoli
     \includegraphics[width=0.2\textwidth]{Immagini/viti_ricir_esempio_vincoli.png}
     \caption{1-3 relative a vincolo e dipendenze, 4 relativa all'esempio}
 \end{figure}
+
+\sottosezione{Rigidezza Assiale}
+Il moto assiale del carico porta a vibrazioni nel sistema, che possono causare problemi di precisione e accuratezza nel moto del carico.
+Un sistema reale ha infiniti modi di vibrare, tuttavia la conoscenza dei parametri è tale per cui una semplificazione con un modello a 2gdl è comparabile con risultati con modelli a più gdl.
+
+\sottosottosezione{Modello a 2gdl}
+Concentro tutte l'elasticità nel punto di traslazione della chiocciola, mentre considero il resto del sistema come rigido, occorre valutare una \(K_{eq}\) e \( M_{eq} \), in cui sono considerati i vari contributi:
+\[ K_{eq} = \left[ \frac{1}{K_\text{assiale,vite}} + \frac{1}{K_\text{torsionale,vite}}\left(\frac{p}{2\pi}\right)^2 + \frac{1}{K_\text{assiale,chiocciola}} + \frac{1}{K_\text{assiale,cuscinetti}} + \frac{1}{K_\text{assiale,giunto}} \right]^{-1} \simeq \left[ \frac{1}{K_\text{assiale,vite}} + \frac{1}{K_\text{torsionale,vite}}\left(\frac{p}{2\pi}\right)^2 \right]^{-1} \]
+Dove i contributi più rilevanti sono tendenzialmente i primi due, che sono dipendenti da p, d quindi non necessitano del catalogo.
+
+\sottosottosezione{Rigidezza Torsionale}
+La rigidezza torsionale è data da \(K_\text{torsionale} = \frac{G I_p}{L_\text{vite}} \) con \(I_p=\frac{\pi}{32} d^4\) momento di inerzia polare, G modulo elastico tangenziale.
+Non dipende molto dalla chiocciola, perciò si considera come costante al variare della posizione.
+
+\sottosottosezione{Rigidezza Assiale}
+La rigidezza assiale è data da \( K_\text{assiale} = \frac{EA}{L_\text{assiale}} \), con \( A \) sezione della vite.
+In questo caso l'effetto della chiocciola NON è trascurabile.
+In particolare a seconda del tipo di vincolo sulla vite cambia sensibilmente.
+
+\paragrafo{Caso unico vincolo assiale:}
+Se sulla vite è posto un unico vincolo assiale (AA,AI,IL), allora un estremo è libero di muoversi assialmente, perciò non sarà interessato dalla rigidezza assiale.
+In questo caso la lunghezza assiale è determinata dalla distanza tra motore e chiocciola.
+In termini di rigidezza minima questa si verifica per lunghezza assiale massima, ossia quando la chiocciola è posta in prossimità dell'estremo assialmente libero.
+
+\paragrafo{Caso doppio vincolo assiale:}
+Se sulla vite è posto un doppio vincolo assiale (II), allora entrambi gli estremi saranno interessati dalla rigidezza assiale.
+In questo caso la vite viene divisa in due molle equivalenti poste in parallelo, di lunghezze \(x\) (posizione della chiocciola), \(L_v - x\) (resto della vite)\footnote{In realtà la lunghezza assiale considera non la lunghezza totale della vite ma da vincolo a vincolo, tuttavia è spesso una buona approssimazione.}: \(K_\text{ass,vite}(x) \simeq \frac{EA}{x} + \frac{EA}{L_v - x} \).
+La rigidezza ha massimo in corrispondenza di \( K_\text{ass,vite}^\text{max} (x=0,L_v) \rightarrow \infty \), nota bene che se questa rigidezza è infinita, nel calcolo della rigidezza equivalente per il modello a 2gdl i parametri prima ritenuti trascurabili non potranno più esserlo.
+La rigidezza ha minimo in corrispondenza di \(K_\text{ass,vite}^\text{min} = \frac{4EA}{L_v} \).
+
+% inserire immagine esempio rigidezza assiale con unico vincolo e doppio vincolo
+
+\paragrafo{Usare rigidezza equivalente:}
+Il valore di \(K_eq\) di per sè non crea problemi, tuttavia considerando il modello a 2 gdl e considerando il motore incastrato, si otterrà una pulsazione di antirisonanza \(\omega_z = \sqrt{\frac{K_{eq}}{M_{eq}}}\) relativa alla funzione di trasferimento data da \( \frac{\Theta(s)}{C_m(s)} \).
+La massa equivalente è data da \( M_{eq}(d) \simeq M_\text{carico} + M_\text{chiocciola} + \frac{M_\text{vite}}{3} \); la rigidezza è funzione di \( K_{eq}(p,d,x) \), perciò \(\omega_z (p,d,x)\), e la pulsazione di antirisonanza ha implicazioni sulla banda passante \( \omega_{bv} \leqslant \omega_z \cdot [50\% \div 70\%] \), quindi su inseguimento del riferimento.
+
+\paragrafo{Rappresentazioni in grafico p,d:}
+In termini di grafico passo, diametro: per d piccoli, \( K_{ass} \) è minore quindi più critico; per p grandi diventa più rilevante l'effetto torsionale perchè una torsione per passo grande implica un grande spostamento assiale.
+
+\sottosezione{Verifica Statica}
+Per verificare staticamente una vite si utilizzano due verifiche:
+\begin{itemize}
+    \item Deformazione statica della vite, legata a forza peso;
+    \item Instabilità al carico di punta, ossia deformazione legata a forza di compressione sulla vite, di tipo euleriano.
+\end{itemize}
+Tuttavia le verifiche statiche sono meno severe delle verifiche dinamiche, il vincolo che si può trovare in termini di diametro minimo esclude una area di grafico già esclusa dalla velocità critica della vite.
+
+
+% inserire grafico contributi di rigidezza assiale e complessivi di vincoli
+
+\sottosezione{Gioco Assiale}
+Prima ancora della scelta di p, d è opportuno scegliere il gioco, che tipicamente è indipendente da p,d perciò nei cataloghi è in sezione a sè stante.
+Il problema del gioco è legato alla grandezza delle gole rispetto le sfere, questo comporta forze che non sono esattamente assiali, ma hanno componente normale.
+
+\paragrafo{Soluzione 1:}
+Utilizzo di sfere maggiorate, che vadano a occupare più spazio all'interno delle gole, tuttavia questo comporta un aumento dell'attrito e maggior richiesta di manutenzione.
+
+\paragrafo{Soluzione 2:}
+Utilizzo di Precarico o Shift di passo, in questo caso va introdotto un certo \(\Delta\) in un passo, di modo che le forze normali si annullino. Per poter utilizzare un precarico occorre utilizzare una chiocciola apposita che, tramite una molla regolabile, forza il contatto delle sfere con le gole. Questo aumenta di conseguenza l'attrito, è sempre applicata, e viene fissata non oltre il \(10\%\) di \(C_D\), il cui calcolo va modificato di conseguenza: \( C_D \geqslant \frac{f_s F_a}{0.9} \sqrt[3]{\frac{L_N}{10^6}} \).
+
+In alcuni casi il sistema è precaricato per configurazione, per esempio quando la vite è posta verticalmente.
+
+
+% inserire figura esempio per gioco 
