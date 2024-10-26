@@ -1,0 +1,72 @@
+\capitolo{Meccanica delle Vibrazioni}
+Ripasso di Meccanica delle Vibrazioni con focus su: oscillatore semplice smorzato, analisi modale di sistemi a più gradi di libertà.
+
+\sezione{Oscillatore Semplice Smorzato}
+L'oscillatore semplice smorzato è un modello di corpo, avente una certa massa \(m\) , vincolato tramite un elemento elastico \(k\) e un elemento viscoso \(c\) a telaio.
+
+Per un sistema così fatto è possibile scrivere le 3 equazioni della dinamica:
+\begin{itemize}
+    \item Equazione di Equilibrio: \(F(t) + F_e(t) + F_v(t) = m \acc{x}(t) \)
+    \item Equazione di Legame: \(F_e(t) = -k x(t)\) e \( F_v(t) = -c\dot{x}(t) \)
+    \item Equazione di Moto: \(m\acc{x}(t) + c\dot{x}(t) + k x(t) = F(t)\)
+\end{itemize}
+
+La soluzione generale dell'equazione differenziale definita dalle equazioni del sistema è dato da soluzione omogenea e soluzione particolare: \(x(t) = x_1(t) + x_2(t)\).
+
+\sottosezione{Soluzione omogenea (Risposta Libera)}
+La soluzione di \(m\acc{x}(t)+c\dot{x}(t)+kx(t)=0\), cui si associa il polinomio caratteristico \( \lambda^2 m +\lambda c +k = 0 \) è la soluzione omogenea dell'equazione differenziale. 
+Dividendo per la massa si ottengono rispettivamente il fattore di smorzamento e la pulsazione naturale del sistema: \( \epsilon = \frac{c}{2\sqrt{km}} \) e \(\omega_n = \sqrt{\frac{k}{m}}\).
+Le radici del polinomio omogeneo associato sono \(\lambda_{1,2} = \epsilon \omega_n \pm \omega_n \sqrt{\epsilon^2 - 1}\), che per i vari \(k>0,m>0,c>0\) permettono di distinguere vari casi:
+\begin{enumerate}
+    \item \(\epsilon > 1\): Sistema sovrasmorzato, permette di ritornare alla condizione di equilibrio, \(x_1(t) = A_1 e^{\lambda_1t} + A_2 e^{\lambda_2t}\)
+    \item \( \epsilon = 1 \): Sistema criticamente smorzato, permette di   ritornare alla condizione di equilibrio il più velocemente possibile senza oscillazioni, \(x_1(t) = (A_1+t A_2) e^{-\omega_n t} \)
+    \item \( 0 < \epsilon < 1 \): Sistema sottosmorzato, ritorna alla condizione di equilibrio, ma con oscillazioni, \(x_1(t) = C e^{-\epsilon \omega_n t} \sin{\left(\omega_d t + \Phi \right)}\)
+    \item \(\epsilon = 0\): Sistema non smorzato, non c'è ritorno alla condizione di equilibrio, \( x_1(t) = B_1 \cos{\left( \omega_n t \right)} + B_2 \sin{\left( \omega_n t \right)} \)
+\end{enumerate}
+
+La soluzione omogenea ha significato di risposta libera del sistema, ossia in condizione di forzante nulla.
+
+\sottosezione{Soluzione particolare (Risposta Forzata)}
+La soluzione di \(m\acc{x}(t) + c\dot{x}(t) + k x(t) = F(t)\), per una certa forzante \(F(t)\) è la soluzione particolare  dell'equazione differenziale.
+In base al tipo di forzante cambia la soluzione particolare.
+Possibili forzanti sono:
+\begin{enumerate}
+    \item \(F(t) = F_0\) Costante
+    \item \(F(t) = F_0 \cos{(\omega t)}\) Armonica
+    \item \(F(t+T) = F(t) \) Periodica
+    \item \(F(t)\) Generica
+\end{enumerate}
+
+\sottosottosezione{Forzante Costante}
+La forzante costante rappresenta la risposta al gradino di forza di ampiezza \(F_0\), la soluzione particolare di questa forzante è \(x_2(t) = \frac{F_0}{k}\), ed indica la posizione raggiunta a regime.
+
+\sottosottosezione{Forzante Armonica}
+La soluzione particolare, per forzante armonica \(F(t) = F_0 \cos{(\omega t)}\), ha risposta che dipende dalla frequenza della forzante.
+Per studiare questa soluzione si passa al campo delle frequenze (ipotesi isofrequenziale) e si utilizza la Frequency Responce Function \( \frac{x_0 e^{i\phi}}{F_0} \), il cui modulo è \( \abs{\frac{x_0 e^{i\phi}}{F_0}} = \frac{1}{k\sqrt{\left[1-\left(\frac{\omega}{\omega_n}\right)^2\right]^2+\left(2\epsilon \frac{\omega}{\omega_n}\right)^2}} \).
+
+Per la FRF si possono andare a verificare condizioni limite:
+\begin{itemize}
+    \item Quasi Statica: \(\phi\simeq 0\), \(\frac{\omega}{\omega_n} << 0\), in questo caso l'effetto dello smorzatore è irrilevante
+    \item Zona di Risonanza\footnote{Tecnicamente la risonanza si ha per \(\omega_r=\omega_n(1-2\epsilon^2)\), che solitamente è vicino alla pulsazione naturale, ma non sono la stessa cosa.}: \(\phi\simeq -\frac{\pi}{2}\), \(\frac{\omega}{\omega_n} = 1\), in questa condizione forza e velocità hanno la stessa direzione, l'energia in ingresso nel sistema può essere tale da portare a rottura il sistema
+    \item Zona Sismografica: \(\phi\simeq -\pi\), \(\frac{\omega}{\omega_n} >> 1\), in questo caso la massa è come se fosse sospesa, \( x_0 = \frac{F_0}{m \omega^2} \)
+\end{itemize}
+
+% inserire grafico frf fatto con matlab, credo ci sia uno script del professore
+
+\sottosottosezione{Forzante Periodica}
+Una forzante periodica può essere scomposta, tramite serie di Fourier, in una serie di componenti armoniche di periodo multiplo del periodo della fondamentale. La soluzione particolare in questo caso è \(x_2(t) = \frac{A_0}{k} + \sum \abs{\frac{x_0 e^{i\phi}}{F_0}}_{\omega=m\overline{\omega}} A_m \cos{\left( m\overline{\omega} t + \alpha_m + \angle{\frac{x_0 e^{i\phi}}{F_0}}_{\omega=m\overline{\omega}} \right)}\)
+
+\sottosottosezione{Forzante Generica, Risposta Impulsiva}
+Teorema: \textit{La trasformata della risposta impulsiva corrisponde alla risposta in frequenza di un oscillatore semplice all'ingresso armonico.}
+Questo significa che la risposta in frequenza all'impulso è la FRF: \(H(i\omega) = \frac{X(i\omega)}{F(i\omega)} = \frac{x_0 e^{i\phi}}{F_0}\).
+Questo permette di ricavare la FRF a partire da misure con shaker elettrodinamici o martello strumentale.
+
+
+\sezione{Sbilanciamento Statico}
+%% inserire parte relativa a sbilanciamento statico pagina 15 appunti MV
+
+\sezione{Vibrazioni Torsionali}
+%% inserire parte su vibrazioni torsionali pag 27 appunti MV
+
+\sezione{Antirisonanza}
+%% inserire parte su antirisonanza pag 46
