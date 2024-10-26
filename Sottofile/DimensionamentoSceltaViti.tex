@@ -176,7 +176,11 @@ In questo caso la vite viene divisa in due molle equivalenti poste in parallelo,
 La rigidezza ha massimo in corrispondenza di \( K_\text{ass,vite}^\text{max} (x=0,L_v) \rightarrow \infty \), nota bene che se questa rigidezza è infinita, nel calcolo della rigidezza equivalente per il modello a 2gdl i parametri prima ritenuti trascurabili non potranno più esserlo.
 La rigidezza ha minimo in corrispondenza di \(K_\text{ass,vite}^\text{min} = \frac{4EA}{L_v} \).
 
-% inserire immagine esempio rigidezza assiale con unico vincolo e doppio vincolo
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Immagini/rigidezza_ass_1vs2_vincoli.png}
+    \caption{Rigidezza per vincoli assiali: unico a sx, doppio a dx}
+\end{figure}
 
 \paragrafo{Usare rigidezza equivalente:}
 Il valore di \(K_eq\) di per sè non crea problemi, tuttavia considerando il modello a 2 gdl e considerando il motore incastrato, si otterrà una pulsazione di antirisonanza \(\omega_z = \sqrt{\frac{K_{eq}}{M_{eq}}}\) relativa alla funzione di trasferimento data da \( \frac{\Theta(s)}{C_m(s)} \).
@@ -193,8 +197,11 @@ Per verificare staticamente una vite si utilizzano due verifiche:
 \end{itemize}
 Tuttavia le verifiche statiche sono meno severe delle verifiche dinamiche, il vincolo che si può trovare in termini di diametro minimo esclude una area di grafico già esclusa dalla velocità critica della vite.
 
-
-% inserire grafico contributi di rigidezza assiale e complessivi di vincoli
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Immagini/vincolo_antirisonanza.png}
+    \caption{Rappresentazione vincolo p,d per antirisonanza sx, grafico di tutti i vincoli dx}
+\end{figure}
 
 \sottosezione{Gioco Assiale}
 Prima ancora della scelta di p, d è opportuno scegliere il gioco, che tipicamente è indipendente da p,d perciò nei cataloghi è in sezione a sè stante.
@@ -208,5 +215,8 @@ Utilizzo di Precarico o Shift di passo, in questo caso va introdotto un certo \(
 
 In alcuni casi il sistema è precaricato per configurazione, per esempio quando la vite è posta verticalmente.
 
-
-% inserire figura esempio per gioco e precarico verticale
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{Immagini/gioco_viti_ricircolo.png}
+    \caption{Gioco nelle viti fig 1,2; precarico fig 3,4}
+\end{figure}

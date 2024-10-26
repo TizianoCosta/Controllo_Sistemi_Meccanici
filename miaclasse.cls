@@ -43,7 +43,7 @@
 %\newcommand*{\derivataparz}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand*{\VelAng}{\dot{\theta}}
 \newcommand*{\AccAng}{\Ddot{\theta}}
-%\newcommand*{\accelerazione}[1]{\Ddot{#1}}
+\newcommand*{\acc}[1]{\Ddot{#1}}
 %\newcommand*{\angolo}[1]{\widehat{#1}}
 %\newcommand*{\intersecato}{\cap}
 %\newcommand*{\unito}{\cup}
@@ -56,7 +56,6 @@
 %\newcommand*{\versore}[1]{\hat{#1}}
 \newcommand*{\derivata}[2]{\frac{d#1}{d#2}}
 \newcommand*{\derivataparz}[2]{\frac{\partial #1}{\partial #2}}
-%\newcommand*{\accelerazione}[1]{\Ddot{#1}}
 % \newcommand*{\angolo}[1]{\widehat{#1}}
 % \newcommand*{\intersecato}{\cap}
 % \newcommand*{\unito}{\cup}
