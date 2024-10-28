@@ -90,7 +90,7 @@ Per semplificare i calcoli si utilizza un criterio di normalizzazione che permet
     \item K-ortogonalità \(\VettU_i^\top \Rigidezza \VettU_j = \begin{cases} 0 \text{  se } i\neq j \\ \omega_i^2 \text{  se } i=j \end{cases} \) 
 \end{itemize}
 
-\sottosottosezione{Oscillatore Modale}
+\sottosezione{Oscillatore Modale}
 Definita la matrice modale \(\Modale\) formata da colonne di  autovettori \(\VettU\), valgono
 \begin{itemize}
     \item \(\Modale^\top \Massa \Modale = \Identita \)
@@ -100,11 +100,21 @@ Definita la matrice modale \(\Modale\) formata da colonne di  autovettori \(\Vet
 Nota bene, per criterio di normalizzazione che \(\Modale^\top \Massa = \Modale^{-1}\), ossia \(\abs{\Modale} \neq 0\) cioè gli autovalori della matrice della dinamica sono linearmente indipendenti quindi formano una base.
 Questo significa che \(\VettPos = \eta_1(t) \VettU_1 + \dots + \eta_n(t) \VettU_n = \Modale \VettModalePos\), che sostituito in \(\Massa \VettAcc + \Rigidezza \VettPos = \left\{ F(t) \right\}\), porta ad un nuovo sistema \(\VettModaleAcc + \Autoval \VettModalePos = \VettModaleForza = \Modale^\top \VettForza \).
 Questo nuovo sistema è un oscillatore modale equivalente di massa unitaria che si sposta di \(\eta_i(t)\) e ha una molla equivalente di rigidità \(\omega_i^2\) e forza applicata sulla massa di ampiezza \(l_i(t)\).
+Per vedere una forma modale occorre fare una evoluzione libera del sistema con condizioni iniziali pari a uno degli autovalori.
+
+\sottosottosezione{Con Smorzamento}
+Nell'oscillatore modale, aggiungere lo smorzamento significa studiare \( \Ddot{\eta}_j(t) + 2\epsilon_j\omega_j \dot{\eta}_j(t) + \omega^2_j \eta_j(t) = l_i(t) \).
+
+\sottosottosezione{Forzante armonica}
+Nel caso fossero applicate forzanti armoniche per i vari gdl, aventi stessa pulsazione \(\omega\), ma ampiezze \(F_j\) e fasi \(\phi_j\) differenti , è possibile passare allo studio di oscillatori modali, che possono essere studiati con vettori complessi, e da cui in seguito a opportune manipolazioni  si ottiene: \(\eta_j(i\omega) = \frac{1}{\omega_j^2} \frac{1}{1-\left(\frac{\omega}{\omega_j}\right)^2 + 2\epsilon_j \frac{\omega}{\omega_j}} l_j(i\omega)\).
+Dall'oscillatore modale è possibile tornare all'oscillatore semplice: \(\left\{ x(i\omega) \right\} = \Modale \left\{ \eta(i\omega) \right\} = \Modale \left[ T(i\omega) \right] \left\{ L(i\omega) \right\} \), dove \(\left[ T(i\omega) \right]\), infine sostituendo \(\left\{ L(i\omega) \right\} = \Modale^\top \left\{ F(i\omega) \right\}\) e definita la matrice delle risposte in frequenza \( \left[ H(i\omega) \right] = \Modale \left[ T(i\omega) \right] \Modale^\top \), si ottiene \( \left\{ x(i\omega) \right\} = \left[ H(i\omega) \right] \left\{ F(i\omega) \right\} \).
+Vale inoltre \(\left[ H(i\omega) \right] = \sum^n_{j=1} \left[ H_j(i\omega) \right] = \sum^n_{j=1} \frac{1}{\omega^2_j} \frac{1}{1-\left(\frac{\omega}{\omega_j}\right)^2 + i2 \epsilon \frac{\omega}{\omega_j}} \VettU_j \VettU_j^\top \).
+
 
 % inserire parte su analisi modale pag 34-... , 73 o 77 appunti di Enrico
 
-\sottosezione{Antirisonanza}
-Con antirisonanza si intendono quelle pulsazioni di un sistema, non smorzato, a più gradi di libertà, tali per cui uno degli elementi della matrice \(\left[ H(i\omega) \right]\) è nullo.
+\sottosottosezione{Antirisonanza}
+Con antirisonanza si intendono quelle pulsazioni di un sistema, non smorzato, a più gradi di libertà, tali per cui uno degli elementi della matrice delle risposte in frequenza \(\left[ H(i\omega) \right]\) è nullo.
 Il numero di pulsazioni di antirisonanza è pari a \(\text{n gdl} - 1\).
 
 Nel caso di sistema a 2 gdl in figura  \( x_1(i\omega) = h_{11}(i\omega) F_1(i\omega) + h_{12}(i\omega)F_2(i\omega) \), per \( h_{11}(i\omega), F_2(i\omega) = 0\) è come se la massa 1, su cui viene applicata una forzante \(F_1(i\omega)\neq 0\), non si muovesse, quindi fosse, virtualmente, a telaio.
