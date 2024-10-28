@@ -60,7 +60,7 @@
 % \newcommand*{\intersecato}{\cap}
 % \newcommand*{\unito}{\cup}
 % \newcommand*{\integrale}[4]{\int_{#1}^{#2} #3 d(#4)}
-% \newcommand*{\unitamisura}[2]{\left[\frac{\textup#1}{\textup#2}\right]}
+\newcommand*{\unitamisura}[2]{\left[\frac{\text{#1}}{\text{#2}}\right]}
 % \newcommand*{\Pa}{\left[\textup{Pa}\right]}
 \newcommand*{\abs}[1]{\left|#1\right|}
 % \newcommand*{\cost}{\textup{cost}}
@@ -70,6 +70,23 @@
 \newcommand*{\laplace}[1]{\mathcal{L}\left(#1\right)}
 \renewcommand*{\arg}[1]{\operatorname{arg}\left(#1\right)}
 \newcommand*{\DperN}{\text{"D}\times \text{n"}}
+\newcommand*{\Massa}{\left[M\right]}
+\newcommand*{\VettAcc}{\left\{ \Ddot{x}(t) \right\}}
+\newcommand*{\VettVel}{\left\{ \dot{x}(t) \right\}}
+\newcommand*{\VettPos}{\left\{ x(t) \right\}}
+\newcommand*{\Rigidezza}{\left[ K \right]}
+\newcommand*{\VettU}{\left\{ u \right\}}
+\newcommand*{\Dinamica}{\left[ D \right]}
+\newcommand*{\VettZero}{\left\{ 0 \right\}}
+\newcommand*{\Identita}{\left[ I \right]}
+\newcommand*{\Autovett}{\left\{ \Phi \right\}}
+\newcommand*{\VettModalePos}{\left\{ \eta(t) \right\}}
+\newcommand*{\VettModaleAcc}{\left\{ \Ddot{\eta}(t) \right\}}
+\newcommand*{\Modale}{\left[ U \right]}
+\newcommand*{\Autoval}{\left[ \Omega \right]}
+\newcommand*{\diag}[1]{\operatorname{diag}\left(#1\right)}
+\newcommand*{\VettModaleForza}{\left\{ L(t) \right\}}
+\newcommand*{\VettForza}{\left\{ F(t) \right\}}
 
 %geometria pagina
 \RequirePackage[a4paper,width=16.5cm,top=2.5cm,bottom=2.5cm]{geometry}
