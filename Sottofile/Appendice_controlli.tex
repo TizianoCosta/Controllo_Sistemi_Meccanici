@@ -20,7 +20,8 @@ Principali proprietà della trasformata di Laplace.
 %% valutare di copiarne altre da appunti di controlli
 
 \sottosezione{Funzione di Trasferimento}
-%% Inserire definizione di funzione di trasferimento su appunti
+Per un sistema LTI, la funzione di trasferimento \(H(s)\) è definita come il rapporto della trasformata di Laplace dell'uscita \(Y(s)\) e dell'ingresso \(X(s)\) del sistema, assumendo condizioni iniziali nulle:
+\(H(s)=\frac{Y(s)}{X(s)}\).
 
 \sezione{Diagrammi di Bode}
 Per rappresentare le risposte armoniche si utilizza una coppia di diagrammi detti di Bode:
@@ -100,3 +101,65 @@ Per esempio fare il luogo delle radici di $G(s) = \frac{s + 3}{(s + 1)(s + 5)(s 
 \end{figure}
 
 %% Rivedere parte su luogo delle radici
+
+
+\sezione{Criteri di Stabilità}
+Per lo studio dei sistemi è importante conoscerne la stabilità, ossia se il sistema reagisce in modo controllato ad un dato ingresso.
+Ci sono diversi tipi di criteri di stabilità alcuni sono grafici, altri analitici.
+
+\sottosezione{Criterio Stabilità BIBO}
+Con stabilità BIBO si intende che il sistema abbia una risposta limitata ad un ingresso limitato. Nota bene, questa stabilità non implica stabilità asintotica.
+
+\sottosezione{Criterio di Stabilità dei Poli della funzione di trasferimento}
+
+In un sistema lineare rappresentato da una funzione di trasferimento \(H(s)=\frac{N(s)}{D(s)}\) con \(N(s)\) e \(D(s)\) coprimi, la stabilità dipende dalla posizione dei poli. Questo criterio è necessario ma non sufficiente.
+
+\begin{itemize}
+    \item Per un sistema causale e stabile, tutti i poli devono avere una parte reale negativa, cioè devono trovarsi nel semipiano sinistro del piano complesso \(\mathbb{R}(s)<0\).
+    \item Se anche un solo polo ha una parte reale positiva \(\mathbb{R}(s)>0\), il sistema è instabile.
+    \item Se i poli si trovano sulla linea immaginaria pura \(\mathbb{R}(s)=0\), il sistema è marginalmente stabile, cioè risponderà con oscillazioni permanenti e costanti.
+\end{itemize}
+
+
+\sottosezione{Criterio di Routh-Hurwitz}
+Il criterio di Routh-Hurwitz permette di verificare la stabilità di un sistema senza calcolare esplicitamente i poli della funzione di trasferimento. Si basa sullo sviluppo di una tabella chiamata tabella di Routh:
+
+Supposto di avere un polinomio caratteristico \(P(s)=a_n s^n+a_{n-1}s^{n-1}+⋯+a_1 s+a_0\) con \(a_n,a_{n-1},…,a_0\) coefficienti reali. La tabella di Routh si costruisce come segue:
+
+\begin{itemize}
+    \item Prima riga: Inserisci i coefficienti degli elementi di grado pari, a partire da \(a_n\)
+    \item Seconda riga: Inserisci i coefficienti degli elementi di grado dispari, partendo da \(a_{n-1}\)
+    \item Righe successive: Gli elementi delle righe successive si calcolano utilizzando i coefficienti delle righe precedenti. Ogni elemento della riga \(i+2\) si calcola con la formula: \(R_{i+2,j} =\frac{ R_{i,1} R_{i+1,j+1} - R_{i+1,1} R_{i,j+1}}{R_{i+1,1}}\)
+    dove \(R_{i,j}\) rappresenta l'elemento nella riga \(i\) e colonna \(j\) della tabella.
+    \item Continua a costruire la tabella fino ad avere una riga per ogni grado di \(s\) (fino a \(s^0\)).
+\end{itemize}
+
+\paragrafo{Condizione di Stabilità:}
+
+Il criterio di Routh-Hurwitz stabilisce che il sistema è stabile se e solo se tutti i termini della prima colonna della tabella di Routh hanno lo stesso segno (positivi o negativi).
+Ogni cambio di segno nella prima colonna corrisponde a un polo con parte reale positiva, quindi a un segno di instabilità.
+
+\sottosezione{Criterio di Nyquist}
+Il criterio di Nyquist è un metodo grafico utilizzato per analizzare la stabilità dei sistemi con retroazione (feedback) attraverso un'analisi della risposta in frequenza.
+Il criterio di Nyquist si applica tipicamente ai sistemi descritti dalla funzione di trasferimento ad anello aperto \(L(s)\), data dal prodotto del guadagno dell'impianto \(G(s)\) e del guadagno del controllore \(H(s)\), \(L(s)=G(s)H(s)\).
+
+\sottosottosezione{Diagramma di Nyquist}
+Per applicare il criterio, si costruisce il diagramma di Nyquist, ovvero la curva tracciata nel piano complesso \(\mathbb{C}\) dalla funzione \(L(i\omega)\) al variare della frequenza \(\omega\) da 0 a \(+\infty\) (e poi da \(+\infty\) a \(-\infty\), se necessario). Questa curva rappresenta la risposta in frequenza del sistema in catena aperta, con la parte reale di \(L(i\omega)\) sull'asse x e la parte immaginaria sull'asse y.
+
+\sottosottosezione{Stabilità}
+Per determinare la stabilità del sistema a ciclo chiuso, il criterio di Nyquist si basa su un'analisi del numero di avvolgimenti del diagramma di Nyquist attorno al punto -1 nel piano complesso. Questo punto rappresenta la condizione critica in cui la retroazione positiva (instabilità) potrebbe prevalere, rendendo instabile il sistema a ciclo chiuso.
+
+Numero di avvolgimenti: Conta il numero di volte che il diagramma di Nyquist avvolge il punto -1 nel piano complesso, considerando il senso di rotazione.
+
+Relazione con i poli instabili: Per la stabilità a ciclo chiuso, il numero di avvolgimenti attorno a -1 deve essere tale da compensare eventuali poli a parte reale positiva nel sistema a ciclo aperto.
+
+Il criterio di Nyquist afferma che il numero di avvolgimenti netti N della curva di Nyquist attorno al punto -1 (contati in senso antiorario come positivi e in senso orario come negativi) deve soddisfare la relazione \(N=P-Z\), dove: 
+\begin{itemize}
+    \item N è il numero di avvolgimenti netti del diagramma attorno al punto -1
+    \item P è il numero di poli a ciclo aperto di \(L(s)\) nel semipiano destro (ovvero i poli a parte reale positiva, che renderebbero instabile il sistema a ciclo chiuso)
+    \item Z è il numero di zeri a ciclo chiuso di \(1+L(s)\) nel semipiano destro (equivalente al numero di poli instabili del sistema a ciclo chiuso)
+\end{itemize}
+Per garantire la stabilità del sistema a ciclo chiuso, il numero Z deve essere zero, ossia non ci devono essere poli a ciclo chiuso con parte reale positiva.
+
+Sistema stabile: Se il sistema a ciclo aperto non ha poli a parte reale positiva \(P=0\), allora la stabilità a ciclo chiuso è garantita se il diagramma di Nyquist non avvolge il punto -1.
+Sistema con poli instabili: Se il sistema a ciclo aperto ha poli a parte reale positiva \(P>0\), allora il diagramma di Nyquist deve avvolgere il punto -1 un numero di volte pari a P per garantire la stabilità a ciclo chiuso.
