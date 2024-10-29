@@ -87,6 +87,7 @@
 \newcommand*{\diag}[1]{\operatorname{diag}\left(#1\right)}
 \newcommand*{\VettModaleForza}{\left\{ L(t) \right\}}
 \newcommand*{\VettForza}{\left\{ F(t) \right\}}
+\newcommand*{\minOtt}[1]{\operatorname{min}\left\{ #1 \right\}}
 
 %geometria pagina
 \RequirePackage[a4paper,width=16.5cm,top=2.5cm,bottom=2.5cm]{geometry}
