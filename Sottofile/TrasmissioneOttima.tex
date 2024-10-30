@@ -41,7 +41,7 @@ Quest'ultima si traduce in \(C_m^{RMS} < T_{CS}\) e quindi \(\minOtt{C_m^{RMS}}\
 \end{figure}
 
 \sottosezione{Riformulazione con grandezze RMS}
-Se si utilizzano le grandezze RMS la riformulazione risulta \(\tau_{opt} = \sqrt{\frac{J_m + J_r}{T_2^{RMS}/\eta_r^{RMS}}\AccAng_c^{RMS}}\). Considerando un rendimento alto, e che comunque il valore ottenuto dovrà essere adattato a quelli presenti nel catalogo disponibile, si può omettere il rendimento, si ottiene quindi un espressione indicativa per la scelta del \(\tau_r\):
+Se si utilizzano le grandezze RMS la riformulazione risulta \(\tau_{opt} = \sqrt{\frac{J_m + J_r}{\left(T_2/\eta_r\right)^{RMS}}\AccAng_c^{RMS}}\). Considerando un rendimento alto, e che comunque il valore ottenuto dovrà essere adattato a quelli presenti nel catalogo disponibile, si può omettere il rendimento, si ottiene quindi un espressione indicativa per la scelta del \(\tau_r\):
 \[\tau_{opt} = \sqrt{\frac{J_m + J_r}{T_2^{RMS}}\AccAng_c^{RMS}}\] 
 
 \sottosezione{Vincoli}
@@ -68,15 +68,50 @@ In modo del tutto simile al caso di \(\tau_{min}\), anche il \(\tau_{max}\) potr
     \caption{Rapporti di trasmissione: minimo sx, massimo dx}
 \end{figure}
 
-\sezione{Energia e Velocità}
-Sono possibili altre valutazioni, in particolare un approccio che consideri l'energia elettrica assorbita e la velocità del motore.
 
-\sottosezione{Energia Elettrica Assorbita}
+\sezione{Energia Elettrica Assorbita}
 L'energia elettrica assorbita è pari a \(E_m = \int^{T_c}_0 v(t) i(t) dt\),  considerando \(i(t)=\frac{C_m}{K_T}\) e \(v(t) = R i(t) + K_B \VelAng_m\), facendo opportune sostituzioni e manipolazione, si ottiene:
 \[ E_m = \frac{R}{K_T^2} T_c (C^{RMS}_m)^2 + \frac{K_B}{K_T} \int^{T_c}_0 C_m\VelAng_m dt \]
 Dove il primo dei due contributi tendenzialmente è dominante; occorre tuttavia tenere conto del secondo contributo che dipende dalla velocità e che quindi potrebbe diventare più rilevante.
 Da queste valutazioni si trova che \(\minOtt{C_m^{RMS}}\) è simile a \(\minOtt{E_m}\), ma il rapporto di trasmissione ottimo per l'energia tendenzialmente è maggiore di quello per la coppia, perciò conviene utilizzare \(\tau_r >\) maggiori.
 
-\sottosezione{Velocità del Motore}
+\sezione{Velocità del Motore}
 La velocità del motore è inversamente proporzionale al rapporto di trasmissione, quindi per ottenere velocità inferiori conviene utilizzare \(\tau_r >\) maggiori.
 Per velocità di motore elevate aumenta la coppia legata all'attrito viscoso; inoltre per velocità elevate \(K_T\) è ridotto, perciò la produzione di coppia richiede maggior corrente, quindi maggiori costi in termini di convertitori.
+
+\sottosezione{Attrito viscoso}
+Il contributo dell'attrito viscoso si vede all'albero veloce \(C_m = (J_m+J_r)\frac{\AccAng_c}{\tau_r} + f_v \frac{\VelAng_c}{\tau_r}\), che quindi rientra nell'espressione del rapporto di trasmissione ottimo\footnote{Nota bene che \(RMS\{A+B\}\leqslant RMS\{A\} +RMS\{B\}\).} \(\tau_{opt} = \sqrt{\frac{\left[(J_m + J_r)\AccAng_c+f_v \VelAng_c\right]^{RMS}}{\left(T_2/\eta_r\right)^{RMS}}}\), dove \(\VelAng_m\) "alta" porta a \(\tau_r\) "bassi", quindi l'effetto di attrito è maggiore per la zona sinistra del grafico. Vengono favoriti \(\tau_r\) maggiori.
+
+\sottosezione{Costante di Coppia}
+A parità di taglia del motore, una velocità maggiore porta ad avere \(K_T\) inferiore, perciò il costo della coppia in termini di corrente è superiore. Vengono favoriti \(\tau_r\) maggiori.
+Occorre quindi scegliere opportunamente la velocità massima al carico (valutazioni su legge di moto) e il rapporto di trasmissione.
+
+\sottosezione{Numero di Stadi}
+La scelta del numero di stadi porta ad una serie di valutazioni su rigidezza, gioco, rendimento, inerzia e costo.
+In generale la scelta tende comunque a favorire \(\tau_r\) maggiori anche in questo caso.
+
+% inserire immagine di come quegli elementi vanno in trade off con il tau r
+
+\sezione{Limite alla Conoscenza dei Valori}
+Nella formula del rapporto di trasmissione ottimo  \(\tau_{opt} = \sqrt{\frac{J_m + J_r}{\left(T_2/\eta_r\right)^{RMS}}\AccAng_c^{RMS}}\), dei parametri presenti:
+\begin{itemize}
+    \item \(T_2, \AccAng_c^{RMS}\) sono indipendenti da \(\tau_r\)
+    \item \(\eta\) è dipendente da \(\tau_r\), ma se le differenze sono ridotte si può trascurare
+    \item \(J_r\) dipende dalla \(\tau_r\), tuttavia la dipendenza maggiore la ha per la taglia, quindi scelta quella si può scegliere un valore medio o significativo
+    \item \(J_m\) dipende da \(T_{CS}\), che a sua volta dipende da \(C_m^{RMS}\) che è legata a \(\tau_r\)
+\end{itemize}
+
+Questo problema ha per soluzioni:
+\begin{enumerate}[label=\Roman*]
+    \item Utilizzo di metodi di stima
+    \item Esperienza
+    \item Iterazioni utilizzando buon senso
+\end{enumerate}
+
+\sezione{Vite a Ricircolo di Sfere}
+Le stesse valutazioni fatte per i riduttori si possono trasporre alle viti a ricircolo di sfere, per cui si parlerà di \(p_{opt}=2\pi \sqrt{\frac{(J_m+J_r)\acc{x}^{RMS}}{(F_a/\eta_r)^{RMS}}}\).
+
+\paragrafo{Effetto del Diametro:}
+Il diametro entra nel calcolo dell'inerzia, in particolare, sostituendo la massa \(J_v=\frac{1}{2}L\rho \pi \frac{d^4}{16} = \alpha d^4\), perciò \(p_{opt}=2\pi \sqrt{\frac{(J_m+\alpha d^4)\acc{x}^{RMS}}{(F_a/\eta_r)^{RMS}}}\), ossia il passo della vite varia circa quadraticamente con il diametro.
+
+% figura del passo ottimo libero e vincolato
