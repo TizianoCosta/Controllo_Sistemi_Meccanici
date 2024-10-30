@@ -90,7 +90,11 @@ Occorre quindi scegliere opportunamente la velocità massima al carico (valutazi
 La scelta del numero di stadi porta ad una serie di valutazioni su rigidezza, gioco, rendimento, inerzia e costo.
 In generale la scelta tende comunque a favorire \(\tau_r\) maggiori anche in questo caso.
 
-% inserire immagine di come quegli elementi vanno in trade off con il tau r
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{Immagini/numero_std_rid_tau_opt.png}
+    \includegraphics[width=0.4\textwidth]{Immagini/riepilogo_tau_opt.png}
+\end{figure}
 
 \sezione{Limite alla Conoscenza dei Valori}
 Nella formula del rapporto di trasmissione ottimo  \(\tau_{opt} = \sqrt{\frac{J_m + J_r}{\left(T_2/\eta_r\right)^{RMS}}\AccAng_c^{RMS}}\), dei parametri presenti:
@@ -114,4 +118,7 @@ Le stesse valutazioni fatte per i riduttori si possono trasporre alle viti a ric
 \paragrafo{Effetto del Diametro:}
 Il diametro entra nel calcolo dell'inerzia, in particolare, sostituendo la massa \(J_v=\frac{1}{2}L\rho \pi \frac{d^4}{16} = \alpha d^4\), perciò \(p_{opt}=2\pi \sqrt{\frac{(J_m+\alpha d^4)\acc{x}^{RMS}}{(F_a/\eta_r)^{RMS}}}\), ossia il passo della vite varia circa quadraticamente con il diametro.
 
-% figura del passo ottimo libero e vincolato
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.3\textwidth]{Immagini/passo_ottimo_libero.png}
+\end{figure}
