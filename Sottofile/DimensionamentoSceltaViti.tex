@@ -76,7 +76,7 @@ Come regola generale conviene avere meno sfere più grandi che tenderanno a ragg
 Durante il moto le sfere ruotano tra le due gole di vite e chiocciola, ma in questo movimento vanno anche a strisciare tra loro. Per velocità elevate risulta un aumento di riscaldamento e un aumento usura legato alla formazione di particolato di sfere.
 La relazione da verificare è \( v_{sfere} = \VelAng_v \frac{d}{2} < v_{lim} \) dove \(d\) è la distanza tra centri delle due sfere opposte, e con velocità limite specifica della chiocciola.
 
-Nei cataloghi non si tiene conto della velocità della sfera, ma del doppio, e viene chiamata "D \(\times\) n" \(= \VelAng_v\cdot d \), quindi  il limite diventa: \(d \cdot \VelAng_v < \text{"D}\times \text{n"}_{lim} \alpha = S \).
+Nei cataloghi non si tiene conto della velocità della sfera, ma del doppio, e viene chiamata "D \(\times\) n" \(= \VelAng_v\cdot d \), quindi  il limite diventa: \(d \cdot \VelAng_v < \text{"D}\times \text{n"}_{lim} \alpha = S \), con \(\alpha\simeq 0.8\) fattore di sicurezza.
 
 \sottosottosezione{Sfere di Acciaio e Ceramica}
 In alternativa alle sfere solo di acciaio, esistono viti a ricircolo di sfere in cui sono alternate sfere di acciaio e di ceramica. In particolare le seconde oltre a essere costruite con un volume leggermente inferiore, hanno una massa inferiore, perciò quando vengono messe in movimento le sfere di acciaio quelle di ceramica vanno in contro-rotazione, così facendo il contatto tra sfere vede anch'esso rotazione, mentre permane lo strisciamento sui punti di contatto tra sfere cercamiche e gola. Questa configurazione permette di raggiungere velocità limite della singola sfera \( \DperN_{lim} \) molto superiori, anche doppi.
@@ -125,7 +125,7 @@ Queste tre possibilità risultano in 4 combinazioni:
 
 \sottoparagrafo{Vincolo 2 su p,d:}
 A partire dalla disequazione \( \VelAng_v^{max} \geqslant \omega_{N,flex}^{min} \alpha \), con \( \alpha \simeq 0.6\div 0.8 \) coefficiente di sicurezza che considera come l'ampiezza inizi a salire prima del valore esatto di pulsazione naturale, sostituisco i vari elementi, effettuo qualche manipolazione e si ottiene:
-\[ p \leqslant \frac{8\pi L^2 \dot{x}^{max} \sqrt{\rho}}{K_v \alpha \sqrt{E}} \cdot \frac{1}{d} \]
+\[ p \geqslant \frac{8\pi L^2 \dot{x}^{max} \sqrt{\rho}}{K_v \alpha \sqrt{E}} \cdot \frac{1}{d} \]
 Disequazione per cui risulta evidente la dipendenza inversa tra passo e diametro; quindi che per velocità superiori il vincolo peggiora; che per lunghezze superiori il vincolo peggiora quadraticamente; che per coefficienti di vincoli inferiori il vincolo peggiora.
 
 \begin{figure}[h]
@@ -135,7 +135,7 @@ Disequazione per cui risulta evidente la dipendenza inversa tra passo e diametro
 \end{figure}
 
 \sottosezione{Vincoli su passo e diametro della vite}
-Andando a unire i due vincoli ricavati: \(p \geqslant \frac{\dot{x_{max}} 2\pi }{S} d\) e \( p \leqslant \frac{8\pi L^2 \dot{x}^{max} \sqrt{\rho}}{K_v \alpha \sqrt{E}} \cdot \frac{1}{d} \), la curva ottenuta sarà come in figura. Va evidenziato il forte limite per diametri ridotti.
+Andando a unire i due vincoli ricavati: \(p \geqslant \frac{\dot{x_{max}} 2\pi }{S} d\) e \( p \geqslant \frac{8\pi L^2 \dot{x}^{max} \sqrt{\rho}}{K_v \alpha \sqrt{E}} \cdot \frac{1}{d} \), la curva ottenuta sarà come in figura. Va evidenziato il forte limite per diametri ridotti.
 
 \sottosottosezione{Esempio}
 Fosse richiesto un \( C_D \) "basso", e quindi occorra utilizzare \(d\) "piccoli". In questo caso utilizzare viti acciaio e ceramica non ha senso, perché andrebbe a influenzare unicamente valori di diametro superiori. In questo caso utilizzare vincoli più rigidi potrebbe aiutare, perché porterebbero ad un aumento del numero di punti utilizzabili, tuttavia occorre valutare se i valori aggiunti possano essere utilizzati nell'applicazione in esame o meno.
