@@ -29,6 +29,7 @@
 \RequirePackage[italian]{babel}
 \RequirePackage[useregional = text]{datetime2}
 \RequirePackage{fancyhdr}   %% serve per avere headers e footers
+\RequirePackage{setspace}   %% serve per fare una bella spaziatura nel titolo nella prima pagina
 
 
 
@@ -98,21 +99,40 @@
 % Define title and author
 \newcommand{\@titolo}{}
 \newcommand{\@autore}{}
+\newcommand{\@titolobreve}{} % titolo breve per il piè di pagina
 
-% Set title and author
-\newcommand{\titolo}[1]{\renewcommand{\@titolo}{#1}}
+% Set title, short title and author
+\newcommand{\titolo}[2]{
+    \renewcommand{\@titolo}{#1}      % Titolo lungo per la prima pagina
+    \renewcommand{\@titolobreve}{#2} % Titolo breve per il piè di pagina
+}
 \newcommand{\autore}[1]{\renewcommand{\@autore}{#1}}
 
 %comando \primapag per titolo in prima pagina
 \newcommand{\primapag}	{
-    { \centering{\Huge\textsc{\@titolo}}\par %titolo
-		\vspace{1cm}
-    {\Large \textit{\@autore}} \par %autore
-    		\vspace{1.5cm} 
-    \includegraphics[width=0.3\textwidth]{Immagini/Univi.jpg} %iconcina università
-    		\vfill %vado fino in fondo
-    \centering\textsf{\today}\par } %data
-  {\thispagestyle{empty}} } %questo comando serve per non mettere il numerino della pagina anche sul foglio del titolo
+  \begin{center}
+    \setstretch{1.3} % Imposta la spaziatura tra le righe
+    \parbox{0.95\textwidth}{\centering \Huge \textsc{\@titolo}} % Titolo con larghezza massima
+    \par
+    \vspace{1cm}
+    {\Large \textit{\@autore}} \par % Autore
+    \vspace{1.5cm}
+    \includegraphics[width=0.3\textwidth]{Immagini/Univi.jpg} % Icona università
+    \vfill
+    \centering\textsf{\today}\par % Data
+\end{center}
+{\thispagestyle{empty}} % Nessun numero di pagina
+}
+
+%% Stile prima pagina vecchio
+%{ \centering{\Huge\textsc{\@titolo}}\par %titolo
+%		\vspace{1cm}
+%    {\Large \textit{\@autore}} \par %autore
+%    		\vspace{1.5cm} 
+%    \includegraphics[width=0.3\textwidth]{Immagini/Univi.jpg} %iconcina università
+%    		\vfill %vado fino in fondo
+%    \centering\textsf{\today}\par } %data
+%  {\thispagestyle{empty} }  %questo comando serve per non mettere il numerino della pagina anche sul foglio del titolo
 
 
 %...%
@@ -126,7 +146,7 @@
 \fancyhf{} % Clear header and footer
 \lhead{\leftmark}
 \rhead{Pagina \thepage}
-\lfoot{\@titolo} %{\@autore}
+\lfoot{\@titolobreve} %{\@autore}
 \rfoot{A.A. 2024/2025}
 \renewcommand{\footrulewidth}{0.1pt}
 \renewcommand{\headrulewidth}{0.1pt}
