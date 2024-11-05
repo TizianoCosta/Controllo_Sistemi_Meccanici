@@ -13,10 +13,10 @@ Pianificazione del moto significa scegliere la legge di moto, ossia \textit{La r
     \end{itemize}
 \end{itemize}
 
-\sezione{Scelta delle Leggi di Moto}
+\paragrafo{Scelta delle Leggi di Moto}
 Le specifiche in termini di legge di moto sono tendenzialmente poche, legate a: tempo di ciclo, spazio percorso, velocità minima, massima; a partire dalle quali va fatta una ottimizzazione consci di non poter ottenere una legge di moto perfetta.
 
-\sottosezione{Criteri di Scelta}
+\sottoparagrafo{Criteri di Scelta}
 La scelta del tipo di legge di moto viene effettuata a partire da alcune caratteristiche progettuali:
 \begin{enumerate}
     \item Minimizzazione di velocità massima o RMS
@@ -25,3 +25,74 @@ La scelta del tipo di legge di moto viene effettuata a partire da alcune caratte
     \item Minimizzazione della potenza
     \item Garantire realizzabilità della legge di moto in termini dinamici\footnote{In termini di banda passante di motore, controllo, di spettro della legge di moto e vibrazioni.}
 \end{enumerate}
+
+\sezione{Formulazione delle principali leggi di Moto}
+Le leggi di moto si dividono in due categorie: Punto-Punto (PP), quando le specifiche sono su punto di inizio e fine o Con specifiche su punti o tratti intermedi.
+All'interno della tipologia Punto-Punto c'è un sottogruppo per cui la velocità inziale e finale sono nulle detto Rest-to-Rest (RtR).
+In seguito verranno analizzati alcune leggi di moto del caso PP, con particolare attenzione ai sottocasi RtR.
+
+Di particolare interesse è il moto simmetrico, ossia avente funzione velocità simmetrica rispetto \(\frac{T}{2}\).
+
+\sottosezione{Parametrizzazione}
+Per successive analisi conviene introdurre una normalizzazione dei tempi di accelerazione \(\lambda_A = \frac{t_A}{T}\) e decelerazione \(\lambda_D = \frac{t_D}{T}\), tenendo conto che per ciascuno vale \(0 < \lambda < 1\) e \(0 < \lambda_A + \lambda_D < 1\).
+
+\paragrafo{Parametri di merito:}
+A partire dalla parametrizzazione si possono ricavare per i vari parametri di progetto dei valori indipendenti da \(h\) alzata e \(T\) periodo di lavoro.
+L'utilizzo di questi valori permette di semplificare la scelta della legge di modo fornendo delle figure di merito confrontabili, da porter tabellare.
+\begin{itemize}
+    \item \(C_V\) coefficiente di velocità massima
+    \item \(C_{A+}\) coefficiente di accelerazione
+    \item \(C_{A-}\) coefficiente di decelerazione
+    \item \(C_A^{RMS}\) coefficiente di accelerazione RMS
+\end{itemize}
+Per poter ricavare dei valori generici è sufficiente ricavare la grandezza di cui interessa il coefficiente, considerando un alzata di 1 metro in un periodo di 1 secondo.
+
+\sottosezione{Rampa di posizione}
+Una rampa (limitata) di posizione è una legge di moto che descrive una funzione continua, ma non derivabile\footnote{Nel senso che la derivata destra e sinistra non coincidono in corrispondenza di punti di inizio e fine della rampa. Si considerano in seguito la velocità e l'accelerazioni come funzioni derivate da funzione definita a tratti.}; da questa legge di posizione si ottiene una velocità discontinua e accelerazione che tende all'infinito, cosa tuttavia irrealizzabile, perché richiederebbe motore a coppia infinita.
+
+\sottosezione{Trapezoidale in velocità}
+Una forma trapeziodale in velocità risulta in una funzione posizione continua e derivabile, di velocità continua ma non derivabile, quindi accelerazione discontinua, ma finita.
+Nel caso di traiettoria RtR \( v_{fin} = 0 = \int^{t_{fin}}_{t_{in}} \acc{q} dt \), ossia le aree sottese dalla funzione accelerazione devono essere uguali.
+
+%%% Inserire figure di rampa di posizione, trapezoidale in velocità
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.35\textwidth]{Immagini/rampa_pos.png}
+    \includegraphics[width=0.35\textwidth]{Immagini/trapezoidale_vel.png}
+    \caption{Funzioni per: rampa posizione sx; trapeziodale velocità dx}
+\end{figure}
+
+\sottosottosezione{Grandezze significative (RtR)}
+La velocità massima ottenibile si può determinare integrando la funzione di velocità, o più semplicemente facendo valutazioni geometriche sul trapezio, da cui si ottiene \(V_{max} = \frac{h}{\frac{t_A}{2}+t_C +\frac{t_D}{2}}\).
+Possono essere ricavate di conseguenza l'accelerazione \(\abs{A} = \frac{V_{max}}{t_A}\) e la delecelazione \(\abs{D} = \frac{V_{max}}{t_D}\). Vale inoltre \(\frac{\abs{A}}{\abs{D}} = \frac{t_D}{t_A}\).
+
+\paragrafo{Velocità con parametrizzazione:}
+La velocità massima ottenibile diventa \(V_{max} = \frac{h}{T} \frac{1}{1-\frac{\lambda_A}{2}-\frac{\lambda_D}{2}}\), dove \(v_{media} = \frac{h}{T}\) ed è indipendente dalla traiettoria, viene definito \(C_v = \frac{1}{1-\frac{\lambda_A}{2}-\frac{\lambda_D}{2}}\).
+
+\paragrafo{Accelerazione con parametrizzazione:}
+L'accelerazione ottenuta diventa \(A=\frac{h}{T^2} \frac{1}{\lambda_A}\frac{1}{1-\frac{\left(\lambda_A + \lambda_D \right)}{2}}\), dove \(a = \frac{h}{T^2}\) rappresenta l'equivalente valore in caso di moto con accelerazione costante, da cui viene definito \(C_{A+} = \frac{1}{\lambda_A}\frac{1}{1-\frac{\left(\lambda_A + \lambda_D \right)}{2}}\).
+In modo del tutto simile, associata alla decelerazione \(D\), viene definito \(C_{A-} = \frac{1}{\lambda_D}\frac{1}{1-\frac{\left(\lambda_A + \lambda_D \right)}{2}}\).
+
+\paragrafo{Accelerazione RMS:}
+L'accelerazione RMS si ottiene calcolando l'integrale usando le valutazioni geometriche per l'accelerazione e ricordando il legame tra \(\abs{D}\) e \(\abs{A}\), da cui si può ricavare l'espressione finale \(\acc{q}^{RMS} = \frac{h}{T^2} C_A \sqrt{\lambda_A + \frac{\lambda_A^2}{\lambda_D}}\), in cui viene definito \(C_A^{RMS} = C_A \sqrt{\lambda_A + \frac{\lambda_A^2}{\lambda_D}}\).
+Analizzando la funzione si otttiene un minimo assoluto per \(\lambda_A=\lambda_D =\frac{1}{3}\), valori in corrispondenza dei quali si ottiene un moto simmetrico (equamente distribuito tra accelerazione, velocità costante e decelerazione).
+
+\paragrafo{Potenza meccanica:}
+Nel moto trapezoidale in velocità i punti più critici in termini di velocità sono per termine di fase di accelerazione e inizio fase di decelerazione, per cui si hanno \(\max{\acc{q}}\) e \(\max{\dot{q}}\), che portano ad avere, nel caso inerziale, \(\max{W_M}\) proporzionale a \(\max{\acc{q}} \cdot \max{\dot{q}}\).
+
+\sottosottosezione{Legge trapezoidale con moto simmetrico, RtR}
+Nel caso di legge trapezoidale con moto simmetrico, vale \(\lambda_A=\lambda_D := \lambda \in (0,1/2]\), i coefficienti diventano: \(C_V = \frac{1}{1-\lambda}\); \(C_A = \frac{1}{\lambda}\frac{1}{1-\lambda}\); \(C_A^{RMS} = C_A \sqrt{2\lambda}\).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{Immagini/CaRMS.png}
+    \includegraphics[width=0.55\textwidth]{Immagini/CvCaCaRMS.png}
+    \caption{Coeff accelerazione RMS sx; Coeff per caso moto simmetrico dx}
+\end{figure}
+
+In questo caso risulta chiaro come ci sia un trade-off tra velocità e accelerazione.
+Una prima scelta sensata (da cui partire per poi affinare la ricerca) potrebbe essere \(\lambda = \frac{1}{3}\), valore per cui si ha il minimo di coefficiente di accelerazione RMS, un basso coefficiente di accelerazione e un valore abbastanza basso di coefficiente di velocità, infine è anche prossimo all'ottimo energetico.
+
+\paragrafo{Simmetria vs Assimetria:}
+Quando c'è una disparità tra forze esterne in accelerazione e decelerazione (es ascensore o piano inclinato), conviene utilizzare una legge assimetrica al posto di una simmetrica per distribuire meglio le due aree.
