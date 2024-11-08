@@ -41,12 +41,18 @@ Per successive analisi conviene introdurre una normalizzazione dei tempi di acce
 A partire dalla parametrizzazione si possono ricavare per i vari parametri di progetto dei valori indipendenti da \(h\) alzata e \(T\) periodo di lavoro.
 L'utilizzo di questi valori permette di semplificare la scelta della legge di modo fornendo delle figure di merito confrontabili, da porter tabellare.
 \begin{itemize}
-    \item \(C_V\) coefficiente di velocità massima
-    \item \(C_{A+}\) coefficiente di accelerazione
-    \item \(C_{A-}\) coefficiente di decelerazione
-    \item \(C_A^{RMS}\) coefficiente di accelerazione RMS
+    \item \(C_V\) coefficiente di velocità massima, con velocità massima \(v_{max}=\frac{h}{T}C_V\)
+    \item \(C_{A+}\) coefficiente di accelerazione massima, con accelerazione massima \(a_{max}=\frac{h}{T^2}C_{A+}\)
+    \item \(C_{A-}\) coefficiente di decelerazione massima, con decelerazione massima \(a_{min}=\frac{h}{T^2}C_{A-}\)
+    \item \(C_A^{RMS}\) coefficiente di accelerazione RMS, con accelerazione RMS \(a^{RMS}=\frac{h}{T^2}C_A^{RMS}\)
+    \item \(C_J\) coefficiente di jerk massimo, con jerk massimo \(j_{max}=\frac{h}{T^3}C_J\)
 \end{itemize}
 Per poter ricavare dei valori generici è sufficiente ricavare la grandezza di cui interessa il coefficiente, considerando un alzata di 1 metro in un periodo di 1 secondo.
+
+\sottosezione{Scalatura delle leggi}
+A partire dalle leggi di moto utilizzate è possibile scalarle in relazione alle richieste della specifica applicazione.
+Guardando velocità, accelerazioni, jerk massimi e accelerazione RMS, si può cogliere come la variazione di alzata \(h\) provoca una variazione lineare del coefficiente (raddoppiare l'alzata porta a raddoppiare il coefficiente).
+Mentre la variazione del tempo dipende in modo inversamente proporzionale con grado pari all'ordine della derivata in esame (dimezzare il tempo porta a raddoppiare la velocità, ma a quadruplicare le accelerazioni).
 
 \sottosezione{Rampa di posizione}
 Una rampa (limitata) di posizione è una legge di moto che descrive una funzione continua, ma non derivabile\footnote{Nel senso che la derivata destra e sinistra non coincidono in corrispondenza di punti di inizio e fine della rampa. Si considerano in seguito la velocità e l'accelerazioni come funzioni derivate da funzione definita a tratti.}; da questa legge di posizione si ottiene una velocità discontinua e accelerazione che tende all'infinito, cosa tuttavia irrealizzabile, perché richiederebbe motore a coppia infinita.
@@ -101,7 +107,7 @@ In modo del tutto equivalente si può utilizzare l'espressione ottenuta per il c
 
 \sottosezione{Trapezoidale in Accelerazione}
 A partire da una legge trapezoidale in velocità, considero di fare una legge trapezoidale in accelerazione che abbia la stessa velocità massima, questo influenza la scelta dei raccordi\footnote{Nel caso in figura i raccordi sono lineari, tuttavia potrebbero essere polinomiali, esponenziali, sinusoidali, ecc nel caso debbano essere modificati i coefficienti o migliorato lo spettro della legge di moto.}.
-Infatti per ottenere la stessa velocità massima le aree delle due accelerazione deve essere uguale; a seguito di semplici valutazioni geometriche si può ricavare l'accelerazione massima per la trapezoidale in accelerazione come \(A_m=\frac{h}{T^2}\frac{1}{\lambda}(1-\lambda)(1-\gamma)\), dove \(\gamma = \frac{t_R}{t_A}\) ossia il tempo di raccordo normalizzato al tempo totale di accelerazione. 
+Infatti per ottenere la stessa velocità massima le aree delle due accelerazione deve essere uguale; a seguito di semplici valutazioni geometriche si può ricavare l'accelerazione massima per la trapezoidale in accelerazione come \(A_m=\frac{h}{T^2}\frac{1}{\lambda(1-\lambda)(1-\gamma)}\), dove \(\gamma = \frac{t_R}{t_A}\) ossia il tempo di raccordo normalizzato al tempo totale di accelerazione. 
 In questa legge di moto l'accelerazione risulta continua, cosa che aumenta la semplicità realizzativa, vengono ridotte le vibrazioni, ma aumentano l'accelerazione massima e RMS.
 
 
@@ -141,7 +147,47 @@ Prestare estrema attenzione al calcolo del jerk, perchè per leggerezza si potre
 
 Per quanto riguarda i coefficienti tenere da conto che la polinomiale di terzo grado ha il valore minimo per quanto riguarda i coefficienti di accelerazione RMS di tutte le leggi di moto classiche. I valori sono: \(C_V=1.5, \ C_A = 6, \ C_A^{RMS}=3.4, \ C_J = \infty\)
 
+
+\sottosezione{Polinomiale di Quinto Grado}
+La polinomiale di quinto grado utilizza 6 coefficienti, quindi il problema per essere ben posto richiede 6 condizioni al contorno. In modo del tutto simile al caso della polinomiale di terzo grado in generale sono \(q_{in} \ q_{fine} \ \dot{q}_{in}, \ \dot{q}_{fine}, \ \Ddot{q}_{in}, \ \Ddot{q}_{fine}\).
+Posizione, velocità sono continue e derivabili, l'accelerazione è solo continua, il jerk è finito ma discontinuo.
+
+Considerando la condizione RtR e usando la normalizzazione, considero gli step di creazione dei grafici:
+\begin{enumerate}
+    \item Punti per velocità e accelerazioni nulle
+    \item Determinazione massimo velocità in \(t=1/2\)
+    \item Tracciamento della velocità
+    \item Valutazioni sulle tangenti di accelerazione agli istanti iniziali e finali: per un polinomio di terzo grado\footnote{Che è quello che si ottiene in accelerazione, avendo derivato due volte un polinomio di quinto grado.} ci sono 2 punti a tangente nulla e devono essere in corrispondenza dei valori di massimo e minimo\footnote{Non è possibile porli a inizio e fine perché altrimenti l'accelerazione dovrebbe rimanere costantemente nulla. {\color{red}(verificare l'affermazione)}}
+    \item Tracciamento dell'accelerazione
+    \item Tracciamento del jerk a partire da punti notevoli dell'accelerazione e soprattutto valutazioni su punti di discontinuità presenti nei punti iniziali e finali (legate a considerazione su accelerazione di cui sopra)
+    \item Tracciamento della posizione prestando attenzione alle tangenti nulle iniziali e finali.
+\end{enumerate}
+
+\sottosezione{Polinomiale di Settimo Grado}
+Nel polinomio di settimo grado i coefficienti sono 8 e quindi le condizioni da imporre sono 8.
+In questo caso posizione, velocità, accelerazione sono continue e derivabili, il jerk è continuo ma non derivabile.
+
+\paragrafo{Grado Terzo vs Quinto, Settimo:}
+Esaminando la tabella dei coefficienti e in particolare confrontando il polinomio di quinto e settimo grado con quello di terzo grado si può notare come la miglior dolcezza venga ripagata con un peggioramento dei coefficienti di velocità e accelerazione.
+Questo perché il maggior numero di radici può portare ad avere punti di massimo e minimo all'interno dell'intervallo temporale in esame, peggiorando drasticamente tutte le caratteristiche di velocità, accelerazione e consumo energetico.
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.3\textwidth]{Immagini/polinom_terzo_grado.png}
+    \includegraphics[width=0.3\textwidth]{Immagini/polinom_quinto_grado.png}
+    \includegraphics[width=0.3\textwidth]{Immagini/polinom_settimo_grado.png}
+    \caption{Polinomiali grado 3 (sx), 5 (centro), 7 (dx) RtR}
 \end{figure}
+
+\sottosezione{Leggi Trigonometriche}
+Quando nelle leggi vengono utilizzati seni e coseni. I risultati sono molto comparabili con leggi polinomiali.
+Sono definite in RtR, possono essere però adattate per condizioni iniziali e finali differenti.
+
+\paragrafo{Cicloidale:}
+La legge cicloidale o sinusoidale in accelerazione è una legge molto dolce, che però ha coefficienti di velocità e accelerazione alti. Risulta paragonabile con la polinomiale di quinto grado.
+
+\paragrafo{Armonica:}
+La legge armonica viene definita come mezzo periodo di una legge cosinusoidale, in velocità e accelerazione ha valori buoni. In particolare rispetto la polinomiale di terzo grado vede un miglioramento dell'accelerazione massima, che risulta nuovamente all'istante iniziale.
+
+\sottoparagrafo{Raccordi:}
+A partire dalla legge armonica, che risente della ridotta dolcezza legata al jerk infinito, è possibile modificare la legge introducendo un raccordo sinusoidale\footnote{I raccordi tendenzialmente non sono lineari. La durata del raccordo in applicazioni pratiche è T/8.}
