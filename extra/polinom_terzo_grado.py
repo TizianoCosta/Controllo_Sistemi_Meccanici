@@ -38,7 +38,6 @@ axs[2].set_ylabel("Accelerazione a(t)")
 
 # Grafico del jerk
 axs[3].plot(t, j(t), color="black")
-axs[3].set_xlabel("Tempo t")
 axs[3].set_ylabel("Jerk j(t)")
 
 plt.subplots_adjust(hspace=0.2)
