@@ -176,7 +176,7 @@ Questo perché il maggior numero di radici può portare ad avere punti di massim
     \includegraphics[width=0.3\textwidth]{Immagini/polinom_terzo_grado.png}
     \includegraphics[width=0.3\textwidth]{Immagini/polinom_quinto_grado.png}
     \includegraphics[width=0.3\textwidth]{Immagini/polinom_settimo_grado.png}
-    \caption{Polinomiali grado 3 (sx), 5 (centro), 7 (dx) RtR}
+    \caption{Polinomiali (RtR) grado 3 (sx), 5 (centro), 7 (dx)}
 \end{figure}
 
 \sottosezione{Leggi Trigonometriche}
@@ -191,3 +191,61 @@ La legge armonica viene definita come mezzo periodo di una legge cosinusoidale, 
 
 \sottoparagrafo{Raccordi:}
 A partire dalla legge armonica, che risente della ridotta dolcezza legata al jerk infinito, è possibile modificare la legge introducendo un raccordo sinusoidale\footnote{I raccordi tendenzialmente non sono lineari. La durata del raccordo in applicazioni pratiche è T/8.}
+
+\sezione{Composizione di Leggi di Moto}
+In modo simile a come fatto per i raccordi, è possibile a partire da specifiche di progetto, comporre diverse leggi di moto. Per semplicità di formulazione in casi generici si utilizzano leggi polinomiali almeno in prima istanza (sarebbe più complicato determinare condizioni iniziali di velocità e accelerazione non nulle per leggi più complesse).
+
+Per la corretta formulazione occorre seguire i seguenti step:
+\begin{enumerate}
+    \item Scrivere esplicitamente le condizioni
+    \item Contare le condizioni
+    \item Identificare il grado del polinomio (in relazione al numero di condizioni)
+    \item Calcolo dei coefficienti del sistema
+\end{enumerate}
+
+\paragrafo{Disaccoppiamento}
+Potrebbe essere possibile risolvere i sotto-problemi separatamente se sono disaccoppiati tra loro.
+Non è vero in generale, perchè i sotto-problemi possono essere tra loro accoppiati.
+
+\sottosezione{Tratti a Velocità Costante Imposta}
+Nell'esempio in figura vengono distinte quattro zone, ciascuna delle quali vede associata una legge di moto.
+Questo è uno di quei casi particolari in cui le leggi di moto possono essere ricavate separatamente (per questo nella risoluzione la zona4 viene affrontata prima della zona3).
+L'accelerazione, per questo esempio, basta non sia infinita, ossia la velocità dev'essere continua (potrebbe non essere derivabile nel dominio)\footnote{HMW: Capire cosa cambia per accelerazione continua e per accelerazione, jerk continui (tipiche richieste da esame).}.
+
+
+\paragrafo{Zona 1:}
+Condizione di velocità, posizione, per tempi iniziale e finale: \(q(t_0)=P_0, \ q(t_1)=P_1, \ \dot{q}(t_0)=0, \ \dot{q}(t_1)=v \), per \(t\in [t_0,t_1]\); le condizioni sono 4, perciò la polinomiale sarà di terzo grado; a partire dalle condizioni è possibile ricavare i coefficienti della polinomiale.
+
+\paragrafo{Zona 2:}
+Tratto a velocità costante: \(q(t)=P_1+v(t-t_1)\), per \(t\in [t_1,t_2]\)
+
+\paragrafo{Zona 4:}
+Tratto di sosta\footnote{Attenzione a non complicarsi inutilmente la vita andando a scrivere leggi polinomiali quando basta semplicemente scrivere posizione uguale a costante.}: \(q(t)=P_0\), per \(t\in [t_3,t_4]\).
+
+\paragrafo{Zona 3:}
+Tratto di ritorno: condizione di velocità, posizione, per tempi iniziale e finale: \(q(t_2)=P_2, \ q(t_3)=P_0, \ \dot{q}(t_2)=v, \ \dot{q}(t_3)=0 \), per \(t\in [t_2,t_3]\); le condizioni sono 4, perciò la polinomiale sarà di terzo grado.
+
+\sottosottosezione{Tracciamento qualitativo dei grafici}
+Per il tracciamento dei grafici conviene partire dalle tangenti nei punti di interesse (inizio, fine, congiungimento a tratti noti). 
+Occorre prestare attenzione alle cuspidi in posizione. 
+Bisogna fare attente valutazioni sui valori di velocità inziali e finali (in questo caso non sono richiesti a 0), e se sia o meno continua (in questo caso no).
+Occorre fare opportune valutazioni sul grafico tracciato in velocità per determinare l'andamento dell'accelerazione che deve necessariamente essere coerente, valutando se sia continua o meno (in questo caso no).
+
+\sottosottosezione{Punto di massimo di posizione}
+Nel definire le leggi di moto per i vari tratti è possibile che in posizione vi sia sovraelongazione quando si dovesse avere un'inversione di velocità, ad esempio per ritornare ad un punto iniziale, o comunque precedente. Il problema legato alla sovraelongazione è che non è noto a priori il valore massimo di posizione, nè il tempo cui avviene. Pensando in ottica di ritorno alla posizione di partenza, di solito questa viene effettuata nel minor tempo possibile, portando quindi ad avere nelle peggiori condizioni in termini di velocità e accelerazione, anche un massimo di posizione.
+
+\paragrafo{Scelta punto di inversione:}
+Per risolvere questo problema occorre imporre il punto di inversione in termini di tempo e posizione. Fatto ciò si divide la zona in cui è presente l'inversione in due, una prima in cui si arriva fino al massimo e una seconda in cui dal massimo si vada a scendere. In particolare la seconda di queste due zone aggiuntive, noto che l'inversione viene effettuata per velocità nulla (per massimo della funzione posizione), e sempre in condizione di ritorno alla posizione precedente, è nelle condizioni di RtR, per cui è possibile ottimizzare la legge andando a scegliere la legge di moto più adatta all'applicazione.
+
+\paragrafo{Scelta del tempo di inversione:}
+La scelta di tempo di inversione è determinato dalla necessità di ridurre le velocità e accelerazioni massime e RMS, cosa fattibile per le valutazioni sulla zona che segue il punto di inversione. C'è tuttavia da notare che per la zona precedente il punto di inversione, invece, non è detto ci sia una condizione tanto favorevole, per tempi lunghi e polinomiali di grado elevato potrei avere l'insorgere di massimi/minimi relativi/assoluti in prossimità della posizione di inversione. Per scongiurare quest'evenienza è sufficiente limitare il tempo di posizione di inversione, oltre a questo limitare il tempo di sovraelongazione permette di dedicare più tempo alla discesa.
+
+\sottosezione{Passaggio Esatto per N Punti Intermedi}
+Per la risoluzione di un problema in cui sia richiesto il passaggio esatto per un numero di punti intermedi si utilizza il metodo S.P.Line, Smooth Path Line, per via dell'accelerazione continua che viene richiesta, quindi perché la legge è dolce.
+
+\paragrafo{Condizioni:}
+Per la posizione sono definite dalle specifiche del problema, per N punti sono \(2(N-1)\) condizioni. Per la velocità è richiesta la continuità per punti intermedi, perciò le leggi \(i, \ i+1\) devono necessariamente avere rispettivamente velocità finale e iniziale uguali \(\dot{q}_i(t_{i+1})=\dot{q}_{i+1}(t_{i+1})\) (il problema è accoppiato perché non sono noti i valori intermedi di velocità), le condizioni sono \(N-2\). Sono inoltre necessarie le condizioni iniziali e finali di velocità, sono quindi 2 condizioni. Per l'accelerazione è richiesta continuità nei punti intermedi quindi le leggi \(i, \ i+1\) devono avere rispettivamente accelerazioni finali e iniziali uguali \(\Ddot{q}_i(t_{i+1})=\Ddot{q}_{i+1}(t_{i+1})\), sono quindi \(N-2\) condizioni.
+Sommando tutto si ottengono \(4(N-1)\) condizioni, ciò significa che avrò \(N-1\) polinomi di grado 3. 
+
+% inserire figura tratti di velocità costante imposta e possibile soluzione di composizione
+% inserire figura passaggio esatto per N punti intermedi
