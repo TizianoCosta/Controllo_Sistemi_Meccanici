@@ -249,8 +249,9 @@ Sommando tutto si ottengono \(4(N-1)\) condizioni, ciò significa che avrò \(N-
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.3\textwidth]{Immagini/tratti_vel_cost.png}
-    \caption{Possibile risoluzione es tratti a velocità costanti}
+    \includegraphics[width=0.6\textwidth]{Immagini/tratti_vel_cost.png}
+    \includegraphics[width=0.3\textwidth]{Immagini/SPLine_spostamento_punto.png}
+    \caption{Es tratti a velocità costanti (sx); Spostamento punto SPLine (dx)}
 \end{figure}
 
 \sottosottosezione{Soluzione}
@@ -290,12 +291,14 @@ Ci sono diverse possibili soluzioni:
     \item Spostaento dei tempi, che permette di ridurre sovraelongazione e di modificare velocità e accelerazioni
 \end{itemize}
 
-% inserire immagine in cui si veda come modificare il punto vada a influenzare tutte le polinomiali intermedie
-
 \sottosottosezione{Esempi SPLine con tratti intermedi a velocità imposta}
 Nel primo caso vanno utilizzate due SPLine, perché c'è disaccoppiamento dovuto dai tratti a velocità costante centrale e finale. Se per esempio il punto P8 che è anche quello inferiore dovesse avere una sovraelongazione critica, potrei pensare di far terminare lì la SPLine, imporre condizioni finali di velocità, accelerazione nulla e terminare la legge con la RtR preferita.
 
 Nel secondo caso, rimuovere il tratto a velocità imposta finale, fa sì che non vi sia disaccoppiamento, quindi dalla zona di lavoro 3 si prosegue con la zona di lavoro 1, perciò è opportuno fare un'unica SPLine che iniziano e finiscono nel tratto a velocità costante. Anche in questo caso, se guardando la legge vi fossero punti critici per sovraelongazione potrei andare a separare in due SPLine imponendo sul punto critico velocità e accelerazioni nulle.
 
-% inserire immagine esempio 1, esempio2
-
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{Immagini/es1_leggi_moto.png}
+    \includegraphics[width=0.4\textwidth]{Immagini/es2_leggi_moto.png}
+    \caption{Esercizi 1 sx; 2 dx}
+\end{figure}
