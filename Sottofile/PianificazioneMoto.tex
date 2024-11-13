@@ -241,11 +241,61 @@ Per risolvere questo problema occorre imporre il punto di inversione in termini 
 La scelta di tempo di inversione è determinato dalla necessità di ridurre le velocità e accelerazioni massime e RMS, cosa fattibile per le valutazioni sulla zona che segue il punto di inversione. C'è tuttavia da notare che per la zona precedente il punto di inversione, invece, non è detto ci sia una condizione tanto favorevole, per tempi lunghi e polinomiali di grado elevato potrei avere l'insorgere di massimi/minimi relativi/assoluti in prossimità della posizione di inversione. Per scongiurare quest'evenienza è sufficiente limitare il tempo di posizione di inversione, oltre a questo limitare il tempo di sovraelongazione permette di dedicare più tempo alla discesa.
 
 \sottosezione{Passaggio Esatto per N Punti Intermedi}
-Per la risoluzione di un problema in cui sia richiesto il passaggio esatto per un numero di punti intermedi si utilizza il metodo S.P.Line, Smooth Path Line, per via dell'accelerazione continua che viene richiesta, quindi perché la legge è dolce.
+Per la risoluzione di un problema in cui sia richiesto il passaggio esatto per un numero di punti intermedi si utilizza il metodo \textbf{S.P.Line}, Smooth Path Line, per via dell'accelerazione continua che viene richiesta, quindi perché la legge è dolce.
 
-\paragrafo{Condizioni:}
+\sottosottosezione{Condizioni}
 Per la posizione sono definite dalle specifiche del problema, per N punti sono \(2(N-1)\) condizioni. Per la velocità è richiesta la continuità per punti intermedi, perciò le leggi \(i, \ i+1\) devono necessariamente avere rispettivamente velocità finale e iniziale uguali \(\dot{q}_i(t_{i+1})=\dot{q}_{i+1}(t_{i+1})\) (il problema è accoppiato perché non sono noti i valori intermedi di velocità), le condizioni sono \(N-2\). Sono inoltre necessarie le condizioni iniziali e finali di velocità, sono quindi 2 condizioni. Per l'accelerazione è richiesta continuità nei punti intermedi quindi le leggi \(i, \ i+1\) devono avere rispettivamente accelerazioni finali e iniziali uguali \(\Ddot{q}_i(t_{i+1})=\Ddot{q}_{i+1}(t_{i+1})\), sono quindi \(N-2\) condizioni.
 Sommando tutto si ottengono \(4(N-1)\) condizioni, ciò significa che avrò \(N-1\) polinomi di grado 3. 
 
-% inserire figura tratti di velocità costante imposta e possibile soluzione di composizione
-% inserire figura passaggio esatto per N punti intermedi
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.3\textwidth]{Immagini/tratti_vel_cost.png}
+    \caption{Possibile risoluzione es tratti a velocità costanti}
+\end{figure}
+
+\sottosottosezione{Soluzione}
+Per risolvere il problema è necessario esplicitare TUTTE le condizioni, questo perché in velocità e accelerazione ci sono accoppiamenti tra le singole leggi polinomiali.
+Così facendo viene evidenziato il sistema lineare, che è facile da risolvere:
+\[ 
+\begin{bmatrix}
+... \\ ::: \\ ::: \\ ::: \\ ::: \\ ::: \\ :::
+\end{bmatrix} 
+\begin{Bmatrix}
+    a_{0,i} \\ a_{1,i} \\ a_{2,i} \\ a_{3,i} \\ : \\ : \\ a_{3,n-1}
+\end{Bmatrix} =
+\begin{Bmatrix}
+    \text{Termini} \\ \text{Noti} \\ ::: \\ ::: \\ ::: \\ ::: \\ :::
+\end{Bmatrix}
+\]
+
+\paragrafo{Senso fisico dell'accoppiamento:}
+Avere un accoppiamento significa che la matrice di cui sopra non è a blocchi. Significa anche che modificare la posizione o il tempo di un punto va a modificare TUTTI gli altri polinomi.
+
+
+\sottosezione{SPLine}
+La Smooth Path Line permette di creare leggi di moto polinomiali per costruire una legge di moto a partire da specifiche in termini di passaggio obbligato per punti in posizione e tempo.
+In generale viene richiesta continuità di posizione e velocità in ogni punto, se poi fosse richiesta continuità di accelerazione unicamente per punti interni si potrà utilizzare una SPLine cubica (perché \(4*N-1\) condizioni).
+Se però volessimo imporre accelerazione continua anche nei punti di estremo, ossia \(\Ddot{q}_i(t_1)=A_{in}\) e \(\Ddot{q}_{n-1}(t_n)=A_{fin}\), quindi ci fossero due condizioni aggiuntive, il primo e l'ultimo polinomio dovranno essere di quarto grado; si parla in questo caso di \textbf{SPLine 434} (usata anche in Robotica Industriale).
+
+\paragrafo{Sintesi:}
+La SPLine permette di avere una legge dolce, perchè avente jerk finito.
+Tuttavia possono essere presenti sovraelongazione in posizione (anche se tendenzialmente limitate perché il grado di SPLine tendenzialmente è ridotto). E non c'è controllo su velocità e accelerazioni massime e RMS.
+
+\sottosottosezione{Soluzioni}
+La presenza di sovraelongazioni in posizione può essere critica.
+Ci sono diverse possibili soluzioni:
+\begin{itemize}
+    \item Introduzione di punti intermedi atti a forzare una determinata forma alla legge di moto
+    \item Imposizione di velocità e/o accelerazione nulla nel punto di massimo desiderato, andando a spezzare in due la SPLine proprio nel punto di massimo
+    \item Spostaento dei tempi, che permette di ridurre sovraelongazione e di modificare velocità e accelerazioni
+\end{itemize}
+
+% inserire immagine in cui si veda come modificare il punto vada a influenzare tutte le polinomiali intermedie
+
+\sottosottosezione{Esempi SPLine con tratti intermedi a velocità imposta}
+Nel primo caso vanno utilizzate due SPLine, perché c'è disaccoppiamento dovuto dai tratti a velocità costante centrale e finale. Se per esempio il punto P8 che è anche quello inferiore dovesse avere una sovraelongazione critica, potrei pensare di far terminare lì la SPLine, imporre condizioni finali di velocità, accelerazione nulla e terminare la legge con la RtR preferita.
+
+Nel secondo caso, rimuovere il tratto a velocità imposta finale, fa sì che non vi sia disaccoppiamento, quindi dalla zona di lavoro 3 si prosegue con la zona di lavoro 1, perciò è opportuno fare un'unica SPLine che iniziano e finiscono nel tratto a velocità costante. Anche in questo caso, se guardando la legge vi fossero punti critici per sovraelongazione potrei andare a separare in due SPLine imponendo sul punto critico velocità e accelerazioni nulle.
+
+% inserire immagine esempio 1, esempio2
+
