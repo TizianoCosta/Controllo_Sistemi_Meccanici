@@ -82,7 +82,7 @@ def plot_spline_434(times, positions, splines, resolution=1000):
 if __name__ == "__main__":
     # Punti noti: istanti di tempo e posizioni verticali
     times = [0, 1, 2, 3, 4]  # Istanti di tempo
-    positions = [0, 2, -1, 3, 0]  # Posizioni verticali
+    positions = [0, 2, 5, 3, 0]  # Posizioni verticali
 
     # Calcolo della SPLine 434
     splines = spline_434(times, positions)
