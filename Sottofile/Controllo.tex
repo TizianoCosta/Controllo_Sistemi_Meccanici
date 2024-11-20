@@ -1,0 +1,28 @@
+\capitolo{Controllo del Moto per Trasmissione Rigida Senza Gioco}
+Nell'industria i controllori sono di tipo P, PI, quindi le valutazioni saranno su questi.
+Il modello di riferimento è quello classico del sistema motore, riduttore, carico a cui si aggiunge l'espressione base del motore:
+\[
+    C_m(t) = J \AccAng(t) + f \VelAng(t) + C_e (t) \\
+    C_m(t) = K_T i(t)
+\]
+
+Che trasformata in Laplace diventa:
+\[
+\begin{cases}
+    C_m(s)=(Js^2+fs)\theta(s) + C_e (s) \\
+    C_m(s)=K_T I(s)
+\end{cases}
+\]
+
+In cui sono state raggruppate tutte le varie inerzie, coefficienti di attrito e coppie legate a forze esterne.
+Il sistema è a 1gdl.
+
+\sezione{Schema Multi-Anello}
+In un sistema motore, riduttore, carico ci sono solitamente diversi anelli di controllo. Partendo dall'interno verso l'esterno ci sono gli anelli di: (tensione)\footnote{Nominato, ma non viene esaminato.} corrente, velocità e posizione.
+
+L'anello di corrente è indipendente dalla meccanica; dipende dall'elettrica, dall'elettronica e dal controllo. Ha anche bande passanti caratteristiche ad alta frequenza \([kHz]\).
+
+L'anello di velocità dipende da: anello di corrente; meccanica; trasduttori di velocità; controllore di velocità.
+Tipicamente ha bande passanti sul centinaio di \([Hz]\).
+
+L'anello di posizione dipende: anello di velocità; trasduttore di posizione; controllo di posizione. In applicazioni tipiche ha banda passante inferiore i \(50 Hz\). 
