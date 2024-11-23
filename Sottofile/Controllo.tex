@@ -17,12 +17,91 @@ Che trasformata in Laplace diventa:
 In cui sono state raggruppate tutte le varie inerzie, coefficienti di attrito e coppie legate a forze esterne.
 Il sistema è a 1gdl.
 
-\sezione{Schema Multi-Anello}
+\paragrafo{Schema Multi-Anello:}
 In un sistema motore, riduttore, carico ci sono solitamente diversi anelli di controllo. Partendo dall'interno verso l'esterno ci sono gli anelli di: (tensione)\footnote{Nominato, ma non viene esaminato.} corrente, velocità e posizione.
 
+\sottoparagrafo{Anello di corrente:}
 L'anello di corrente è indipendente dalla meccanica; dipende dall'elettrica, dall'elettronica e dal controllo. Ha anche bande passanti caratteristiche ad alta frequenza \([kHz]\).
+
+\sottoparagrafo{Anello di posizione:}
+L'anello di posizione dipende: anello di velocità; trasduttore di posizione; controllo di posizione. In applicazioni tipiche ha banda passante inferiore i \(50 Hz\). 
+
+\paragrafo{Feedback vs Feedforward:}
+Nella trattazione classica dei controlli si tende a valutare soprattutto il sistema con feedback (catena chiusa), però tende a limitare le prestazioni. Un approccio più flessibile utilizza un feedback ben sintonizzato e un feedforward (catena aperta) basato sulla conoscenza (approssimata) del sistema fisico e del modello, che si traduce in una stima (nota a priori) di corrente\footnote{Nel caso dell'anello di velocità.} richiesta per la movimentazione.
+
+\sezione{Anello di Velocità}
+
+% inserire immagine schema a blocchi anello di velocità
 
 L'anello di velocità dipende da: anello di corrente; meccanica; trasduttori di velocità; controllore di velocità.
 Tipicamente ha bande passanti sul centinaio di \([Hz]\).
 
-L'anello di posizione dipende: anello di velocità; trasduttore di posizione; controllo di posizione. In applicazioni tipiche ha banda passante inferiore i \(50 Hz\). 
+\sottosezione{Modello Semplificato 1}
+Lo schematico in figura è quello completo, tuttavia in prima analisi conviene fare delle approssimazioni:
+\begin{itemize}
+    \item Coppie esterne vengono trascurate (valido per sovrapposizione degli effetti)
+    \item Non utilizzo feedforward
+    \item Trasduttore ideale, la misura non ha ritardi o errori, è come se il blocco relativo fosse 1
+    \item Anello di corrente ideale, la corrente erogata, è come se il blocco relativo fosse 1
+\end{itemize}
+
+% inserire immagine di schema a blocchi semplificato
+
+\sottosottosezione{Controllo proporzionale}
+Considerando il modello semplificato e l'utilizzo di un controllo di tipo proporzionale, ottengo che la funzione di trasferimento del sistema a catena chiusa è 
+\[W(s)=\frac{K_{pv}K_T}{K_{pv}K_T+f}\frac{1}{1+s\frac{J}{f+K_{pv}+K_T}}\]
+dove \(\tau = \frac{J}{f+K_{pv}+K_T}\) è la costante di tempo\footnote{Nota bene: si può parlare di costanti di tempo solo per sistemi del primo ordine.}.
+
+% inserire immagine risposta al gradino e significato di \(\tau\)
+
+\paragrafo{Banda passante:}
+In un sistema del primo ordine la banda passante è data da \(\omega_B=\frac{1}{\tau}\), tuttavia considerando trascurabile l'attrito risulta \(\omega_B\simeq \frac{K_{pv}K_T}{J}\). Quest'ultima relazione permette facilmente di sintonizzare il controllore invertendo \(K_{pv}=\frac{\omega_B J}{K_T}\).
+
+\paragrafo{Errore a regime:}
+Per un sistema del primo ordine il guadagno in continua/regime è dato da \(\frac{K_{pv}K_T}{K_{pv}K_T+f}<1\), che è necessariamente minore di 1, ossia l'errore a regime non è nullo. Questo è molto negativo. Non potendo impostare un guadagno proporzionale infinito, occorre necessariamente valutare un controllore di altro tipo che permetta di ottenere un errore a regime nullo, di modo da avere un guadagno in continua unitario.
+
+\sottosottosezione{Controllo Proporzionale Integrale}
+Un controllore PI è del tipo \(C_V(s)=K_{pv}\frac{1+sT_{iv}}{sT_{iv}}\), per cui il sistema a catena chiusa diventa 
+\[W_v(s)=\frac{K_{pv}K_T(1+sT_{iv})}{s^2T_{iv}J + sT_{iv}(f+K_{pv}K_T)+K_{pv}K_T}\]
+Come era voluto, il sistema così ottenuto ha guadagno in continua unitario.
+Però aumenta il numero di poli, diventa di secondo ordine (cosa che deve mettere in allarme per una serie di implicazione) e viene aggiunto uno zero reale (che ha anch'esso forti implicazioni). Tuttavia il grado relativo rimane 1.
+
+\paragrafo{Effetto dello zero reale:}
+Per valutare bene l'effetto dello zero nel sistema a catena chiusa adotto una parametrizzazione:
+\[\frac{1+\frac{s}{\alpha \epsilon \omega_n}}{\left(\frac{s}{\omega_n}\right)^2+\frac{2\epsilon}{\omega_n}s+1}\]
+Utilizzare \(\alpha\) permette di valutare dove si trova lo zero rispetto i poli del sistema
+\[
+\begin{cases}
+\alpha >> 1 \text{ \ zero in alta frequenza} \\
+\alpha \simeq 1 \text{ \ zero vicino ai poli} \\
+\alpha << 1 \text{ \ zero in bassa frequenza}
+\end{cases}
+\]
+In particolare si nota come la presenza dello zero vada a incrementare la sovraelongazione.
+
+\textbf{La sovraelongazione dipende da \(\epsilon\) e dalla posizione dello zero.}
+
+% inserire grafico in cui si veda come con poli aventi \epsilon=0.5 cambi la sovraelongazione variando \alpha 
+
+\sottoparagrafo{Scomposizione sovraelongazione poli e zero:}
+A partire dal sistema a catena chiusa, vado a scomporre la componente legata al sistema del secondo ordine dal resto, cioè un sistema del secondo ordine derivato \(H(s)=\frac{1}{\left(\frac{s}{\omega_n}\right)^2+\frac{2\epsilon}{\omega_n}s+1} + \frac{1}{\alpha \epsilon \omega_n}\frac{s}{\left(\frac{s}{\omega_n}\right)^2+\frac{2\epsilon}{\omega_n}s+1}\), che nel tempo diventa \(h(t)=h_{2 ord}(t) + \frac{1}{\alpha \epsilon \omega_n} \derivata{h_{2 ord}(t)}{t}\).
+
+Nella risposta al gradino avrò una componente legata alla risposta al gradino del sistema del secondo ordine e una componente legata alla risposta all'impulso\footnote{Impulso che è la derivata del gradino.} del sistema del secondo ordine.
+\begin{itemize}
+    \item Se cala lo smorzamento, a parità del resto, la sovraelongazione \(M_p\) aumenta per effetto dello zero
+    \item Se \(\alpha >>1\) l'effetto legato allo zero diventa trascurabile
+    \item Se \(\alpha <<1\) l'effetto legato allo zero è tanto più severo tanto è minore lo smorzamento
+\end{itemize}
+
+Quindi per attenuare la sovraelongazione conviene:
+\begin{itemize}
+    \item Posizionare gli zeri ad alta frequenza \(>> \epsilon \oemga_n\)
+    \item Se \(\epsilon << 1\) aumenta la sensibilità allo zero quindi lo zero va portato ancora  a più alta frequenza
+    \item Se non è possibile intervenire su \(\alpha, \epsilon\), occorre intervenire sulla legge di moto
+\end{itemize}
+
+\paragrafo{Legge di Moto:}
+A leggi di moto più dolci si associano sovraelongazioni legate allo zero più trascurabili. A leggi di moto non dolci si associano sovraelongazioni legate allo zero maggiori.
+
+%% aggiungere parte di appendice sui sistemi del secondo ordine pag 54 finale e 55 fino effetto dello zero reale
+% aggiungere immagini
