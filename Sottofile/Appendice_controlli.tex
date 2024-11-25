@@ -1,5 +1,5 @@
 \capitolo{Controlli Automatici}
-Ripasso di controlli automatici con focus su: Trasformata di Laplace; Diagrammi di Bode; Luogo delle radici; Criteri di stabilità; Analisi di sistemi nel tempo e in frequenza.
+Ripasso di controlli automatici con focus su: Trasformata di Laplace; Diagrammi di Bode; Sistemi del secondo ordine; Luogo delle radici; Criteri di stabilità; Analisi di sistemi nel tempo e in frequenza.
 
 \sezione{Trasformata di Laplace}
 La trasformata di Laplace bilatera del segnale $x:\mathbb{R} \rightarrow \mathbb{C}$ è la funzione $X:\mathbb{C} \rightarrow \mathbb{C}$, $s \rightarrow X(s) := \int^\infty_{-\infty} x(t)e^{-st} dt $, per ogni $s=\sigma + j\omega\in \mathbb{C}$ per cui l'integrale converge. Si denota come $\laplace{x(t)} = X(s)$.
@@ -53,9 +53,44 @@ Nel caso di fasi:
     \item Zeri: Per ogni ordine n hanno pendenza di $n\cdot \frac{\pi}{4}$ per decade, per una durata totale di due decadi
 \end{enumerate}
 
-\sezione{Sistemi del Secondo Ordine}
-I sistemi del secondo ordine si definiscono come \(G(s)=\frac{K \omega_n^2}{s^2+2\epsilon\omega_n s +\omega_n^2}\), dove \(\omega_n\) è la frequenza naturale dei poli e  \(\epsilon\) è il fattore di smorzamento. Ha per radici 
+\sezione{Sistemi del Secondo Ordine} \label{sistemi_ordine_2}
+I sistemi del secondo ordine si definiscono come \(G(s)=\frac{K \omega_n^2}{s^2+2\xi\omega_n s +\omega_n^2}\), dove \(\omega_n\) è la frequenza naturale dei poli e  \(\xi\) è il fattore di smorzamento. Ha per radici 
+\(s_{1,2}=-\xi \omega_n \pm \omega_n\sqrt{\xi^2-1}\), dove: per \(\xi < 1\) i due poli sono complessi coniugati; per \(\xi = 1\) i due poli sono coincidenti; per \(\xi > 1\) i due poli sono reali distinti.
 
+\sottosezione{Risposta al gradino}
+Parametri tipici della risposta al gradino sono: 
+\begin{itemize}
+    \item \(t_\text{rise}\), tempo di salita, definito come il tempo impiegato per passare dal \(10\%\) al \(90\%\) del valore finale\footnote{Tuttavia permette di sapere solo ciò che accade negli istanti iniziali. Un sistema con un buon tempo di risposta potrebbe divergere e non avremmo modo di rendencene conto guardando solo questo tempo.}; \item \(M_p\) massima sovraelongazione come incremento, in percentuale, sul valore finale; 
+    \item \(t_\text{settling}\), tempo di assestamento, definito come il tempo per arrivare e permanere all'interno di una certa banda entro l'\(1\%\) del valore finale.
+\end{itemize}
+
+\sottosezione{Effetto dello smorzamento}
+Lo smorzamento interviene in diverso modo sulla dinamica di un sistema in base al valore che assume. In particolare vengono distinte tre regioni:
+\begin{enumerate}
+    \item \(\xi > 1\) sistema sovrasmorzato, non presenta oscillazioni o sovraelongazione
+    \item \(\xi = 1\) sistema criticamente smorzato, è quanto più veloce il sistema può rispondere in assenza di oscillazioni
+    \item \(\xi < 1\) sistema sottosmorzato, presenta oscillazioni e sovraelongazione
+\end{enumerate}
+
+\paragrafo{Massima sovraelongazione:}
+La massima sovraelongazione in un sistema del secondo ordine dipende unicamente dal valore dello smorzamento. Un valore che va tenuto a mente è \(\xi \simeq 0.7\) per cui si ottiene \(M_p = 5\%\).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{Immagini/sovraelongazione_xi.png}
+    \caption{Influenza del fattore di smorzamento nella sovraelongazione}
+\end{figure}
+
+\paragrafo{Tempo di assestamento:}
+Nei libri, solitamente, è presente una relazione del tipo \(t_s \propto \frac{1}{\xi \omega_n} \), tuttavia non tiene conto della non monotonia di \(t_s\) al variare di \(\xi\).
+In particolare, risulta più corretto:
+\[
+\begin{cases}
+    t_s \propto \frac{1}{\omega_n} \text{ \ } \downarrow \text{\ se \ } \uparrow \omega_n \\
+    \propto \frac{1}{\xi} \text{\ fino 0.7, oltre 0.7 \ } \propto \xi
+\end{cases}
+\]
+In questo modo risulta chiaro come convenga operare per pulsazioni naturali alte, e per sovraelongazioni \(\xi \in [0.6;1.1]\) {\color{red}{Come mai in questo range, cosa significa?}}
 
 \sezione{Luogo delle radici}
 Strumento che consente di valutare graficamente l'andamento delle radici del denominatore di una funzione di trasferimento ottenuta mettendo in retroazione il blocco di andata costituito da $G(s)$ e blocco proporzionale $K$, e il blocco di retroazione $1$. 
