@@ -102,5 +102,42 @@ Quindi per attenuare la sovraelongazione conviene:
     \item Se non è possibile intervenire su \(\alpha, \xi\), occorre intervenire sulla legge di moto
 \end{itemize}
 
-\paragrafo{Legge di Moto:}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Immagini/relazione_sovraelongazione.png}
+    \caption{Relazione tra \(\alpha\) e \(M_p\)}
+\end{figure}
+
+\paragrafo{Banda passante:}
+La banda passante di un sistema con controllore proporzionale è data da \(\omega_{bw}=\frac{K_{pv}K_T}{J}\).
+Riscrivendo la funzione di trasferimento per il controllore PI come visto per sistemi massa molla smorzatore \(W(s)=\frac{K_{pv}K_T(1+sT_{iv})}{s^2M_{eq} + s C_{eq} + K_{eq}}\), si ottengono come poli del sistema \(S_{1,2}=\frac{-C_{eq}\pm\sqrt{C_{eq}^2-4M_{eq}K_{eq}}}{2M_{eq}}\). Il fattore di smorzamento vale \(\xi = \frac{C_{eq}}{2\sqrt{M_{eq}K_{eq}}}=\frac{\sqrt{T_{iv}}}{2}\sqrt{\frac{K_{pv}K_T}{J}}\), dove la banda passante del sistema valeva per controllore proporzionale \(\omega_{bw}=\frac{K_{pv}K_T}{J}\), quindi \(\xi=\frac{\sqrt{\omega_{bw}T_{iv}}}{2}\).
+Lo zero del PI è in corrispondenza di \(\frac{1}{T_{iv}}\), invertendo l'espressione di \(\xi\), si può riscrivere \(\frac{1}{T_{iv}} = \frac{\omega_{bw}}{4\xi^2_{des}}\), ossia effettuando una opportuna scelta di fattore di smorzamento (\(\xi \in [0.7\div 1.4]\)  circa), la banda passante è ad un fattore 4 rispetto lo zero del PI, ossia la pulsazione di banda passante si ha quando l'effetto dell'integrale è già esaurito, quindi vale ancora la relazione della banda passante ricavata per controllore P:
+\[\omega_{bw}=\frac{K_{pv}K_T}{J}\]
+
+\paragrafo{Approccio tipico alla risoluzione:}
+Dati limiti e specifiche sulla banda, si definisce una banda passante desiderata, si ricava il coefficiente proporzionale \(K_{pv}\), vanno aggiunte specifiche sullo smorzamento, quindi si ricava \(T_{iv}\).
+
+\sottosottosezione{Legge di Moto}
 A leggi di moto più dolci si associano sovraelongazioni legate allo zero più trascurabili. A leggi di moto non dolci si associano sovraelongazioni legate allo zero maggiori.
+
+L'utilizzo della finestratura (tempo finito) e la discontinuità in accelerazione, portano ad avere infinite armoniche. 
+Tutto ciò che viene attenuato dalla banda passante comporta distorsione della legge nel tempo, tendendo ad addolcire la legge, eliminando le discontinuità. Questo effetto è più rilevante per leggi non dolci. Tuttavia, in una RtR, perdere armoniche porta a non ottenere arresto all'istante finale.
+
+\paragrafo{Esempi:}
+In termini di leggi di moto la risposta al gradino è non dolce, perciò gli effetti delle sovraelongazioni sono particolarmente acuiti.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Immagini/fft_leggi_di_moto.png}
+    \caption{FFT delle principali leggi di moto}
+\end{figure}
+
+\paragrafo{Riduzione del tempo di moto:}
+La riduzione del tempo di moto peggiora gli effetti di distorsione perché: le armoniche aumentano di frequenza, perciò è più facile vengano attenuate; inoltre le singole armoniche vedono un incremento in termini di ampiezza \(\propto \frac{1}{T^2}\).
+
+\paragrafo{Limiti all'aumento della banda passante:}
+
+\import{Immagini/}{modello_senza_feedforward}
+
+
+% inserire in appendice criterio di stabilità di bode
