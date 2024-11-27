@@ -150,7 +150,6 @@ Ci sono diversi tipi di criteri di stabilità alcuni sono grafici, altri analiti
 Con stabilità BIBO si intende che il sistema abbia una risposta limitata ad un ingresso limitato. Nota bene, questa stabilità non implica stabilità asintotica.
 
 \sottosezione{Criterio di Stabilità dei Poli della funzione di trasferimento}
-
 In un sistema lineare rappresentato da una funzione di trasferimento \(H(s)=\frac{N(s)}{D(s)}\) con \(N(s)\) e \(D(s)\) coprimi, la stabilità dipende dalla posizione dei poli. Questo criterio è necessario ma non sufficiente.
 
 \begin{itemize}
@@ -177,6 +176,18 @@ Supposto di avere un polinomio caratteristico \(P(s)=a_n s^n+a_{n-1}s^{n-1}+⋯+
 
 Il criterio di Routh-Hurwitz stabilisce che il sistema è stabile se e solo se tutti i termini della prima colonna della tabella di Routh hanno lo stesso segno (positivi o negativi).
 Ogni cambio di segno nella prima colonna corrisponde a un polo con parte reale positiva, quindi a un segno di instabilità.
+
+\sottosezione{Criterio di Bode}\label{CriterioBode}
+Per il criterio di Bode, può essere analizzata la stabilità di un sistema tramite due parametri principali, il margine di fase \(m_\phi\) e il margine di guadagno \(m_a\). 
+
+\begin{center}
+Un sistema è stabile se \(m_\phi>0,m_a>0\).
+\end{center}
+
+\begin{enumerate}
+    \item \textbf{Margine di fase:} la differenza in gradi tra la fase del sistema e \(-180^\circ\) alla frequenza di attraversamento del guadagno unitario (o nullo in dB) \(\omega_a\): \(m_\phi=\pi\angle{L(j\omega_a)}\). Indica quanto ritardo in fase il sistema può sopportare prima di diventare instabile. 
+    \item \textbf{Margine di guadagno:} il rapporto di guadagno necessario per portare il sistema ad attraversare il punto critico, ossia per \(\omega_\pi\) tc \(\angle{L(j\omega_a)}=-\pi\): \(m_a=\frac{1}{\abs{L(j\omega_\pi)}}=-\abs{L(j\omega_\pi)}_{dB}\). Indica l'incremento in termini di guadagno che un elemento del sistema può sopportare prima di diventare instabile. 
+\end{enumerate}
 
 \sottosezione{Criterio di Nyquist}
 Il criterio di Nyquist è un metodo grafico utilizzato per analizzare la stabilità dei sistemi con retroazione (feedback) attraverso un'analisi della risposta in frequenza.
