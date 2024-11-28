@@ -13,8 +13,8 @@ trasduttore = 1e3  # Costante di tempo del polo del trasduttore
 anelloI = 2e3 # Costante di tempo del polo dell'anello di corrente
 
 # Definizione della funzione di trasferimento parametrizzata
-numerator = (mecc + s) * 1e6
-denominator = s * (zeroPI + s) * (trasduttore + s) * (anelloI + s)
+numerator = (zeroPI + s) * 1e6
+denominator = s * (mecc + s) * (trasduttore + s) * (anelloI + s)
 transfer_function = numerator / denominator
 
 # Espansione dei polinomi e calcolo dei coefficienti
@@ -71,20 +71,21 @@ for k in multipliers:
     ax_phase.axhline(phase_at_cross, color='gray', linestyle='--', linewidth=0.8)
 
 # Configurazione del grafico del modulo
-ax_mag.set_title('Modulo della funzione di trasferimento')
-ax_mag.set_ylabel('Modulo [dB]')
+#ax_mag.set_title('Modulo della funzione di trasferimento')
+#ax_mag.set_ylabel('Modulo [dB]')
 ax_mag.set_xscale('log')
 ax_mag.legend()
-ax_mag.grid(which='both', linestyle='--', linewidth=0.5)
+#ax_mag.grid(which='both', linestyle='--', linewidth=0.5)
 
 # Configurazione del grafico della fase
-ax_phase.set_title('Fase della funzione di trasferimento')
-ax_phase.set_ylabel('Fase [°]')
-ax_phase.set_xlabel('Pulsazione [rad/s]')
+#ax_phase.set_title('Fase della funzione di trasferimento')
+#ax_phase.set_ylabel('Fase [°]')
+#ax_phase.set_xlabel('Pulsazione [rad/s]')
 ax_phase.set_xscale('log')
 ax_phase.legend()
-ax_phase.grid(which='both', linestyle='--', linewidth=0.5)
+#ax_phase.grid(which='both', linestyle='--', linewidth=0.5)
 
 # Mostra i grafici
 plt.tight_layout()
+plt.savefig("anello_aperto_anello_velocita.png", dpi=300)
 plt.show()
