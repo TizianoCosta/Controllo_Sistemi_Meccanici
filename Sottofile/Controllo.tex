@@ -161,11 +161,11 @@ Fissato\footnote{Viene fatto unicamente per fare delle valutazioni, \(K_{pv}, T_
 \paragrafo{Logica di sintesi del controllore:}
 La scelta di \(K_{pv}\) viene effettuata in modo tale da avere \(\omega_a \in \left[\frac{1}{T_{iv}}, \omega_{tv}\right]\) e \(\max{m_\phi} \simeq 90^\circ\), cercando di migliorare la robustezza. Si potrebbe privilegiare velocità di risposta e quindi valutare margini di fase minori.
 
-\sottosottosezione{Stima di pulsazione per massimizzazione margine di fase}
-Per la stima della pulsazione in corrispondenza del massimo margine di fase conviene utilizzare un modello semplificato, che permette di ottenere una buona precisione del calcolo, anche trascurando l'anello di corrente.
+\sottosottosezione{Stima di pulsazione di attraversamento per massimizzazione margine di fase}
+Per la stima della pulsazione di attraversamento in corrispondenza del massimo margine di fase conviene utilizzare un modello semplificato, che permette di ottenere una buona precisione del calcolo, anche trascurando l'anello di corrente.
 
 \paragrafo{1 - Trascurando l'anello di corrente:}
-Considerando \(W_I(0)=1, \omega_I\rightarrow \infty\) e fissato \(T_{iv}\), si ottiene che la zona di interesse, \(\left[\frac{1}{T_{iv}}, \omega_{tv}\right]\), è simmetrica in fase (perché parte da \(-180^\circ\) e termina in \(-180^\circ\)),  perciò può calcolare la pulsazione di attraversamento ottima utilizzando il metodo dell'ottimo geometrico\footnote{La fase è simmetrica nell'intervallo, tuttavia l'asse delle ascisse è logaritmico, perciò non si può fare una media come metà della somma dei valori di estremo.} \(\omega_{a,opt} = \sqrt{\frac{1}{T_{iv}}\omega_{tv}}\).
+Considerando \(W_I(0)=1, \omega_I\rightarrow \infty\) e fissato \(T_{iv}\), si ottiene che la zona di interesse, \(\left[\frac{1}{T_{iv}}, \omega_{tv}\right]\), è simmetrica in fase (perché parte da \(-180^\circ\) e termina in \(-180^\circ\)),  perciò è possibile calcolare la pulsazione di attraversamento ottima utilizzando il metodo dell'ottimo geometrico\footnote{La fase è simmetrica nell'intervallo, tuttavia l'asse delle ascisse è logaritmico, perciò non si può fare una media come metà della somma dei valori di estremo.} \(\omega_{a,opt} = \sqrt{\frac{1}{T_{iv}}\omega_{tv}}\).
 
 \paragrafo{2 - Considerando l'anello di corrente:}
 Considerare l'anello di corrente porta differenze solo per frequenze "alte", per \(\omega>\frac{1}{T_{iv}}\), in particolare calano il valore massimo del margine di fase e la pulsazione cui si verifica. Unisco le pulsazioni ad alta frequenza in un unico contributo equivalente \(T_{eq}=\frac{1}{\omega_{tv}}+\frac{1}{\omega_I}\). Questo valore può essere utilizzato per valutare la pulsazione di attraversamento ottima \(\omega_{a,opt} = \sqrt{\frac{1}{T_{iv}}\frac{1}{T_{eq}}}\), che sarà paragonabile a quanto ottenuto nel caso precedente.
@@ -176,4 +176,67 @@ Il controllore dell'anello di velocità ragiona in tempo discreto, tuttavia il s
 \paragrafo{4 - Trasduttore modellato con 2 poli reali:}
 Un ulteriore affinamento consiste nel modellare il trasduttore come fosse a 2 poli reali coincidenti, quindi \(T_{eq}=\frac{1}{\omega_{tv}}+\frac{1}{\omega_{tv}}+\frac{1}{\omega_I}+\frac{T_c}{2}\), da cui ricavare un \(\omega_{a,opt}\) paragonabile con quanto ottenuto nel caso 1.
 
-% inserire in appendice criterio di stabilità di bode
+\sottosottosezione{Considerazioni su banda passante}
+Considero un sistema avente \(m_\phi=90^\circ\) e fdt del trasduttore unitaria, per definizione di margine di fase \(\angle{L_v(j\omega_a)} = -90^\circ\) e \(\abs{L_v(j\omega_a)}=1\) o in modo equivalente \(L_v(j\omega_a)=-j\), perciò la fdt del sistema in catena chiusa \(W(j\omega_a)=\frac{L_v(j\omega_a)}{1+L_v(j\omega_a)}\), sostituendo la fdt del sistema a catena aperta appena ottenuto e calcolando il modulo si ottiene \(\abs{W(j\omega_a)}=\frac{1}{\sqrt{2}}=-3dB\) ossia \(\omega_a=\omega_{bw}\).
+
+Quello esaminato è un caso costruito ad hoc, e \(\omega_a\) e \(\omega_{bw}\) sono legati a fenomeni fisici differenti, tuttavia, numericamente sono valori confrontabili.
+In generale il margine di fase sarà \(<90^\circ\) perciò, intuitivamente, cala lo smorzamento, appare un picco di risonanza\footnote{Lo smorzamento influenza maggiormente zona di risonanza in catena chiusa, meno la catena aperta.} che porta a un incremento della banda passante.
+
+Tipicamente le pulsazioni sono legate dalla relazione: \(\omega_a < \frac{K_{pv}K_T}{J} < \omega_{bw}\) e da attraversamento a banda passante può esserci un \(20\% \div 50\%\) di incremento, tuttavia, per semplificazione:
+\[\omega_a \simeq \frac{K_{pv}K_T}{J} \simeq \omega_{bw}\]
+
+\paragrafo{Sintesi euristica del controllore:}
+Quest'ultima espressione viene utilizzata per la sintesi euristica del controllore per andare a massimizzare il margine di fase; valgono:
+\[
+\begin{cases}
+    \omega_{bw}^{des} \simeq \frac{\frac{1}{T_{eq}}}{4\xi^2_{des}} \\
+    K_{pv} \simeq \frac{\omega_{bw}^{des}J}{K_T} \\
+    \frac{1}{T_{iv}} \simeq \frac{\omega_{bw}^{des}}{4\xi^2_{des}}
+\end{cases}
+\]
+Con possibilità di scelta dello smorzamento:
+\[
+\begin{cases}
+    \xi \simeq 0.7 \text{ \ per sintonizzazione aggressiva con alta dinamica } \\
+    \xi = 1 \text{ \ per sintonizzazione standard} \\
+    \xi > 1 \text{ \ per sintonizzazione conservativa}
+\end{cases}
+\]
+In termini partici la scelta dello smorzamento viene effettuato mediante uno slider software che modifica \(\xi\), per quel valore calcola \(K_{pv}, T_{iv}\) infine va portato in macchina e aggiustato sul caso reale.
+
+\sottosottosezione{Problema del trasduttore}
+Trascurando l'anello di corrente e il campionamento\footnote{Se li considerassimo \(\omega_{bw}^{des} < \frac{\omega_{tv}}{4}\).}, per \(\xi_{des}=1\), vale \(T_{eq}=\frac{1}{\omega_{tv}}\), da cui \(\omega_{bw}^{des}\simeq \frac{\omega_{tv}}{4}\).
+La velocità non viene misurata direttamente, si ottiene per derivazione della posizione, tipicamente ottenuta con encoder o resolver. Dal momento che la posizione viene ricavata quantizzando, nella misura entra rumore bianco con componenti ad alta frequenza che vengono amplificate dal derivatore; risulta necessario applicare un filtro passa basso, la cui banda passante va a definire \(\omega_{tv}\).
+
+Il rumore è legato al cablaggio e alla risoluzione, in particolare diminuire la risoluzione permette di diminuire il rumore (a discapito di un peggioramento della ripetibilità della misura). 
+
+\paragrafo{Encoder reali:}
+Gli encoder classici con doppie piste hanno 3 tipologie di modalità per ottenere risoluzioni differenti: "\(1\times\)" per cui \(\frac{360^\circ}{N_t}\); "\(2\times\)" per cui \(\frac{360^\circ}{2N_t}\); "\(4\times\)" per cui \(\frac{360^\circ}{4N_t}\).
+In alternativa esistono encoder sin/cos composti da doppia pista "standard" e altre due: una sinusoidale, una cosinusoidale di semiperiodi pari a 1 tacca, che permettono di sapere all'interno della tacca dove si trova. La risoluzione in questo caso è dettata dal numero di bit utilizzati, ma si può arrivare fino \(0.0001 \text{arcmin}\), avere risoluzioni così basse permette di ottenere \(\omega_{tv}\) molto elevate\footnote{Anche in questo caso vale il teorema di Shannon {\color{red}{Inserire riferimento}} per cui \(\omega_{tv}>\frac{2\pi f_c}{2}\)}, perciò conviene cercare la risoluzione maggiore, non tanto per la posizione, quanto per la velocità.
+
+% Immagini relative la misura di una velocità con encoder a risoluzioni differenti
+
+\paragrafo{Effetto del rumore:}
+Il rumore che si inserisce nel ramo di feedback ritorna nel ramo di andata dove viene moltiplicato per \(K_{pv}\) (che potrebbe amplificare il rumore), filtrato dall'anello di corrente, ma non in modo sostanziale, in seguito viene moltiplicato per \(K_T\), per cui il rumore diventa un disturbo di coppia, che va al sistema meccanico, dove eccita le risonanze e il motore vibra nel gioco \footnote{Immagino il rotore che vibra quindi si muove di poco in senso orario fino a colpire l'estremo superiore del gioco e poi in senso antiorario in cui va a colpire l'estremo inferiore.}, che viene "eccitato".
+
+Prendendo gli stessi encoder di prima, ma cercando di ottenere \textbf{parità di rumore}, quindi filtrando maggiormente per quello avente minor risoluzione e di conseguenza aumentandone il ritardo, si nota come \(K_{pv}=\frac{\omega_{bw}^{des}J}{K_T}\) ossia \textbf{maggiore la banda passante, maggiore l'amplificazione del rumore}. Nell'esempio precedente i valori sono \(K_{pv}=1.3\) per \(\omega_{bw}=136 \unitamisura{rd}{s}\) e \(K_{pv}=6.6\) per \(\omega_{bw}=660 \unitamisura{rd}{s}\).
+
+\begin{enumerate}
+    \item Potrebbe andare bene lavorare con encoder più risoluto anche se l'amplificazione è elevata
+    \item Potrebbe andare meglio usare l'encoder poco risoluto, alzando \(\uparrow \omega_{tv}\) e \(\uparrow\) rumore di velocità, mantenendo i guadagni limitati
+    \item Potrebbe andare meglio usare l'encoder molto risoluto, abbassando \(\downarrow \omega_{tv}\) e \(\downarrow\) rumore di velocità, mantenendo un alta frequenza del polo del trasduttore di velocità
+\end{enumerate}
+
+% Immagini relative la misura di una velocità con encoder a risoluzioni differenti con filtri differenti e come varia il K_pv
+
+\sottosottosezione{Stimatore di velocità}
+Derivando la posizione si ottiene una stima di velocità, che però è ottenuta utilizzando un filtro passa basso, perciò la stima è buona a bassa frequenza.
+Se però si partisse da un valore di accelerazione, lo si integrasse, filtrasse con un filtro passa alto, si otterrebbe una stima di corrente buona ad alta frequenza.
+Tuttavia l'accelerazione non viene misurata direttamente, ma si può ricavare a partire da misure di corrente (che sono influenzate dalla banda passante di corrente, che però è elevata); valgono: \(C_m=K_T i= J \AccAng + C_e\), da cui \(\AccAng = \frac{K_T i - C_e}{J}\) in cui l'unico elemento non noto è la coppia legata alle forze esterne \(C_e\).
+\(C_e\) si potrebbe stimare, oppure si può assumere sia in bassa frequenza, quindi filtrando con un passa alto (come anticipato è già presente un passa alto, perciò si utilizza quello) si può attenuare.
+Così facendo si ottiene una stima a ridotto rumore, ritardo e con \(\omega_{tv}\simeq \frac{f_c}{2}\)
+
+\import{Immagini}{stimatore_velocita}
+
+% aggiungere immagini
+% aggiungere in appendice teorema di Shannon e inserire riferimento nel footnote
