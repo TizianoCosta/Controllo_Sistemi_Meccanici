@@ -292,6 +292,8 @@ La scelta del coefficiente del feedforward porta a errori di posizione:
     \item Guadagno giusto: non ha sovraelongazione, assomiglia al riferimento di velocità.
 \end{itemize}
 
+% immagine errore di posizione 
+
 \paragrafo{Inerzia variabile:}
 Nel caso di inerzia variabile, il feedforward viene tarato su \(J_{min}\) (eventualmente per un certo fattore), così che la compensazione sia minima.
 
@@ -301,8 +303,12 @@ Nel caso di inerzia variabile, il feedforward viene tarato su \(J_{min}\) (event
 Per il calcolo della velocità desiderata va fatto il calcolo col feedback, ma va aggiunto il contributo del feedforward, perché va tenuto conto il progetto della legge di moto di velocità, aggiunto col feedforward.
 \(\Omega^{des}(s) = C_p(s)E_p(s) + s\theta^{des}\) dove \(C_p\) è il controllore di posizione, mentre \(E_p = \theta^{des} - \theta^{mis}\) è l'errore di posizione.
 
+% schema per anello di posizione
+
 \paragrafo{Ipotesi semplificative:}
 Per l'anello  di posizione si faranno due ipotesi semplificative: viene trascurato il trasduttore di posizione (perché \(\omega_{tp}\geqslant \omega_{tv} >> \omega_{b,v} >> \omega_{b,p}\), verranno fatte valutazioni più avanti su questo proposito); viene semplificato l'anello di velocità, considerando di aver ben sintonizzato l'anello di velocità (quindi scelto un buon smorzamento) \(W_v(s)=\frac{1}{1+\frac{s}{\omega_{b,v}}}\), modello che è ben rappresentato in bassa frequenza con PI (\(W_v(0)=1\) e \(\xi \simeq 1\)); viene trascurato il feedforward di velocità, che però è presente, per focalizzarsi sul feedback.
+
+% schema anello di posizione semplificato
 
 \sottosezione{Controllore P}
 La funzione ad anello chiuso di posizione è data da \(W_p(s) = \frac{\theta_m(s)}{\theta_m^{des}(s)} = \frac{K_{pp}\omega_{b,v}}{s^2 + s \omega_{b,v} + K_{pp}\omega_{b,v}}\). Questa funzione ha \(W_p(0) = 1\), l'errore a regime è nullo con ingresso costante/a gradino, e l'errore a regime è nullo con legge rest to rest in posizione.
@@ -321,6 +327,6 @@ Analisi dei poli: \(\omega_{n,p} = \sqrt{K_{pp} \omega_{b,v}}\) e \(\xi_p = \fra
 
 Privilegiare la sovraelongazione di posizione porta ad un peggioramento di \(\omega_{b,p}\) che possono venire compensati in feedforward di velocità, che va direttamente all'anello di velocità e quindi non risente della ridotta \(\omega_{b,p}\).
 
-
+% aggiungere immagini
 
 % aggiungere in appendice teorema di Shannon e inserire riferimento nel footnote
