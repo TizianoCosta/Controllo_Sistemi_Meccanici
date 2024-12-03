@@ -1,0 +1,44 @@
+\begin{figure}[!ht]
+    \centering
+    \resizebox{0.7\textwidth}{!}{%
+    \begin{circuitikz}
+    \tikzstyle{every node}=[font=\LARGE]
+    \draw [->, >=Stealth] (0,8.25) -- (2.75,8.25);
+    \draw  (3.5,8.25) circle (0.75cm);
+    \draw  (12.5,8.25) circle (0.75cm);
+    \draw [short] (1.75,8.25) -- (1.75,11.25);
+    \draw [->, >=Stealth] (1.75,11.25) -- (4.75,11.25);
+    \draw  (4.75,12) rectangle (6.25,10.5);
+    \draw  (6.25,9) rectangle (9.25,7.5);
+    \draw [->, >=Stealth] (4.25,8.25) -- (6.25,8.25);
+    \draw [->, >=Stealth] (9.25,8.25) -- (11.75,8.25);
+    \draw [short] (6.25,11.25) -- (12.5,11.25);
+    \draw [->, >=Stealth] (12.5,11.25) -- (12.5,9);
+    \draw [->, >=Stealth] (13.25,8.25) -- (15.75,8.25);
+    \draw  (15.75,9) rectangle (19,7.5);
+    \draw  (21.25,9) rectangle (22.5,7.5);
+    \draw [->, >=Stealth] (19,8.25) -- (21.25,8.25);
+    \draw [->, >=Stealth] (22.5,8.25) -- (24.5,8.25);
+    \draw [short] (23.5,8.25) -- (23.5,6);
+    \draw [->, >=Stealth] (23.5,6) -- (14,6);
+    \draw  (8.75,6.75) rectangle (14,5.25);
+    \draw [short] (8.75,6) -- (3.5,6);
+    \draw [->, >=Stealth] (3.5,6) -- (3.5,7.5);
+    \node [font=\LARGE] at (3,8.25) {+};
+    \node [font=\LARGE] at (3.5,7.75) {-};
+    \node [font=\LARGE] at (12,8.25) {+};
+    \node [font=\LARGE] at (12.5,8.75) {+};
+    \node [font=\LARGE] at (5.5,11.25) {s};
+    \node [font=\LARGE] at (7.75,8.25) {$C_p(s)$};
+    \node [font=\LARGE] at (11.5,6) {Trasduttore pos};
+    \node [font=\LARGE] at (17.25,8.25) {$W_v(s)$};
+    \node [font=\LARGE] at (22,8.25) {$\frac{1}{s}$};
+    \node [font=\LARGE] at (24.5,8.75) {$\theta_m$};
+    \node [font=\LARGE] at (20,8.75) {$s\theta_m$};
+    \node [font=\LARGE] at (0.5,8.75) {$\theta^{des}$};
+    \node [font=\LARGE] at (4.75,6.5) {$\theta^{mis}$};
+    \end{circuitikz}
+    }%
+    
+    \label{fig:my_label}
+    \end{figure}
