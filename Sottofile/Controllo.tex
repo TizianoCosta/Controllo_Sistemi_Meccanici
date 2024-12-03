@@ -109,10 +109,10 @@ Quindi per attenuare la sovraelongazione conviene:
 \end{figure}
 
 \paragrafo{Banda passante:}
-La banda passante di un sistema con controllore proporzionale è data da \(\omega_{bw}=\frac{K_{pv}K_T}{J}\).
-Riscrivendo la funzione di trasferimento per il controllore PI come visto per sistemi massa molla smorzatore \(W(s)=\frac{K_{pv}K_T(1+sT_{iv})}{s^2M_{eq} + s C_{eq} + K_{eq}}\), si ottengono come poli del sistema \(S_{1,2}=\frac{-C_{eq}\pm\sqrt{C_{eq}^2-4M_{eq}K_{eq}}}{2M_{eq}}\). Il fattore di smorzamento vale \(\xi = \frac{C_{eq}}{2\sqrt{M_{eq}K_{eq}}}=\frac{\sqrt{T_{iv}}}{2}\sqrt{\frac{K_{pv}K_T}{J}}\), dove la banda passante del sistema valeva per controllore proporzionale \(\omega_{bw}=\frac{K_{pv}K_T}{J}\), quindi \(\xi=\frac{\sqrt{\omega_{bw}T_{iv}}}{2}\).
-Lo zero del PI è in corrispondenza di \(\frac{1}{T_{iv}}\), invertendo l'espressione di \(\xi\), si può riscrivere \(\frac{1}{T_{iv}} = \frac{\omega_{bw}}{4\xi^2_{des}}\), ossia effettuando una opportuna scelta di fattore di smorzamento (\(\xi \in [0.7\div 1.4]\)  circa), la banda passante è ad un fattore 4 rispetto lo zero del PI, ossia la pulsazione di banda passante si ha quando l'effetto dell'integrale è già esaurito, quindi vale ancora la relazione della banda passante ricavata per controllore P:
-\[\omega_{bw}=\frac{K_{pv}K_T}{J}\]
+La banda passante di un sistema con controllore proporzionale è data da \(\omega_{b,v}=\frac{K_{pv}K_T}{J}\).
+Riscrivendo la funzione di trasferimento per il controllore PI come visto per sistemi massa molla smorzatore \(W(s)=\frac{K_{pv}K_T(1+sT_{iv})}{s^2M_{eq} + s C_{eq} + K_{eq}}\), si ottengono come poli del sistema \(S_{1,2}=\frac{-C_{eq}\pm\sqrt{C_{eq}^2-4M_{eq}K_{eq}}}{2M_{eq}}\). Il fattore di smorzamento vale \(\xi = \frac{C_{eq}}{2\sqrt{M_{eq}K_{eq}}}=\frac{\sqrt{T_{iv}}}{2}\sqrt{\frac{K_{pv}K_T}{J}}\), dove la banda passante del sistema valeva per controllore proporzionale \(\omega_{b,v}=\frac{K_{pv}K_T}{J}\), quindi \(\xi=\frac{\sqrt{\omega_{b,v}T_{iv}}}{2}\).
+Lo zero del PI è in corrispondenza di \(\frac{1}{T_{iv}}\), invertendo l'espressione di \(\xi\), si può riscrivere \(\frac{1}{T_{iv}} = \frac{\omega_{b,v}}{4\xi^2_{des}}\), ossia effettuando una opportuna scelta di fattore di smorzamento (\(\xi \in [0.7\div 1.4]\)  circa), la banda passante è ad un fattore 4 rispetto lo zero del PI, ossia la pulsazione di banda passante si ha quando l'effetto dell'integrale è già esaurito, quindi vale ancora la relazione della banda passante ricavata per controllore P:
+\[\omega_{b,v}=\frac{K_{pv}K_T}{J}\]
 
 \paragrafo{Approccio tipico alla risoluzione:}
 Dati limiti e specifiche sulla banda, si definisce una banda passante desiderata, si ricava il coefficiente proporzionale \(K_{pv}\), vanno aggiunte specifiche sullo smorzamento, quindi si ricava \(T_{iv}\).
@@ -177,21 +177,21 @@ Il controllore dell'anello di velocità ragiona in tempo discreto, tuttavia il s
 Un ulteriore affinamento consiste nel modellare il trasduttore come fosse a 2 poli reali coincidenti, quindi \(T_{eq}=\frac{1}{\omega_{tv}}+\frac{1}{\omega_{tv}}+\frac{1}{\omega_I}+\frac{T_c}{2}\), da cui ricavare un \(\omega_{a,opt}\) paragonabile con quanto ottenuto nel caso 1.
 
 \sottosottosezione{Considerazioni su banda passante}
-Considero un sistema avente \(m_\phi=90^\circ\) e fdt del trasduttore unitaria, per definizione di margine di fase \(\angle{L_v(j\omega_a)} = -90^\circ\) e \(\abs{L_v(j\omega_a)}=1\) o in modo equivalente \(L_v(j\omega_a)=-j\), perciò la fdt del sistema in catena chiusa \(W(j\omega_a)=\frac{L_v(j\omega_a)}{1+L_v(j\omega_a)}\), sostituendo la fdt del sistema a catena aperta appena ottenuto e calcolando il modulo si ottiene \(\abs{W(j\omega_a)}=\frac{1}{\sqrt{2}}=-3dB\) ossia \(\omega_a=\omega_{bw}\).
+Considero un sistema avente \(m_\phi=90^\circ\) e fdt del trasduttore unitaria, per definizione di margine di fase \(\angle{L_v(j\omega_a)} = -90^\circ\) e \(\abs{L_v(j\omega_a)}=1\) o in modo equivalente \(L_v(j\omega_a)=-j\), perciò la fdt del sistema in catena chiusa \(W(j\omega_a)=\frac{L_v(j\omega_a)}{1+L_v(j\omega_a)}\), sostituendo la fdt del sistema a catena aperta appena ottenuto e calcolando il modulo si ottiene \(\abs{W(j\omega_a)}=\frac{1}{\sqrt{2}}=-3dB\) ossia \(\omega_a=\omega_{b,v}\).
 
-Quello esaminato è un caso costruito ad hoc, e \(\omega_a\) e \(\omega_{bw}\) sono legati a fenomeni fisici differenti, tuttavia, numericamente sono valori confrontabili.
+Quello esaminato è un caso costruito ad hoc, e \(\omega_a\) e \(\omega_{b,v}\) sono legati a fenomeni fisici differenti, tuttavia, numericamente sono valori confrontabili.
 In generale il margine di fase sarà \(<90^\circ\) perciò, intuitivamente, cala lo smorzamento, appare un picco di risonanza\footnote{Lo smorzamento influenza maggiormente zona di risonanza in catena chiusa, meno la catena aperta.} che porta a un incremento della banda passante.
 
-Tipicamente le pulsazioni sono legate dalla relazione: \(\omega_a < \frac{K_{pv}K_T}{J} < \omega_{bw}\) e da attraversamento a banda passante può esserci un \(20\% \div 50\%\) di incremento, tuttavia, per semplificazione:
-\[\omega_a \simeq \frac{K_{pv}K_T}{J} \simeq \omega_{bw}\]
+Tipicamente le pulsazioni sono legate dalla relazione: \(\omega_a < \frac{K_{pv}K_T}{J} < \omega_{b,v}\) e da attraversamento a banda passante può esserci un \(20\% \div 50\%\) di incremento, tuttavia, per semplificazione:
+\[\omega_a \simeq \frac{K_{pv}K_T}{J} \simeq \omega_{b,v}\]
 
 \paragrafo{Sintesi euristica del controllore:}
 Quest'ultima espressione viene utilizzata per la sintesi euristica del controllore per andare a massimizzare il margine di fase; valgono:
 \[
 \begin{cases}
-    \omega_{bw}^{des} \simeq \frac{\frac{1}{T_{eq}}}{4\xi^2_{des}} \\
-    K_{pv} \simeq \frac{\omega_{bw}^{des}J}{K_T} \\
-    \frac{1}{T_{iv}} \simeq \frac{\omega_{bw}^{des}}{4\xi^2_{des}}
+    \omega_{b,v}^{des} \simeq \frac{\frac{1}{T_{eq}}}{4\xi^2_{des}} \\
+    K_{pv} \simeq \frac{\omega_{b,v}^{des}J}{K_T} \\
+    \frac{1}{T_{iv}} \simeq \frac{\omega_{b,v}^{des}}{4\xi^2_{des}}
 \end{cases}
 \]
 Con possibilità di scelta dello smorzamento:
@@ -205,7 +205,7 @@ Con possibilità di scelta dello smorzamento:
 In termini partici la scelta dello smorzamento viene effettuato mediante uno slider software che modifica \(\xi\), per quel valore calcola \(K_{pv}, T_{iv}\) infine va portato in macchina e aggiustato sul caso reale.
 
 \sottosottosezione{Problema del trasduttore}
-Trascurando l'anello di corrente e il campionamento\footnote{Se li considerassimo \(\omega_{bw}^{des} < \frac{\omega_{tv}}{4}\).}, per \(\xi_{des}=1\), vale \(T_{eq}=\frac{1}{\omega_{tv}}\), da cui \(\omega_{bw}^{des}\simeq \frac{\omega_{tv}}{4}\).
+Trascurando l'anello di corrente e il campionamento\footnote{Se li considerassimo \(\omega_{b,v}^{des} < \frac{\omega_{tv}}{4}\).}, per \(\xi_{des}=1\), vale \(T_{eq}=\frac{1}{\omega_{tv}}\), da cui \(\omega_{b,v}^{des}\simeq \frac{\omega_{tv}}{4}\).
 La velocità non viene misurata direttamente, si ottiene per derivazione della posizione, tipicamente ottenuta con encoder o resolver. Dal momento che la posizione viene ricavata quantizzando, nella misura entra rumore bianco con componenti ad alta frequenza che vengono amplificate dal derivatore; risulta necessario applicare un filtro passa basso, la cui banda passante va a definire \(\omega_{tv}\).
 
 Il rumore è legato al cablaggio e alla risoluzione, in particolare diminuire la risoluzione permette di diminuire il rumore (a discapito di un peggioramento della ripetibilità della misura). 
@@ -214,12 +214,16 @@ Il rumore è legato al cablaggio e alla risoluzione, in particolare diminuire la
 Gli encoder classici con doppie piste hanno 3 tipologie di modalità per ottenere risoluzioni differenti: "\(1\times\)" per cui \(\frac{360^\circ}{N_t}\); "\(2\times\)" per cui \(\frac{360^\circ}{2N_t}\); "\(4\times\)" per cui \(\frac{360^\circ}{4N_t}\).
 In alternativa esistono encoder sin/cos composti da doppia pista "standard" e altre due: una sinusoidale, una cosinusoidale di semiperiodi pari a 1 tacca, che permettono di sapere all'interno della tacca dove si trova. La risoluzione in questo caso è dettata dal numero di bit utilizzati, ma si può arrivare fino \(0.0001 \text{arcmin}\), avere risoluzioni così basse permette di ottenere \(\omega_{tv}\) molto elevate\footnote{Anche in questo caso vale il teorema di Shannon {\color{red}{Inserire riferimento}} per cui \(\omega_{tv}>\frac{2\pi f_c}{2}\)}, perciò conviene cercare la risoluzione maggiore, non tanto per la posizione, quanto per la velocità.
 
-% Immagini relative la misura di una velocità con encoder a risoluzioni differenti
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Immagini/encoder1vs1_stesso_filtro.png}
+    \caption{Rumore per due encoder filtrati con stesso pb}
+\end{figure}
 
 \paragrafo{Effetto del rumore:}
 Il rumore che si inserisce nel ramo di feedback ritorna nel ramo di andata dove viene moltiplicato per \(K_{pv}\) (che potrebbe amplificare il rumore), filtrato dall'anello di corrente, ma non in modo sostanziale, in seguito viene moltiplicato per \(K_T\), per cui il rumore diventa un disturbo di coppia, che va al sistema meccanico, dove eccita le risonanze e il motore vibra nel gioco \footnote{Immagino il rotore che vibra quindi si muove di poco in senso orario fino a colpire l'estremo superiore del gioco e poi in senso antiorario in cui va a colpire l'estremo inferiore.}, che viene "eccitato".
 
-Prendendo gli stessi encoder di prima, ma cercando di ottenere \textbf{parità di rumore}, quindi filtrando maggiormente per quello avente minor risoluzione e di conseguenza aumentandone il ritardo, si nota come \(K_{pv}=\frac{\omega_{bw}^{des}J}{K_T}\) ossia \textbf{maggiore la banda passante, maggiore l'amplificazione del rumore}. Nell'esempio precedente i valori sono \(K_{pv}=1.3\) per \(\omega_{bw}=136 \unitamisura{rd}{s}\) e \(K_{pv}=6.6\) per \(\omega_{bw}=660 \unitamisura{rd}{s}\).
+Prendendo gli stessi encoder di prima, ma cercando di ottenere \textbf{parità di rumore}, quindi filtrando maggiormente per quello avente minor risoluzione e di conseguenza aumentandone il ritardo, si nota come \(K_{pv}=\frac{\omega_{b,v}^{des}J}{K_T}\) ossia \textbf{maggiore la banda passante, maggiore l'amplificazione del rumore}. Nell'esempio precedente i valori sono \(K_{pv}=1.3\) per \(\omega_{b,v}=136 \unitamisura{rd}{s}\) e \(K_{pv}=6.6\) per \(\omega_{b,v}=660 \unitamisura{rd}{s}\).
 
 \begin{enumerate}
     \item Potrebbe andare bene lavorare con encoder più risoluto anche se l'amplificazione è elevata
@@ -227,16 +231,96 @@ Prendendo gli stessi encoder di prima, ma cercando di ottenere \textbf{parità d
     \item Potrebbe andare meglio usare l'encoder molto risoluto, abbassando \(\downarrow \omega_{tv}\) e \(\downarrow\) rumore di velocità, mantenendo un alta frequenza del polo del trasduttore di velocità
 \end{enumerate}
 
-% Immagini relative la misura di una velocità con encoder a risoluzioni differenti con filtri differenti e come varia il K_pv
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Immagini/encoder1vs1_stesso_rumore.png}
+    \caption{Ritardo per due encoder con stesso rumore}
+\end{figure}
 
 \sottosottosezione{Stimatore di velocità}
 Derivando la posizione si ottiene una stima di velocità, che però è ottenuta utilizzando un filtro passa basso, perciò la stima è buona a bassa frequenza.
 Se però si partisse da un valore di accelerazione, lo si integrasse, filtrasse con un filtro passa alto, si otterrebbe una stima di corrente buona ad alta frequenza.
-Tuttavia l'accelerazione non viene misurata direttamente, ma si può ricavare a partire da misure di corrente (che sono influenzate dalla banda passante di corrente, che però è elevata); valgono: \(C_m=K_T i= J \AccAng + C_e\), da cui \(\AccAng = \frac{K_T i - C_e}{J}\) in cui l'unico elemento non noto è la coppia legata alle forze esterne \(C_e\).
+L'accelerazione non viene misurata direttamente, ma si può ricavare a partire da misure di corrente (che sono influenzate dalla banda passante di corrente, che però è elevata); valgono: \(C_m=K_T i= J \AccAng + C_e\), da cui \(\AccAng = \frac{K_T i - C_e}{J}\) in cui l'unico elemento non noto è la coppia legata alle forze esterne \(C_e\).
 \(C_e\) si potrebbe stimare, oppure si può assumere sia in bassa frequenza, quindi filtrando con un passa alto (come anticipato è già presente un passa alto, perciò si utilizza quello) si può attenuare.
-Così facendo si ottiene una stima a ridotto rumore, ritardo e con \(\omega_{tv}\simeq \frac{f_c}{2}\)
+Così facendo si ottiene una stima a ridotto rumore, ritardo e con \(\omega_{tv}\simeq \frac{2\pi f_c}{2}\)
 
 \import{Immagini}{stimatore_velocita}
 
-% aggiungere immagini
+\sottosottosezione{Variazione dell'inerzia}
+Tarato il controllore per \(J=J_{nom}\) e ottenuto \(K_{pv}\) tale che \(\max{m_\phi}\), variare l'inerzia può creare problemi.
+Se nel sistema con quel controllore l'inerzia dovesse aumentare: \(\downarrow \omega_{b,v}^r=\frac{K_{pv}K_T}{\uparrow J}\), perciò \(\uparrow t_r\) e considerando \(\omega_{b,v}\simeq \omega_a\), \(\downarrow \omega_a\) ossia \(\downarrow m_\phi\) e \(\downarrow \xi\). L'abbassamento del fattore di smorzamento introduce oscillazioni in bassa frequenza.
+Se nel sistema con quel controllore l'inerzia dovesse diminuire: \(\uparrow \omega_{b,v}^r=\frac{K_{pv}K_T}{\downarrow J}\), perciò \(\downarrow t_r\) e \(\uparrow \omega_a\), tuttavia l'aumento della pulsazione di attraversamento porta questa ad avvicinarsi a \(\omega_{tv}\), e questo porta a \(\downarrow m_\phi\) e \(\downarrow \xi\).
+
+% inserire immagine in cui si varia l'inerzia con x5 e x1/2.5
+
+\paragrafo{Gestione della variazione di inerzia con controllore "fisso":}
+Per gestire la variazione di inerzia con un controllore a guadagno costante, si cerca di fare una taratura a partire da un valore di inerzia o massimo o minimo, di modo tale da assicurarsi un range di funzionamento.
+
+\sottosezione{Feedforward}
+Il feedforward aggiunto al sistema ad anello chiuso, permette di intervenire sulla \(\omega_{b,v}\) in relazione al tempo di moto e alle specifiche di inseguimento.
+Ha una serie di vantaggi:
+\begin{itemize}
+    \item Sfrutta la conoscenza a priori
+    \item Non necessita dell'errore per dare un comando
+    \item Utile in transitorio
+    \item Se il sistema è BIBO stabile e senza saturazione o altre non linearità, non lo destabilizza
+\end{itemize}
+
+\sottosottosezione{Costruttori}
+Nei controllori industriali, per la taratura del feedforward, sono utilizzate diverse funzioni, ciascuna legata ad un termine della dinamica inversa: Inerzia; Attrito; Forze costanti; Cogging Torque del motore.
+
+Rexroth utilizza una compensazione a coppia costante, questo permette di mantenere fisso un carico sollevato. Se il carico fosse frenato, venisse scollegato il freno, collegato il motore, ma non ci fosse il feedforward, il feedback prima lascerebbe che l'oggetto scenda, per rialzarlo solo ottenuto un certo errore. Col feedforward invece, con un opportuna sincronizzazione freno motore, è possibile mantere fisso il carico.
+
+Kollmorgen invece utilizza un riferimento di velocità per fare una compensazione di attrito e attrito viscoso.
+
+Rockwell infine utilizza un sistema di compensazione di attrito con modello a punti di lavoro in base alla velocità, permettendo una buona stima anche per sistemi a bassa velocità e soggetti ad attrito statico.
+
+\sottosottosezione{Compensazione Cogging Torque}
+La cogging torque è una coppia resistente che varia con \(\theta\), che è problematica a basse velocità e per motori costruiti in modo approssimativo. Possibili soluzioni sono l'aumento del guadagno per permette di mantenere la velocità costante oppure la compensazione in feedforward.
+
+\paragrafo{Costruttori:}
+Kollmorgen fa un auto-taratura tramite misura puntuale di valore di coppia in riferimento alla posizione, salva tutto in una tabella e compensa in feedforward.
+Un altro costruttore crea una funzione coseno con molteplicità pari al numero di espansioni polari e la porta in feedforward.
+
+\sottosottosezione{Compensazione di forze d'Inerzia (feedforward di Accelerazione)}
+Per compensare le forze di inerzia si cerca di fare \(i^{ffw}=\frac{J\AccAng^{des}}{K_T}\). Nel feedforward non è un problema fare la derivata, perché è il riferimento (potrebbe essere analitica) sicuramente non ci sono problemi di rumore.
+Non si fa una compensazione totale del feedforward (circa un \(50\div 70\% J_{reale}\)), perché si predilige il feedback (dove si cerca di avere un guadagno "abbstanza alto").
+La scelta del coefficiente del feedforward porta a errori di posizione:
+\begin{itemize}
+    \item Guadagno alto: il feedforward diventa la componente predominante, la posizione risulta in anticipo;
+    \item Guadagno basso: il feedforward è una componente poco rilevante, la posizione risulta in ritardo;
+    \item Guadagno giusto: non ha sovraelongazione, assomiglia al riferimento di velocità.
+\end{itemize}
+
+\paragrafo{Inerzia variabile:}
+Nel caso di inerzia variabile, il feedforward viene tarato su \(J_{min}\) (eventualmente per un certo fattore), così che la compensazione sia minima.
+
+
+
+\sezione{Anello di Posizione}
+Per il calcolo della velocità desiderata va fatto il calcolo col feedback, ma va aggiunto il contributo del feedforward, perché va tenuto conto il progetto della legge di moto di velocità, aggiunto col feedforward.
+\(\Omega^{des}(s) = C_p(s)E_p(s) + s\theta^{des}\) dove \(C_p\) è il controllore di posizione, mentre \(E_p = \theta^{des} - \theta^{mis}\) è l'errore di posizione.
+
+\paragrafo{Ipotesi semplificative:}
+Per l'anello  di posizione si faranno due ipotesi semplificative: viene trascurato il trasduttore di posizione (perché \(\omega_{tp}\geqslant \omega_{tv} >> \omega_{b,v} >> \omega_{b,p}\), verranno fatte valutazioni più avanti su questo proposito); viene semplificato l'anello di velocità, considerando di aver ben sintonizzato l'anello di velocità (quindi scelto un buon smorzamento) \(W_v(s)=\frac{1}{1+\frac{s}{\omega_{b,v}}}\), modello che è ben rappresentato in bassa frequenza con PI (\(W_v(0)=1\) e \(\xi \simeq 1\)); viene trascurato il feedforward di velocità, che però è presente, per focalizzarsi sul feedback.
+
+\sottosezione{Controllore P}
+La funzione ad anello chiuso di posizione è data da \(W_p(s) = \frac{\theta_m(s)}{\theta_m^{des}(s)} = \frac{K_{pp}\omega_{b,v}}{s^2 + s \omega_{b,v} + K_{pp}\omega_{b,v}}\). Questa funzione ha \(W_p(0) = 1\), l'errore a regime è nullo con ingresso costante/a gradino, e l'errore a regime è nullo con legge rest to rest in posizione.
+Per questo motivo è sufficiente un controllore proporzionale\footnote{Aggiungere un integrale tende a introdurre problemi, ha senso solo se le forze esterne sono elevate e non prevedibili, compensabili in feedforward.}. Questo è possibile perché c'è un integrale fisico tra velocità e posizione.
+
+Analisi dei poli: \(\omega_{n,p} = \sqrt{K_{pp} \omega_{b,v}}\) e \(\xi_p = \frac{1}{2}\frac{\omega_{b,v}}{K_{pp}}\), valgono:
+\( \uparrow K_{pp} \rightarrow \begin{cases}
+    \uparrow \omega_{n,p} \\
+    \downarrow \xi_p
+\end{cases}
+\) il coefficiente proporzionale va dimensionato per limitare la sovraelongazione in posizione e \( \uparrow \omega_{b,v} \rightarrow \begin{cases}
+    \uparrow \omega_{n,p} \\
+    \uparrow \xi_p
+\end{cases}
+\) ossia l'effetto è benefico, per questo è fondamentale una buon sintonizzazione dell'anello di velocità.
+
+Privilegiare la sovraelongazione di posizione porta ad un peggioramento di \(\omega_{b,p}\) che possono venire compensati in feedforward di velocità, che va direttamente all'anello di velocità e quindi non risente della ridotta \(\omega_{b,p}\).
+
+
+
 % aggiungere in appendice teorema di Shannon e inserire riferimento nel footnote
