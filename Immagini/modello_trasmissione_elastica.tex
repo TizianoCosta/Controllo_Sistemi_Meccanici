@@ -1,0 +1,34 @@
+\begin{figure}[!ht]
+    \centering
+    \resizebox{0.7\textwidth}{!}{%
+    \begin{circuitikz}
+    \tikzstyle{every node}=[font=\LARGE]
+    \draw  (0,8.75) rectangle  node {\huge Motore} (5.25,5.5);
+    \draw  (5.25,7.5) rectangle (13,6.75);
+    \draw  (13,9) rectangle  node {\LARGE $\tau_R$} (16.25,5.25);
+    \draw  (16.25,7.5) rectangle (22.25,6.75);
+    \draw (22.5,8.5) to[R,l={ \LARGE k}] (26.5,8.5);
+    \draw (22.5,6) to[C,l={ \LARGE D}] (26.5,6);
+    \draw  (26.75,7.5) rectangle (34.25,6.75);
+    \draw  (34.25,10.5) rectangle  node {\LARGE Carico} (37,4.25);
+    \draw [short] (22.5,9.75) -- (22.5,4.75);
+    \draw [short] (26.5,9.75) -- (26.5,4.75);
+    \draw [->, >=Stealth] (7,5.5) -- (7,9.5);
+    \draw [->, >=Stealth] (11.25,9.5) -- (11.25,5.5);
+    \draw [->, >=Stealth] (9.25,5.5) -- (9.25,9.5);
+    \draw [->, >=Stealth] (19,5.25) -- (19,9.5);
+    \draw [->, >=Stealth] (28.25,5) -- (28.25,9.25);
+    \draw [->, >=Stealth] (33,9.25) -- (33,5);
+    \node [font=\LARGE] at (6.75,10) {$\dot \theta_M$};
+    \node [font=\LARGE] at (9.25,10) {$C_M$};
+    \node [font=\LARGE] at (19,10) {$\dot \theta_R$};
+    \node [font=\LARGE] at (28.25,10) {$\dot \theta_c$};
+    \node [font=\LARGE] at (30.5,4.5) {$f_c \dot \theta_C$};
+    \node [font=\LARGE] at (33,4.5) {$C_c$};
+    \node [font=\LARGE] at (11,5) {$f_m \dot \theta_M$};
+    \draw [->, >=Stealth] (30.75,9.25) -- (30.75,5);
+    \end{circuitikz}
+    }%
+    
+    \label{fig:my_label}
+    \end{figure}
