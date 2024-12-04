@@ -212,7 +212,7 @@ Il rumore è legato al cablaggio e alla risoluzione, in particolare diminuire la
 
 \paragrafo{Encoder reali:}
 Gli encoder classici con doppie piste hanno 3 tipologie di modalità per ottenere risoluzioni differenti: "\(1\times\)" per cui \(\frac{360^\circ}{N_t}\); "\(2\times\)" per cui \(\frac{360^\circ}{2N_t}\); "\(4\times\)" per cui \(\frac{360^\circ}{4N_t}\).
-In alternativa esistono encoder sin/cos composti da doppia pista "standard" e altre due: una sinusoidale, una cosinusoidale di semiperiodi pari a 1 tacca, che permettono di sapere all'interno della tacca dove si trova. La risoluzione in questo caso è dettata dal numero di bit utilizzati, ma si può arrivare fino \(0.0001 \text{arcmin}\), avere risoluzioni così basse permette di ottenere \(\omega_{tv}\) molto elevate\footnote{Anche in questo caso vale il teorema di Shannon {\color{red}{Inserire riferimento}} per cui \(\omega_{tv}>\frac{2\pi f_c}{2}\)}, perciò conviene cercare la risoluzione maggiore, non tanto per la posizione, quanto per la velocità.
+In alternativa esistono encoder sin/cos composti da doppia pista "standard" e altre due: una sinusoidale, una cosinusoidale di semiperiodi pari a 1 tacca, che permettono di sapere all'interno della tacca dove si trova. La risoluzione in questo caso è dettata dal numero di bit utilizzati, ma si può arrivare fino \(0.0001 \text{arcmin}\), avere risoluzioni così basse permette di ottenere \(\omega_{tv}\) molto elevate\footnote{Anche in questo caso vale il teorema di Shannon, vedi appendice \ref{th_Shannon} per cui \(\omega_{tv}>\frac{2\pi f_c}{2}\)}, perciò conviene cercare la risoluzione maggiore, non tanto per la posizione, quanto per la velocità.
 
 \begin{figure}[h]
     \centering
@@ -267,8 +267,11 @@ Ha una serie di vantaggi:
     \item Sfrutta la conoscenza a priori
     \item Non necessita dell'errore per dare un comando
     \item Utile in transitorio
-    \item Se il sistema è BIBO stabile e senza saturazione o altre non linearità, non lo destabilizza
+    \item Se il sistema è BIBO stabile e senza saturazione o altre non linearità, non lo destabilizza (perché opera in catena aperta)
 \end{itemize}
+
+\textbf{Il guadagno di feedforward di velocità va impostato a 1}, al controllo va passata la legge di moto com'è, di modo da poter ridurre i coefficienti del feedback e far andare il motore alla velocità progettata.
+Mentre il guadagno di feedforward di accelerazione che va all'anello di coppia/corrente è il fattore di conversione tra accelerazione e coppia/corrente.
 
 \sottosottosezione{Costruttori}
 Nei controllori industriali, per la taratura del feedforward, sono utilizzate diverse funzioni, ciascuna legata ad un termine della dinamica inversa: Inerzia; Attrito; Forze costanti; Cogging Torque del motore.
@@ -287,7 +290,7 @@ Kollmorgen fa un auto-taratura tramite misura puntuale di valore di coppia in ri
 Un altro costruttore crea una funzione coseno con molteplicità pari al numero di espansioni polari e la porta in feedforward.
 
 \sottosottosezione{Compensazione di forze d'Inerzia (feedforward di Accelerazione)}
-Per compensare le forze di inerzia si cerca di fare \(i^{ffw}=\frac{J\AccAng^{des}}{K_T}\). Nel feedforward non è un problema fare la derivata, perché è il riferimento (potrebbe essere analitica) sicuramente non ci sono problemi di rumore.
+Per compensare le forze di inerzia si cerca di fare \(i^{ffw}=\frac{J\AccAng^{des}}{K_T}\). Nel feedforward non è un problema fare la derivata, perché è il riferimento (potrebbe essere analitica), sicuramente non ci sono problemi di rumore.
 Non si fa una compensazione totale del feedforward (circa un \(50\div 70\% J_{reale}\)), perché si predilige il feedback (dove si cerca di avere un guadagno "abbstanza alto").
 La scelta del coefficiente del feedforward porta a errori di posizione:
 \begin{itemize}
@@ -313,13 +316,13 @@ Per il calcolo della velocità desiderata va fatto il calcolo col feedback, ma v
 \import{Immagini/}{anello_posizione}
 
 \paragrafo{Ipotesi semplificative:}
-Per l'anello  di posizione si faranno due ipotesi semplificative: viene trascurato il trasduttore di posizione (perché \(\omega_{tp}\geqslant \omega_{tv} >> \omega_{b,v} >> \omega_{b,p}\), verranno fatte valutazioni più avanti su questo proposito); viene semplificato l'anello di velocità, considerando di aver ben sintonizzato l'anello di velocità (quindi scelto un buon smorzamento) \(W_v(s)=\frac{1}{1+\frac{s}{\omega_{b,v}}}\), modello che è ben rappresentato in bassa frequenza con PI (\(W_v(0)=1\) e \(\xi \simeq 1\)); viene trascurato il feedforward di velocità, che però è presente, per focalizzarsi sul feedback.
+Per l'anello  di posizione si faranno due ipotesi semplificative: viene trascurato il trasduttore di posizione (perché \(\omega_{tp}\geqslant \omega_{tv} >> \omega_{b,v} >> \omega_{b,p}\), verranno fatte valutazioni più avanti (vedi \ref{ordine_anello_pos_vel}) su questo proposito); viene semplificato l'anello di velocità, considerando di aver ben sintonizzato l'anello di velocità (quindi scelto un buon smorzamento) \(W_v(s)=\frac{1}{1+\frac{s}{\omega_{b,v}}}\), modello che è ben rappresentato in bassa frequenza con PI (\(W_v(0)=1\) e \(\xi \simeq 1\)); viene trascurato il feedforward di velocità, che però è presente, per focalizzarsi sul feedback.
 
 \import{Immagini/}{anello_posizione_semplificato}
 
 \sottosezione{Controllore P}
 La funzione ad anello chiuso di posizione è data da \(W_p(s) = \frac{\theta_m(s)}{\theta_m^{des}(s)} = \frac{K_{pp}\omega_{b,v}}{s^2 + s \omega_{b,v} + K_{pp}\omega_{b,v}}\). Questa funzione ha \(W_p(0) = 1\), l'errore a regime è nullo con ingresso costante/a gradino, e l'errore a regime è nullo con legge rest to rest in posizione.
-Per questo motivo è sufficiente un controllore proporzionale\footnote{Aggiungere un integrale tende a introdurre problemi, ha senso solo se le forze esterne sono elevate e non prevedibili, compensabili in feedforward.}. Questo è possibile perché c'è un integrale fisico tra velocità e posizione.
+Per questo motivo è sufficiente un controllore proporzionale\footnote{Aggiungere un integrale tende a introdurre problemi, ha senso solo se le forze esterne sono elevate e non prevedibili o non compensabili in feedforward.}. Questo è possibile perché c'è un integrale fisico tra velocità e posizione.
 
 Analisi dei poli: \(\omega_{n,p} = \sqrt{K_{pp} \omega_{b,v}}\) e \(\xi_p = \frac{1}{2}\frac{\omega_{b,v}}{K_{pp}}\), valgono:
 \( \uparrow K_{pp} \rightarrow \begin{cases}
@@ -334,4 +337,54 @@ Analisi dei poli: \(\omega_{n,p} = \sqrt{K_{pp} \omega_{b,v}}\) e \(\xi_p = \fra
 
 Privilegiare la sovraelongazione di posizione porta ad un peggioramento di \(\omega_{b,p}\) che possono venire compensati in feedforward di velocità, che va direttamente all'anello di velocità e quindi non risente della ridotta \(\omega_{b,p}\).
 
-% aggiungere in appendice teorema di Shannon e inserire riferimento nel footnote
+\sottosottosezione{Sintonizzazione}
+Per effettuare la sintonizzazione dell'anello di posizione vengono considerati \(\xi^{des}_p = 1\div 1.5\) e l'anello di velocità ben sintonizzato, perciò valgono:
+\[\begin{cases}
+    K_{pp} = \frac{\omega_{b,v}}{4(\xi^{des})^2} \\
+    \omega_{b,p} \simeq \frac{\omega_{n,p}}{\xi} 0.65 \\
+    \omega_{n,p} = \sqrt{K_{pp} \omega_{b,v}}
+\end{cases}
+\]
+Unendo la prima e la terza: \(\omega_{n,p} = \frac{\omega_{b,v}}{2\xi_p}\), mentre unendo tutte: \[\omega_{b,p}\simeq \frac{0.65}{2}\frac{\omega_{b,v}}{\xi^2_p} \simeq 
+\begin{cases}
+    \frac{\omega_{b,v}}{3} \text{ \ se \ } \xi_p = 1 \\
+    \frac{\omega_{b,v}}{6} \text{ \ se \ } \xi_p = 1.4
+\end{cases}
+\]
+Per cui si verifica come \(\omega_{b,p} << \omega_{b,v}\). \label{ordine_anello_pos_vel}
+
+\sottosottosezione{Costruttori}
+Lenze: Propongono soluzioni per anello di corrente, velocità, posizione e utilizza una logica come quella esaminata nel corso. Propongono \(\xi_v=1\) e \(\xi_p=1.4\) come valori default. Inoltre permettono di variare il guadagno \(K_{pp}\) per le basse velocità (serve per il gioco).
+
+Rockwell: Utilizzano uno stesso smorzamento per velocità e posizione, permettono di settare \(\xi\in [0.8; 1.5]\), utilizzano, come visto sopra la scalatura per determinare \(\omega_{b,p}\) a partire da \(\omega_{b,v}\). Propongono un controllo PI in posizione, ma l'azione integrale è posta a 0 di default.
+
+Danaher/Kollmorgen: Permette di impostare i guadagni per i feedforward di velocità e accelerazione. Ricordare di impostare quello di velocità a 1.
+
+Kollmorgen: Permette di effettuare gain scheduling: \(K_{p,v}(\theta,\VelAng), \ T_{i,v}(\theta,\VelAng), \ K_{pp}(\theta,\VelAng)\).
+
+Beckhoff/Bosch: Pone un filtro in serie al feedforward di velocità, che può servire solo per leggi molto brusche come gradini e rampe (da non utilizzare). E anche un filtro in serie al feedforward di accelerazione, che però potrebbe servire per leggi brusche aventi gradini/rampe di accelerazione.
+
+Bosch: Implementano una funzione di saturazione della corrente, nel caso in cui ci fosse un qualche tipo di problema che porta ad un incremento della temperatura di motore, che viene monitorata o stimata. In quei casi viene interrotta l'esecuzione della legge di moto, perciò è un evento che deve verificarsi il meno possibile.
+
+B\&R: Effettuano un anticipo del feedforward per cercare di compensare una bassa \(\omega{b,v}\) o una bassa frequenza di campionamento della posizione. Tuttavia occorre prestare attenzione che questo non faccia partire prima del previsto il motore.
+
+\paragrafo{Alternative di Feedforward di Accelerazione:}
+Per effettuare il feedforward di accelerazione ci sono diversi approcci:
+\begin{itemize}
+    \item "Classico": approccio didattico per cui \(A^{des}=s^2 \theta^{des}\). Questo è l'approccio più sicuro, tuttavia non è coerente con \(\Omega^{des}\) in cui è presente anche la parte di feedback
+    \item Beckhoff/Bosch: \(A^{des}=s\Omega^{des}=s^2 \theta^{des}+sK_{pp}(\theta^{des}-\theta^{mis})\) ossia deriva la velocità di riferimento all'anello di velocità, quindi con feedback e feedforward. Questo approccio è coerente con \(\Omega^{des}\), tuttavia è sbagliato perché è presente la derivata della misura ossia viene introdotto rumore direttamente all'anello di corrente, inoltre introduce un anello indesiderato e difficile da analizzare per la presenza del feedback, che può portare a instabilità.
+    \item Beckhoff/Bosch v2: Un approccio intermedio tra quelli precedenti considera un fattore di ripartizione per i due fenomeni \(A^{des}=\alpha s^2 \theta^{des}+(1-\alpha)s\Omega^{des}\), empiricamente si ottiene ridotto rumore e sovraelongazione per effetto del feedforward per \(\alpha \in [0.7; 0.8]\).
+\end{itemize}
+
+\capitolo{Controllo del Moto per Trasmissione Elastica}
+
+\import{Immagini/}{modello_trasmissione_elastica}
+
+\paragrafo{Inerzia del riduttore:}
+L'inerzia del riduttore andrebbe divisa in componenti e separarle per albero lento e veloce; tuttavia viene descritta a catalogo da un unico dato \(J_R\).
+Occorre utilizzare un modello approssimato, che consideri l'inerzia del carico alta e permetta di trascurare \(\tau^2_R J_{out}\), dove \(J_{out}\) è l'inerzia della trasmissione verso l'uscita, da cui: \(J_C + J_{out} \simeq J_C\) e \(J_M + J_{sole} \simeq J_C + J_R\) con \(J_R = J_{sole} + \tau^2_R J_{out} \simeq J_{sole}\).
+
+\sezione{Modello Newtoniano}
+La forza visco-elastica è data da \(R = -k(\theta_C - \theta_R) - D(\VelAng_C - \VelAng_R) \) con k rigidezza e D fattore di smorzamento.
+Lato carico vale \(J_C \AccAng_C = R - C_C - f_c \VelAng_C\), da cui: \(J_C \AccAng_C + D\VelAng_C + k\theta_C + f_c \VelAng_C = k \tau_R \theta_M + D \tau_R \VelAng_M - C_C\).
+Lato motore, ricordando \(\theta_R = \tau_R \theta_M\), vale \(J_M \AccAng_M = C_M - f_m \VelAng_M - \tau_R R\).

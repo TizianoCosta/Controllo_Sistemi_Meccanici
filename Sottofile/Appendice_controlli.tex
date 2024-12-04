@@ -1,6 +1,9 @@
 \capitolo{Controlli Automatici}
 Ripasso di controlli automatici con focus su: Trasformata di Laplace; Diagrammi di Bode; Sistemi del secondo ordine; Luogo delle radici; Criteri di stabilità; Analisi di sistemi nel tempo e in frequenza.
 
+\paragrafo{Teorema di Shannon:}\label{th_Shannon}
+Per campionare correttamente (senza perdita di informazioni) un segnale, è sufficiente campionarlo con una frequenza di campionamento pari almeno al doppio della massima frequenza del segnale (tale frequenza viene anche detta frequenza di Nyquist): \(f_c \geqslant 2 f_{max}\).
+
 \sezione{Trasformata di Laplace}
 La trasformata di Laplace bilatera del segnale $x:\mathbb{R} \rightarrow \mathbb{C}$ è la funzione $X:\mathbb{C} \rightarrow \mathbb{C}$, $s \rightarrow X(s) := \int^\infty_{-\infty} x(t)e^{-st} dt $, per ogni $s=\sigma + j\omega\in \mathbb{C}$ per cui l'integrale converge. Si denota come $\laplace{x(t)} = X(s)$.
 
