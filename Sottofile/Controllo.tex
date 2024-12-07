@@ -387,4 +387,45 @@ Occorre utilizzare un modello approssimato, che consideri l'inerzia del carico a
 \sezione{Modello Newtoniano}
 La forza visco-elastica è data da \(R = -k(\theta_C - \theta_R) - D(\VelAng_C - \VelAng_R) \) con k rigidezza e D fattore di smorzamento.
 Lato carico vale \(J_C \AccAng_C = R - C_C - f_c \VelAng_C\), da cui: \(J_C \AccAng_C + D\VelAng_C + k\theta_C + f_c \VelAng_C = k \tau_R \theta_M + D \tau_R \VelAng_M - C_C\).
-Lato motore, ricordando \(\theta_R = \tau_R \theta_M\), vale \(J_M \AccAng_M = C_M - f_m \VelAng_M - \tau_R R\).
+Lato motore, ricordando \(\theta_R = \tau_R \theta_M\), vale \(J_M \AccAng_M = C_M - f_m \VelAng_M - \tau_R D \VelAng_c + \tau_R k \theta_c\).
+Da queste passando a Laplace:
+\[
+\begin{cases}
+    (J_c s^2 + D s + k) \theta_c(s) = (D s + k)\theta_M(s) \tau_R \\
+    (J_M s^2 + \tau_R^2 D s + \tau_R^2 k)\theta_M(s) = C_m(s) + \tau_R (D s + k)\theta_c(s)
+\end{cases}
+\]
+
+A partire da queste espressioni è possibile ricavare le varie funzioni di trasferimento che andranno poi a definire il sistema. Ognuna di queste verrà scritta nella forma "fisica" (con D,k,J) e nella forma classica dei controlli (con \(\xi\) e \(\omega\)), che sono definiti:
+\begin{itemize}
+    \item \(\omega_p = \sqrt{\frac{k J}{J_k J_c}}\)
+    \item \(\xi_p = \frac{D J}{2 \sqrt{J J_k J_c k}}\)
+    \item \(\omega_z = \sqrt{\frac{k}{J_c}}\)
+    \item \(\xi_z = \frac{D}{2\sqrt{J_c k}}\)
+\end{itemize}
+Dove \(J = J_M + \tau_R^2 J_c\).
+
+\paragrafo{Trasmissibilità:}
+La trasmissibilità è la funzione di trasferimento che lega posizione angolare del motore \(\theta_M\) e la posizione angolare del carico \(\theta_c\). Se in un sistema rigido vale esattamente il rapporto di trasmissione \(\tau\), considerando la rigidezza e lo smorzamento che caratterizzano qualsiasi riduttore, diventa:
+\[ T(s) := \frac{\theta_c(s)}{\theta_M(s)}=\tau \frac{D s + k}{J_c s^2 + D s +k} = \tau \frac{2\frac{2\xi_z}{\omega_z} s + 1}{\frac{s^2}{\omega_p^2} + \frac{2\xi_p}{\omega_p} s + 1}\]
+
+\sottosezione{Ricettanza, Mobilità, Inertanza}
+La ricettanza è la relazione che lega posizione in uscita e coppia in ingresso; di nostro interesse c'è la mobilità, che relaziona la velocità e la coppia; mentre l'inertanza lega accelerazione e coppia.
+Considerando in ingresso la coppia del motore e in uscita la posizione/velocità/accelerazione del motore, si ottengono le seguenti espressioni:
+\begin{itemize}
+    \item \(\frac{\theta_M(s)}{C_M(s)} = \frac{1}{s^2} \frac{J_c s^2 + D s + k}{J_M J_c s^2 + D J s + k J} \)
+    \item \(\frac{s \theta_M(s)}{C_M(s)} = \frac{1}{s} \frac{J_c s^2 + D s + k}{J_M J_c s^2 + D J s + k J} := G_{vm}(s) \)
+    \item \(\frac{s^2 \theta_M(s)}{C_M(s)} = \frac{J_c s^2 + D s + k}{J_M J_c s^2 + D J s + k J} \)
+\end{itemize}
+
+Riscrivendo la mobilità nella forma controllistica classica si ottiene:
+\(G_{vm}(s) = \frac{1}{J_s} \frac{\frac{s^2}{\omega_z^2} + \frac{2\xi_z}{\omega_z} s + 1}{\frac{s^2}{\omega_p^2} + \frac{2\xi_p}{\omega_p} s + 1}\).
+
+Si può anche riscrivere la mobilità con la velocità del carico in uscita e la coppia del motore in ingresso, da quanto appena scritto su \(G_{vm}(s)\) basta moltiplicare la trasmissibilità da cui si ottiene \(G_{vc}(s) = G_{vm}(s) T(s) = \tau \frac{1}{s} \frac{D s + k}{J_M J_c s^2 + D J s + k J}\).
+
+\paragrafo{Analisi poli-zeri della Mobilità:}
+Importante da notare come i poli delle mobilità, lato carico e motore, siano gli stessi.
+Gli zeri della mobilità lato motore sono due, questo comporta la presenza di antirisonanza\footnote{Vedi ***aggiungere riferimento***}. Invece la mobilità lato carico ha un solo zero reale, perciò non ha antirisonanza.
+
+
+% meccanica delle vibrazioni, aggiungere immagine per antirisonanza, aggiungere parte su decremento logaritmico
