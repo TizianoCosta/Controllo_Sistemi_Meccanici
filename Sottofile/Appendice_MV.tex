@@ -68,13 +68,24 @@ La massa è soggetta ad una forza centrigura \(F_c = m\omega^2 r\), dove \(\omeg
 La componente forzante da tenere presente è quella che si scarica su molla e smorzatore\footnote{L'altra componente si scarica sulle guide.} \( F_\parallel = s\omega^2 \sin{(\omega t)} \).
 Passando ai vettori complessi è possibile ricavare il modulo di \(\abs{x_0 e^{i\phi}} = \frac{s}{M}\left(\frac{\omega}{\omega_n}\right)^2 \frac{1}{\sqrt{\left[ 1-\left( \frac{\omega}{\omega_n} \right)^2  \right]^2 + \left( 2\epsilon \frac{\omega}{\omega_n} \right)^2}}\).
 
-% inserire immagine del modulo
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Immagini/sbilanciamento_statico.png}
+    \caption{Sbilanciamento statico \(s=10^{-3}, M=100, \omega_n=1000\)}
+\end{figure}
 
 \sezione{Vibrazioni Torsionali}
 Si parla di vibrazioni torsionali per un volano collegato ad un estremo di un albero e soggetto ad una coppia \(T(t)\) che provoca una rotazione \(\theta(t)\).
 Considerando l'albero privo di massa, assimilabile ad una molla torsionale di rigidezza \(k_T \unitamisura{Nm}{rd} = \frac{I_p^O G}{L}\) dove \(I_p^O = \frac{\pi d^4}{32}\) è il momento di inerzia polare, \(G = \frac{E}{2(1+\nu)}\) modulo elastico tangenziale.
 Per la viscosità viene introdotto \(c_T \unitamisura{Nm s}{rd}\).
 A questo punto è possibile riportarsi al modello classico di oscillatore semplice smorzato considerando l'inerzia al posto della massa, la rigidezza torsionale e la viscosità torsionale; valgono: \(\omega_n=\sqrt{\frac{K_T}{I^O_p}}\) e \(\epsilon = \frac{c_T}{2\sqrt{K_T I^O_p}}\).
+
+\sezione{Decremento Logaritmico}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Immagini/es_decremento_log.png}
+    \caption{Esempio calcolo decremento logaritmico}
+\end{figure}
 
 \sezione{Analisi Modale}
 L'analisi modale consiste nel disaccoppiare le variabili nel sistema di equazioni differenziali.
@@ -120,5 +131,13 @@ Il numero di pulsazioni di antirisonanza è pari a \(\text{n gdl} - 1\).
 Nel caso di sistema a 2 gdl in figura  \( x_1(i\omega) = h_{11}(i\omega) F_1(i\omega) + h_{12}(i\omega)F_2(i\omega) \), per \( h_{11}(i\omega), F_2(i\omega) = 0\) è come se la massa 1, su cui viene applicata una forzante \(F_1(i\omega)\neq 0\), non si muovesse, quindi fosse, virtualmente, a telaio.
 
 Nel caso di sistemi smorzati non si ha attraversamento per l'asse delle ascisse, quindi non si ha antirisonanza.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textiwidth]{Immagini/esempio_antirisonanza.png}
+    \caption{Esempio di antirisonanza}
+\end{figure}
+
+
 
 % inserire figura di esempio, telaio, molla 1, massa 1, molla 2, massa 2 e massa 2 libera
