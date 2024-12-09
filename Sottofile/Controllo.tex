@@ -2,8 +2,10 @@
 Nell'industria i controllori sono di tipo P, PI, quindi le valutazioni saranno su questi.
 Il modello di riferimento è quello classico del sistema motore, riduttore, carico a cui si aggiunge l'espressione base del motore:
 \[
+\begin{cases}
     C_m(t) = J \AccAng(t) + f \VelAng(t) + C_e (t) \\
     C_m(t) = K_T i(t)
+\end{cases}
 \]
 
 Che trasformata in Laplace diventa:
@@ -324,7 +326,7 @@ Per l'anello  di posizione si faranno due ipotesi semplificative: viene trascura
 La funzione ad anello chiuso di posizione è data da \(W_p(s) = \frac{\theta_m(s)}{\theta_m^{des}(s)} = \frac{K_{pp}\omega_{b,v}}{s^2 + s \omega_{b,v} + K_{pp}\omega_{b,v}}\). Questa funzione ha \(W_p(0) = 1\), l'errore a regime è nullo con ingresso costante/a gradino, e l'errore a regime è nullo con legge rest to rest in posizione.
 Per questo motivo è sufficiente un controllore proporzionale\footnote{Aggiungere un integrale tende a introdurre problemi, ha senso solo se le forze esterne sono elevate e non prevedibili o non compensabili in feedforward.}. Questo è possibile perché c'è un integrale fisico tra velocità e posizione.
 
-Analisi dei poli: \(\omega_{n,p} = \sqrt{K_{pp} \omega_{b,v}}\) e \(\xi_p = \frac{1}{2}\frac{\omega_{b,v}}{K_{pp}}\), valgono:
+Analisi dei poli: \(\omega_{n,p} = \sqrt{K_{pp} \omega_{b,v}}\) e \(\xi_p = \frac{1}{2}\sqrt{\frac{\omega_{b,v}}{K_{pp}}}\), valgono:
 \( \uparrow K_{pp} \rightarrow \begin{cases}
     \uparrow \omega_{n,p} \\
     \downarrow \xi_p
@@ -427,5 +429,57 @@ Si può anche riscrivere la mobilità con la velocità del carico in uscita e la
 Importante da notare come i poli delle mobilità, lato carico e motore, siano gli stessi.
 Gli zeri della mobilità lato motore sono due, questo comporta la presenza di antirisonanza\footnote{Vedi ***aggiungere riferimento***}. Invece la mobilità lato carico ha un solo zero reale, perciò non ha antirisonanza.
 
+\paragrafo{Antirisonanza Gvm:}
+L'antirisonanza di \(G_{vm}(s)\) ha frequenza naturale del sistema aggiunto, ottenuto bloccando il rotore del motore da cui si ottiene (in modo del tutto simile a quanto visto in meccanica delle vibrazioni) \(\omega_z=\frac{k}{J_c}\).
+Per ricavarla sperimentalmente basta mantenere frenato il motore, applicare una sollecitazione impulsiva al carico, misurare le vibrazioni e utilizzare il decremento logaritmico, per cui misuro il periodo di oscillazione, da cui ricavo la pulsazione di oscillazione (smorzata) \(\omega_{z,d} = \omega_z \sqrt{1-\xi_z^2}\), misuro diversi picchi così da poter determinare lo smorzamento \(\xi_z\) e la pulsazione \(\omega_z\) \footnote{Vedi ***aggiungere riferimento***}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Immagini/schema_antirisonanza.png}
+    \caption{Schema equivalente per verifica su antirisonanza}
+\end{figure}
+
+\paragrafo{Relazione poli-zeri Gvm:}
+Ricordando rapporto di inerzia \(\rho = \frac{\tau_R^2 J_c}{J_m} > 0\), in \(G_{vm}(s)\) esiste una relazione tra pulsazione del polo e pulsazione dello zero e per smorzamento del polo e smorzamento dello zero:
+\[
+\begin{cases}
+    \omega_p = \omega_z \sqrt{1+\rho} \\
+    \xi_p = \xi_z \sqrt{1+\rho} \\
+    \omega_z < \omega_p \\
+    \xi_z < \xi_p
+\end{cases}
+\]
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Immagini/poli_zeri_Gvm.png}
+    \caption{Rappresentazione su piano complesso di poli e zeri di \(G_{vm}\)}
+\end{figure}
+
+\sottosezione{Architetture di controllo}
+Ci sono diverse tipologie di controllo in base alla grandezza misurata (o stimata) e grandezza attuata e se sono riferite entrambe allo stesso sitema (entrambe motore oppure una motore l'altra carico) o all'utilizzo di controllo SISO o MIMO.
+
+\sottosottosezione{Controllo Co-Locato}
+Con controllo co-locato si intende un controllo in cui misura e grandezza attuata sono al motore; il carico si trova all'esterno del loop ed è in catena aperta.
+
+\import{Immagini}{controllo_co_locato}
+
+\sottosottosezione{Controllo non Co-Locato}
+Con controllo non co-locato si intende un controllo in cui misura e grandezza attuata sono differenti, in particolare la misura è effettuata al carico mentre la grandezza attuata è al motore; il carico si trova all'interno del loop.
+
+\import{Immagini}{controllo_co_locato}
+
+\sottosottosezione{Controllo di stato}
+Nel controllo di stato, lavorando in MIMO, permette di scegliere entrambe le grandezza di misura, risultando in un controllo migliore. Tuttavia nell'industria sono solitamente difficilmente praticabili. 
+
+\sottosottosezione{Controllo Co-Locato vs non Co-Locato}
+Per valutare quale controllo utilizzare vado a studiare l'inertanza (per semplicità di analisi) \(sG_{vm}(s)\) e la mobilità \(G_{vm}(s)\). Per il tracciamento si consiglia di studiare gli asintoti e quindi tracciare la funzione di trasferimento collegandoli.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{Immagini/Inertanza_gvm.png}
+    \includegraphics[width=0.45\textwidth]{Immagini/mobilita_gvm.png}
+    \caption{Inertanza \(sG_{vm}\) sx e mobilità \(G_{vm}\)}
+\end{figure}
 
 % meccanica delle vibrazioni, aggiungere immagine per antirisonanza, aggiungere parte su decremento logaritmico
