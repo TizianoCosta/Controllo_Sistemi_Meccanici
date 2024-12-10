@@ -41,10 +41,9 @@ else:
 
 # Creare il grafico
 plt.figure(figsize=(10, 6))
-plt.plot(t_values, A_values, label="Oscillazione smorzata")
-plt.scatter(t_values[peaks], peak_amplitudes, color='red', label="Picchi")
-plt.title(f"Oscillazione smorzata con decremento logaritmico\n"
-          f"Decremento logaritmico (calcolato): {delta_calculated:.4f}\n"
+plt.plot(t_values, A_values, label="Oscillazione smorzata", color='black')
+plt.scatter(t_values[peaks], peak_amplitudes, color='grey', label="Picchi")
+plt.title(f"Decremento logaritmico (calcolato): {delta_calculated:.4f}\n"
           f"Frazione di smorzamento xi: {xi:.4f}\n"
           f"Pulsazione naturale omega_n: {omega_n:.2f} rad/s")
 #plt.xlabel("Tempo (s)")
