@@ -106,17 +106,30 @@ Si notano in particolare \(m_\phi > 90^°\) e, non arrivando mai a \(-180^°\), 
 \paragrafo{Controllo non Co-Locato:}
 Per quanto riguarda il controllo non Co-Locato, facendo lo stesso ci si accorge di come la mobilità, complessivamente sia un sistema con polo del secondo ordine, inoltre il polo agisce prima dello zero, quindi in un certo tratto la fase potrebbe andare al di sotto dei \(-180^°\). Come risulta più chiaro dal grafico, questo aspetto ha conseguenze sulla stabilità del sistema: \textbf{Non si può fare un controllo non co-locato in velocità.}
 
-%% inserire immagine bode mobilità per Gvc
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{Immagini/mobilita_gvc.png}
+    \caption{Mobilità \(G_{vc}\)}
+\end{figure}
 
 \paragrafo{Luogo delle radici:}
 Valutazioni simili possono essere fatte utilizzando il luogo delle radici\footnote{Vedi \ref{rlocus} per le regole di tracciamento, noi lavoreremo in modo qualitativo, quindi senza valutare esattamente gli asintoti, gli angoli di uscita o il passaggio per l'asse immaginario.}.
 
-%% inserire immagine luogo delle radici per controlli co-locato e non co-locato
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{Immagini/controllo_v_colocato.png}
+    \includegraphics[width=0.45\textwidth]{Immagini/controllo_v_non_colocato.png}
+    \caption{Controlli di velocità: Co-Locato sx; Non Co-Locato dx}
+\end{figure}
 
 \sottosezione{Trasmissibilità}
-A completamento dell'analisi, si può studiare anche la trasmissibilità \(T(s) = \tau \frac{1+\frac{2\xi_z}{\omega_z}s}{1+\frac{2\xi_z}{\omega_z}s + \frac{s^2}{\omega_p^2}}\). Da notare come ad alta frequenza (come visto in Meccanica delle Vibrazioni) vi sia la zona di non trasmissione del moto, con modulo fortemente attenuato e ritardo. Il moto relativo di motore e carico è "grande".
+A completamento dell'analisi, si può studiare anche la trasmissibilità \(T(s) = \tau \frac{1+\frac{2\xi_z}{\omega_z}s}{1+\frac{2\xi_z}{\omega_z}s + \frac{s^2}{\omega_z^2}}\). Da notare come ad alta frequenza (come visto in Meccanica delle Vibrazioni) vi sia la zona di non trasmissione del moto, con modulo fortemente attenuato e ritardo. Il moto relativo di motore e carico è "grande".
 
-%% inserire immagine bode trasmissibilità
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{Immagini/trasmissibilita.png}
+    \caption{Trasmissibilità \(T(s)\)}
+\end{figure}
 
 \sottosezione{Attrito}
 L'attrito ha implicazioni in tutto il sistema, volessi fare un'analisi rigorosa dovrei ricalcolare gli smorzamenti e le pulsazioni. Per un analisi approssimata invece è sufficiente considerare come l'attrito vada ad agire principalmente sul sistema rigido, quindi soprattutto per basse frequenze, si ottiene quindi il modello: \(G_{vm}(s) \simeq \frac{1}{sJ+f} \frac{\frac{s^2}{\omega_z^2} + \frac{2\xi_z}{\omega_z} s + 1}{\frac{s^2}{\omega_p^2} + \frac{2\xi_p}{\omega_p} s + 1}\). 
@@ -139,9 +152,13 @@ Valutato come il controllo da utilizzare in velocità sia quello Co-Locato, cons
 \(\rho \simeq 1\) significa motore e carico di massa paragonabili. Il motore percepisce oscillazioni del carico, può quindi attivarsi per cercare di limitarle.
 \(\rho \rightarrow 0\) significa motore di massa tanto maggiore a quella del carico. Il controllo viene visto come semplificato perché qualsiasi problematica di carico non viene percepita dal motore. Soluzione per questo caso è quella di utilizzare un controllo in controllo di stato (se possibile) oppure scegliere una legge di moto dolce standard o ad hoc (in particolare leggi di moto dolci ad hoc per \(\rho \rightarrow 0\) si vedranno in laboratorio).
 
-%% inserire immagini per vari \rho per rlocus e bode
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Immagini/controllo_v_colocato_subplot_rho.png}
+    \caption{Controllo Co-Locato per vari \(\rho\)}
+\end{figure}
 
 
-%% inserire immagini
+
 % aggiungere riferimenti; cerca '***'
 % meccanica delle vibrazioni, aggiungere parte su decremento logaritmico

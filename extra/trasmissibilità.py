@@ -18,13 +18,13 @@ omega_p = omega_z * math.sqrt(1+rho)  # Frequenza naturale degli zeri
 xi_p = xi_z * math.sqrt(1+rho)     # Coefficiente di smorzamento degli zeri
 
 s = ctrl.TransferFunction.s
-numerator = (s**2 / omega_z**2 + s * 2 * xi_z / omega_z + 1)
-denominator = Jtot * s * (s**2 / omega_p**2 + s * 2 * xi_p / omega_p + 1)
+numerator = tauR * (s * 2 * xi_z / omega_z + 1)
+denominator = Jtot * (s**2 / omega_z**2 + s * 2 * xi_z / omega_z + 1)
 H = numerator / denominator
 
 # Generare il diagramma di Bode
 mag, phase, omega = ctrl.bode(H, dB=True, Plot=True)
 
 # Mostrare il grafico
-plt.savefig('mobilita_gvm.png',dpi=300)
+plt.savefig('trasmissibilita.png',dpi=300)
 plt.show()
