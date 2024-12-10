@@ -148,6 +148,14 @@ Valutato come il controllo da utilizzare in velocità sia quello Co-Locato, cons
 \end{cases}
 \]
 
+
+Dal luogo delle radici è possibile verificare come, col variare di \(K_{pv}\), varino: 
+\begin{itemize}
+    \item la lunghezza del vettore che collega origine e punti del luogo, che corrisponde alla variazione di pulsazione dei poli del sistema a catena chiusa \(W_v\)
+    \item l'angolo del vettore, che corrisponde alla variazione di fattore di smorzamento del polo di \(W_v\)
+    \item la proiezione del vettore sull'ascissa, che corrisponde a \(\abs{\mathbb{R}(W_v)}\)
+\end{itemize}
+
 \paragrafo{Significato fisico:}
 \(\rho \simeq 1\) significa motore e carico di massa paragonabili. Il motore percepisce oscillazioni del carico, può quindi attivarsi per cercare di limitarle.
 \(\rho \rightarrow 0\) significa motore di massa tanto maggiore a quella del carico. Il controllo viene visto come semplificato perché qualsiasi problematica di carico non viene percepita dal motore. Soluzione per questo caso è quella di utilizzare un controllo in controllo di stato (se possibile) oppure scegliere una legge di moto dolce standard o ad hoc (in particolare leggi di moto dolci ad hoc per \(\rho \rightarrow 0\) si vedranno in laboratorio).
