@@ -80,7 +80,19 @@ Considerando l'albero privo di massa, assimilabile ad una molla torsionale di ri
 Per la viscosità viene introdotto \(c_T \unitamisura{Nm s}{rd}\).
 A questo punto è possibile riportarsi al modello classico di oscillatore semplice smorzato considerando l'inerzia al posto della massa, la rigidezza torsionale e la viscosità torsionale; valgono: \(\omega_n=\sqrt{\frac{K_T}{I^O_p}}\) e \(\epsilon = \frac{c_T}{2\sqrt{K_T I^O_p}}\).
 
-\sezione{Decremento Logaritmico}
+\sezione{Decremento Logaritmico}\label{decr_log}
+Il metodo del decremento logaritmico, dedicato a sistemi ad 1gdl oppure aventi \(\xi << 1\), permette, a partire da misure sperimentali, di ricavare pulsazione naturale e smorzamento di un certo sistema.
+
+Considerando una risposta nel tempo del tipo: \(x(t) = e^{-\xi\omega_n t} (B_1 \cos{(\omega_d t)} + B_2 \cos{(\omega_d t)}) \), è possibile fare il rapporto tra due picchi, considerando il periodo di oscillazione pari a \(T_d = \frac{2\pi}{\omega_d}\), che risulta: \(\frac{x_1}{x_2} = \frac{e^{-\xi\omega_n \overline{t}}}{e^{-\xi\omega_n (\overline{t}+T_d)}} = e^{-\xi\omega_n T_d}\).
+
+Il decremento logaritmico è il logaritmo del rapporto appena definito, per cui, noto \(\omega_d = \omega_n\sqrt{1-\xi^2}\), sostituendo, si ottiene:
+\[
+\delta = \ln{\left(\frac{x_1}{x_2}\right)} =  \xi\frac{2\pi}{\sqrt{1-\xi^2}}
+\]
+
+Per valori di \(\xi << 1\), vale \(\xi \simeq \frac{\delta}{2\pi}\).
+Utilizzando due picchi non adiacenti, per migliorare la precisione di misura, si ottiene: \(\xi \simeq \frac{\delta}{2 n \pi}\)
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{Immagini/es_decremento_log.png}
@@ -124,7 +136,7 @@ Vale inoltre \(\left[ H(i\omega) \right] = \sum^n_{j=1} \left[ H_j(i\omega) \rig
 
 % inserire parte su analisi modale pag 34-... , 73 o 77 appunti di Enrico
 
-\sottosottosezione{Antirisonanza}
+\sottosottosezione{Antirisonanza}\label{antirisonanza}
 Con antirisonanza si intendono quelle pulsazioni di un sistema, non smorzato, a più gradi di libertà, tali per cui uno degli elementi della matrice delle risposte in frequenza \(\left[ H(i\omega) \right]\) è nullo.
 Il numero di pulsazioni di antirisonanza è pari a \(\text{n gdl} - 1\).
 
