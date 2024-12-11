@@ -166,9 +166,53 @@ Dal luogo delle radici è possibile verificare come, col variare di \(K_{pv}\), 
     \caption{Controllo Co-Locato per vari \(\rho\)}
 \end{figure}
 
+\paragrafo{Relazione smorzamento massimo di Wv e rho:}
+Sussiste una relazione tra il massimo smorzamento dei poli di \(W_v\) e \(\rho\): \(\xi_{max} = \xi_p + \frac{\sqrt{1+\rho}}{2} - 1\). Questa relazione (non da sapere a memoria) evidenzia come lo smorzamento massimo dei poli di \(W_v\) sia maggiore di quello dei poli a catena aperta, ed è legato a quanto visto per il luogo delle radici in cui è evidente la dipendenza tra \(\rho\) e \(\alpha\).
 
+\sottosottosezione{Rapporto di inerzia nullo}
+Per \(\rho \rightarrow 0\) il controllo di motore è equivalente al controllo di un asse rigido, avente \(\omega_{bv}\) elevata. La banda elevata può portare ad avere il motore, se comandato con legge non dolce, ad eccitare il carico.
 
-%% guarda immagini anello di corrente come ho fatto a fare i bode in bianco e nero e senza griglia e provare a fare lo stesso nelle immagini passate e future
+Considero l'errore di posizione al carico: \(e_c(t) = \theta_c^{des}(t) - \theta_c^{mis}(t)\) considerando \(\tau=1\), solo per semplificare il ragionamento, e \(\theta_c^{mis} = \theta_c\) ossia che il motore venga controllato bene (ipotesi realistica, considerando che sto lavorando con un equivalente asse rigido) \(e_c(t) = \theta_M^{des}(t) - \theta_c(t)\), passando in Laplace si ottiene \(E(s) = \theta_M (s) - \theta_c(s) = \theta_M(s) (1 - T(s)) = \theta_M(s) \frac{\frac{s^2}{\omega_z^2}}{\frac{s^2}{\omega_z^2} + \frac{2\xi_z}{\omega_z}s + 1}\), da cui si ottiene la formulazione:
+\[
+E(s) = \frac{A_M(s)}{\omega_z^2} \frac{1}{\frac{s^2}{\omega_z^2} + \frac{2\xi_z}{\omega_z}s + 1}
+\]
+
+In cui viene evidenziata la relazione tra errore in posizione motore-carico e accelerazione del motore. Questo ha conseguenze sulla scelta della legge di moto perché avere accelerazione maggiore (a parità di altro), è associato ad accelerazioni maggiore. Inoltre viene evidenziato l'effetto della pulsazione dello zero \(\omega_z\) che va ad abbattere l'errore di posizione.
+
+%% inserire immagine di esempio armonica vs sinusoidale in accelerazione
+
+\sottosottosezione{Rapporto di inerzia non nullo}
+Per \(\rho > 0\) il controllo colocato permette di controllare indirettamente anche il carico.
+Questo va diviso in più casi:
+\begin{enumerate}
+    \item Risonanza in "bassa" frequenza: \(\omega_p << \omega_{tv}, \omega_I\)
+    \item Risonanza in "media" frequenza: \(\omega_z \simeq \omega_p \simeq \omega_{tv} \simeq \omega_I\)
+    \item Risonanza in "alta" frequenza: \(\omega_z >> \omega_{tv}, \omega_I\)
+\end{enumerate} 
+
+\paragrafo{Risonanza in alta frequenza:}
+Nel caso di risonanza in alta frequenza (circa un \(\times 2\) tra \(\omega_z\) e \(\omega_{tv},\omega_I\)) non possono essere misurate le oscillazioni dal trasduttore e il motore non può nè eccitare nè controllare le vibrazioni ad alta frequenza. Questo è il caso di un equivalente sistema rigido in cui le risonanza e antirisonanza sono filtrate da trasduttore e anello di corrente, perciò \(G_{vm}(s) \simeq \frac{1}{sJ}\) e l'anello aperto ha funzione di trasferimento \(L(s) \simeq \frac{1}{sJ} C_v K_T H_{trasd} W_I\).
+
+\sottosottosezione{Rapporto di Inerzia non nullo, Risonanza in bassa frequenza}
+Nel caso di risonanza in bassa frequenza (circa un \(\times 3;4\) tra \(\omega_z\) e \(\omega_{tv}, \omega_I\)) considero intanto il sistema senza gli effetti di trasduttore e anello di corrente che agiscono solo ad alta frequenza.
+Per facilitare la realizzazione pratica si può considerare la relazione \(\omega_z < \omega_p << \omega_\pi\), perché la pulsazione di attraversamento si verifica, nel controllo colocato, per effetto di trasduttore e anello di corrente.
+
+\paragrafo{Valutazione sulla catena chiusa:}
+La funzione di trasferimento in catena chiusa è \(W_v(s) \simeq \frac{G_{vm}C_v K_T}{1+G_{vm}C_v K_T}\), i poli del sistema possono essere analizzati col luogo delle radici (i poli possono essere variati con il \(K_{pv}\)), mentre gli zeri del sistema sono legati a \(G_{vm}C_v\) che ha una coppia di zeri aventi \(\xi_z, \omega_z\), per cui l'antirisonanza della catena chiusa è la stessa di \(G_{vm}\) e uno zero reale \(s=-\frac{1}{T_{iv}}\).
+
+%% inserire immagine luogo delle radici P vs PI
+
+\paragrafo{Tipici approcci di progetto:}
+Fissato \(\omega_{bv}^{des} \simeq [0.5\div 0.7]\omega_z\), calcolo, approssimando il sistema ad un sistema rigido, \(K_{pv} \simeq \frac{\omega_{bv}^{des} J}{K_T}\) e \(\frac{1}{T_{iv}} \simeq \frac{\omega_{bv}^{des}}{4 \xi_{des}^2}\) con smorzamento del polo del sistema a catena chiusa \(\xi_{des} \geqslant 1\) (perché non conviene rischiare avendo trasmissione elastica).
+Alternativamente è possibile partire considerando il luogo delle radici, e cercare \(K_{pv}\) tale che siano massimizzati \(\xi_{poli}\) o \(\mathbb{R}(\text{poli})\).
+I due metodi portano a \(K_{pv}\) paragonabili e nella zona di ottimo.
+Tenendo a mente che rimane da garantire \footnote{Vedi \ref{Teq} per condizioni per sistema con trasmissione rigida.} \(\omega_{bv} > \frac{\frac{1}{T_{eq}}}{4\xi^2}\).
+
+\paragrafo{Valutazioni sul carico:}
+Il picco di risonanza della trasmissibilità "compensa" il picco di antirisonanza di \(W_v\), lato carico si ottiene un \(\omega_{bv}\) maggiore.
+Bisogna quindi prestare attenzione a utilizzare guadagni troppo elevati perché il motore potrà beneficiarne, ma questo potrebbe portare ad avere una eccessiva compensazione, da parte della trasmissibilità, lato carico, causando di picchi di risonanza.
+
+%% aggiungere immagine modulo di W_v vs s\theta_c/\Omega^{des}
 
 % aggiungere riferimenti; cerca '***'
 % meccanica delle vibrazioni, aggiungere parte su decremento logaritmico
