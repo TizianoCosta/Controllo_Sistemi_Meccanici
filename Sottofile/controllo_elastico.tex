@@ -200,7 +200,14 @@ Per facilitare la realizzazione pratica si può considerare la relazione \(\omeg
 \paragrafo{Valutazione sulla catena chiusa:}
 La funzione di trasferimento in catena chiusa è \(W_v(s) \simeq \frac{G_{vm}C_v K_T}{1+G_{vm}C_v K_T}\), i poli del sistema possono essere analizzati col luogo delle radici (i poli possono essere variati con il \(K_{pv}\)), mentre gli zeri del sistema sono legati a \(G_{vm}C_v\) che ha una coppia di zeri aventi \(\xi_z, \omega_z\), per cui l'antirisonanza della catena chiusa è la stessa di \(G_{vm}\) e uno zero reale \(s=-\frac{1}{T_{iv}}\).
 
-%% inserire immagine luogo delle radici P vs PI
+\paragrafo{Con controllore PI:}
+Abbiamo visto come il controllo di velocità convenga venire effettuato con controllore PI, di seguito il luogo delle radici in questo caso. A differenza del luogo delle radici con proporzionale si notano il polo nullo e lo zero sull'asse reale.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{Immagini/controllo_v_colocato_PI.png}
+    \caption{Controllo Colocato con controllore PI}
+\end{figure}
 
 \paragrafo{Tipici approcci di progetto:}
 Fissato \(\omega_{bv}^{des} \simeq [0.5\div 0.7]\omega_z\), calcolo, approssimando il sistema ad un sistema rigido, \(K_{pv} \simeq \frac{\omega_{bv}^{des} J}{K_T}\) e \(\frac{1}{T_{iv}} \simeq \frac{\omega_{bv}^{des}}{4 \xi_{des}^2}\) con smorzamento del polo del sistema a catena chiusa \(\xi_{des} \geqslant 1\) (perché non conviene rischiare avendo trasmissione elastica).
@@ -212,7 +219,14 @@ Tenendo a mente che rimane da garantire \footnote{Vedi \ref{Teq} per condizioni 
 Il picco di risonanza della trasmissibilità "compensa" il picco di antirisonanza di \(W_v\), lato carico si ottiene un \(\omega_{bv}\) maggiore.
 Bisogna quindi prestare attenzione a utilizzare guadagni troppo elevati perché il motore potrà beneficiarne, ma questo potrebbe portare ad avere una eccessiva compensazione, da parte della trasmissibilità, lato carico, causando di picchi di risonanza.
 
-%% aggiungere immagine modulo di W_v vs s\theta_c/\Omega^{des}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{Immagini/colocato_v_lato_carico.png}
+    \caption{Controllo Colocato lato carico}
+\end{figure}
+
+
+%% manca figura da dispende prof
 
 % aggiungere riferimenti; cerca '***'
 % meccanica delle vibrazioni, aggiungere parte su decremento logaritmico
