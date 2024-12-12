@@ -50,7 +50,7 @@ Importante da notare come i poli delle mobilità, lato carico e motore, siano gl
 Gli zeri della mobilità lato motore sono due, questo comporta la presenza di antirisonanza\footnote{Vedi \ref{antirisonanza}}. Invece la mobilità lato carico ha un solo zero reale, perciò non ha antirisonanza.
 
 \paragrafo{Antirisonanza Gvm:}
-L'antirisonanza di \(G_{vm}(s)\) ha frequenza naturale del sistema aggiunto, ottenuto bloccando il rotore del motore da cui si ottiene (in modo del tutto simile a quanto visto in meccanica delle vibrazioni) \(\omega_z=\frac{k}{J_c}\).
+L'antirisonanza di \(G_{vm}(s)\) ha frequenza naturale del sistema aggiunto, ottenuto bloccando il rotore del motore da cui si ottiene (in modo del tutto simile a quanto visto in meccanica delle vibrazioni) \(\omega_z=\sqrt{\frac{k}{J_c}}\).
 Per ricavarla sperimentalmente basta mantenere frenato il motore, applicare una sollecitazione impulsiva al carico, misurare le vibrazioni e utilizzare il decremento logaritmico, per cui misuro il periodo di oscillazione, da cui ricavo la pulsazione di oscillazione (smorzata) \(\omega_{z,d} = \omega_z \sqrt{1-\xi_z^2}\), misuro diversi picchi così da poter determinare lo smorzamento \(\xi_z\) e la pulsazione \(\omega_z\) \footnote{Vedi \ref{decr_log}}.
 
 \begin{figure}[h]
@@ -179,7 +179,12 @@ E(s) = \frac{A_M(s)}{\omega_z^2} \frac{1}{\frac{s^2}{\omega_z^2} + \frac{2\xi_z}
 
 In cui viene evidenziata la relazione tra errore in posizione motore-carico e accelerazione del motore. Questo ha conseguenze sulla scelta della legge di moto perché avere accelerazione maggiore (a parità di altro), è associato ad accelerazioni maggiore. Inoltre viene evidenziato l'effetto della pulsazione dello zero \(\omega_z\) che va ad abbattere l'errore di posizione.
 
-%% inserire immagine di esempio armonica vs sinusoidale in accelerazione
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textiwidth]{Immagini/armonica_colocato_v.png}
+    \includegraphics[width=0.45\textiwidth]{Immagini/sinusoidale_colocato_v.png}
+    \caption{Legge Armonica sx; Sinusoidale in accelerazione dx}
+\end{figure}
 
 \sottosottosezione{Rapporto di inerzia non nullo}
 Per \(\rho > 0\) il controllo colocato permette di controllare indirettamente anche il carico.
