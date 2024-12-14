@@ -94,7 +94,7 @@ Nel controllo di stato, lavorando in MIMO, permette di scegliere entrambe le gra
 
 \sottosezione{Controllo Co-Locato vs non Co-Locato}
 Per valutare quale controllo utilizzare vado a studiare intanto il controllo Co-Locato e in particolare l'inertanza (per semplicità di analisi) \(sG_{vm}(s)\) e la mobilità \(G_{vm}(s)\). Per il tracciamento si consiglia di studiare gli asintoti e quindi tracciare la funzione di trasferimento collegandoli.
-Si notano in particolare \(m_\phi > 90^°\) e, non arrivando mai a \(-180^°\), vale anche \(m_a = \infty\). Questo è un ottimo segnale in termini di stabilità del sistema.
+Si notano in particolare \(m_\phi > 90^\circ\) e, non arrivando mai a \(-180^\circ\), vale anche \(m_a = \infty\). Questo è un ottimo segnale in termini di stabilità del sistema.\footnote{In fase, variazione tra \(-360^\circ\rightarrow -180^\circ\) equivale alla variazione \(0^\circ\rightarrow 180^\circ\) vista in aula}
 
 \begin{figure}[h]
     \centering
@@ -104,7 +104,7 @@ Si notano in particolare \(m_\phi > 90^°\) e, non arrivando mai a \(-180^°\), 
 \end{figure}
 
 \paragrafo{Controllo non Co-Locato:}
-Per quanto riguarda il controllo non Co-Locato, facendo lo stesso ci si accorge di come la mobilità, complessivamente sia un sistema con polo del secondo ordine, inoltre il polo agisce prima dello zero, quindi in un certo tratto la fase potrebbe andare al di sotto dei \(-180^°\). Come risulta più chiaro dal grafico, questo aspetto ha conseguenze sulla stabilità del sistema: \textbf{Non si può fare un controllo non co-locato in velocità.}
+Per quanto riguarda il controllo non Co-Locato, facendo lo stesso ci si accorge di come la mobilità, complessivamente sia un sistema con polo del secondo ordine, inoltre il polo agisce prima dello zero, quindi in un certo tratto la fase potrebbe andare al di sotto dei \(-180^\circ\). Come risulta più chiaro dal grafico, questo aspetto ha conseguenze sulla stabilità del sistema: \textbf{Non si può fare un controllo non co-locato in velocità.}
 
 \begin{figure}[h]
     \centering
@@ -138,7 +138,7 @@ A differenza del precedente, al posto di avere un integrale in ingresso c'è un 
 
 In senso fisico, l'attrito è legato al moto assoluto (più rilevante in bassa frequenza), mentre l'attrito viscoso è maggiormente legato al moto relativo (più rilevante in alta frequenza).
 
-\sottosezione{Controllo Co-Locato di Velocità}
+\sezione{Controllo Co-Locato di Velocità}
 Valutato come il controllo da utilizzare in velocità sia quello Co-Locato, considero due casi:
 \[
 \frac{\omega_p}{\omega_z} = \frac{\xi_p}{\xi_z} = \sqrt{1+\rho} \ \rightarrow \
@@ -169,7 +169,7 @@ Dal luogo delle radici è possibile verificare come, col variare di \(K_{pv}\), 
 \paragrafo{Relazione smorzamento massimo di Wv e rho:}
 Sussiste una relazione tra il massimo smorzamento dei poli di \(W_v\) e \(\rho\): \(\xi_{max} = \xi_p + \frac{\sqrt{1+\rho}}{2} - 1\). Questa relazione (non da sapere a memoria) evidenzia come lo smorzamento massimo dei poli di \(W_v\) sia maggiore di quello dei poli a catena aperta, ed è legato a quanto visto per il luogo delle radici in cui è evidente la dipendenza tra \(\rho\) e \(\alpha\).
 
-\sottosottosezione{Rapporto di inerzia nullo}
+\sottosezione{Rapporto di inerzia nullo}
 Per \(\rho \rightarrow 0\) il controllo di motore è equivalente al controllo di un asse rigido, avente \(\omega_{bv}\) elevata. La banda elevata può portare ad avere il motore, se comandato con legge non dolce, ad eccitare il carico.
 
 Considero l'errore di posizione al carico: \(e_c(t) = \theta_c^{des}(t) - \theta_c^{mis}(t)\) considerando \(\tau=1\), solo per semplificare il ragionamento, e \(\theta_c^{mis} = \theta_c\) ossia che il motore venga controllato bene (ipotesi realistica, considerando che sto lavorando con un equivalente asse rigido) \(e_c(t) = \theta_M^{des}(t) - \theta_c(t)\), passando in Laplace si ottiene \(E(s) = \theta_M (s) - \theta_c(s) = \theta_M(s) (1 - T(s)) = \theta_M(s) \frac{\frac{s^2}{\omega_z^2}}{\frac{s^2}{\omega_z^2} + \frac{2\xi_z}{\omega_z}s + 1}\), da cui si ottiene la formulazione:
@@ -186,7 +186,7 @@ In cui viene evidenziata la relazione tra errore in posizione motore-carico e ac
     \caption{Legge Armonica sx; Sinusoidale in accelerazione dx}
 \end{figure}
 
-\sottosottosezione{Rapporto di inerzia non nullo}
+\sottosezione{Rapporto di inerzia non nullo}
 Per \(\rho > 0\) il controllo colocato permette di controllare indirettamente anche il carico.
 Questo va diviso in più casi:
 \begin{enumerate}
@@ -196,11 +196,21 @@ Questo va diviso in più casi:
 \end{enumerate} 
 
 \paragrafo{Risonanza in alta frequenza:}
-Nel caso di risonanza in alta frequenza (circa un \(\times 2\) tra \(\omega_z\) e \(\omega_{tv},\omega_I\)) non possono essere misurate le oscillazioni dal trasduttore e il motore non può nè eccitare nè controllare le vibrazioni ad alta frequenza. Questo è il caso di un equivalente sistema rigido in cui le risonanza e antirisonanza sono filtrate da trasduttore e anello di corrente, perciò \(G_{vm}(s) \simeq \frac{1}{sJ}\) e l'anello aperto ha funzione di trasferimento \(L(s) \simeq \frac{1}{sJ} C_v K_T H_{trasd} W_I\).
+Nel caso di risonanza in alta frequenza (circa un \(\times 2\) tra \(\omega_z\) e \(\omega_{tv},\omega_I\)) non possono essere misurate le oscillazioni dal trasduttore e il motore non può nè eccitare nè controllare le vibrazioni ad alta frequenza. Questo è il caso di un \textbf{equivalente sistema rigido} in cui le risonanza e antirisonanza sono filtrate da trasduttore e anello di corrente, perciò \(G_{vm}(s) \simeq \frac{1}{sJ}\) e l'anello aperto ha funzione di trasferimento \(L(s) \simeq \frac{1}{sJ} C_v K_T H_{trasd} W_I\).
 
-\sottosottosezione{Rapporto di Inerzia non nullo, Risonanza in bassa frequenza}
-Nel caso di risonanza in bassa frequenza (circa un \(\times 3;4\) tra \(\omega_z\) e \(\omega_{tv}, \omega_I\)) considero intanto il sistema senza gli effetti di trasduttore e anello di corrente che agiscono solo ad alta frequenza.
+\sottosottosezione{Risonanza in bassa frequenza}
+Nel caso di risonanza in bassa frequenza (circa un \(\times 3;4\) tra \(\omega_z\) e \(\omega_{tv}, \omega_I\)) considero intanto il sistema senza gli effetti di trasduttore e anello di corrente che agiscono solo ad alta frequenza, interviene prima l'effetto \textbf{legato alla trasmissione elastica} {\color{red}E' corretto dire che questa risonanza in bassa frequenza è maggiormente influenzata, in termini di banda passante, dalla trasmissione elastica?}.
 Per facilitare la realizzazione pratica si può considerare la relazione \(\omega_z < \omega_p << \omega_\pi\), perché la pulsazione di attraversamento si verifica, nel controllo colocato, per effetto di trasduttore e anello di corrente.
+
+\paragrafo{Valutazione sulla catena aperta:}
+La funzione di trasferimento in catena aperta è \(L_v(s) = G_{vm}K_T C_v(s) H_{tv}(s) W_I(s)\), dove entrano mobilità, costante di coppia, controllo di velocità, trasduttore e anello di corrente.
+Guardando il Bode dell'anello aperto e confrontandolo con lo stesso sistema in cui vengano trascurati trasduttore e anello di velocità ci si accorge di come abbiano influenza solo in alta frequenza.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{Immagini/risonanza_bassa_f_Gvm_vs_Lv.png}
+    \caption{Effetto di trasduttore e anello di corrente su anello aperto \(L_v\)}
+\end{figure}
 
 \paragrafo{Valutazione sulla catena chiusa:}
 La funzione di trasferimento in catena chiusa è \(W_v(s) \simeq \frac{G_{vm}C_v K_T}{1+G_{vm}C_v K_T}\), i poli del sistema possono essere analizzati col luogo delle radici (i poli possono essere variati con il \(K_{pv}\)), mentre gli zeri del sistema sono legati a \(G_{vm}C_v\) che ha una coppia di zeri aventi \(\xi_z, \omega_z\), per cui l'antirisonanza della catena chiusa è la stessa di \(G_{vm}\) e uno zero reale \(s=-\frac{1}{T_{iv}}\).
@@ -218,7 +228,7 @@ Abbiamo visto come il controllo di velocità convenga venire effettuato con cont
 Fissato \(\omega_{bv}^{des} \simeq [0.5\div 0.7]\omega_z\), calcolo, approssimando il sistema ad un sistema rigido, \(K_{pv} \simeq \frac{\omega_{bv}^{des} J}{K_T}\) e \(\frac{1}{T_{iv}} \simeq \frac{\omega_{bv}^{des}}{4 \xi_{des}^2}\) con smorzamento del polo del sistema a catena chiusa \(\xi_{des} \geqslant 1\) (perché non conviene rischiare avendo trasmissione elastica).
 Alternativamente è possibile partire considerando il luogo delle radici, e cercare \(K_{pv}\) tale che siano massimizzati \(\xi_{poli}\) o \(\mathbb{R}(\text{poli})\).
 I due metodi portano a \(K_{pv}\) paragonabili e nella zona di ottimo.
-Tenendo a mente che rimane da garantire \footnote{Vedi \ref{Teq} per condizioni per sistema con trasmissione rigida.} \(\omega_{bv} > \frac{\frac{1}{T_{eq}}}{4\xi^2}\).
+Tenendo a mente che rimane da garantire \footnote{Vedi \ref{Teq} per condizioni per sistema con trasmissione rigida. {\color{red}Perché se la trasmissione è elastica uso questa espressione per condizione rigida?}} \(\omega_{bv} > \frac{\frac{1}{T_{eq}}}{4\xi^2}\).
 
 \paragrafo{Valutazioni sul carico:}
 Il picco di risonanza della trasmissibilità "compensa" il picco di antirisonanza di \(W_v\), lato carico si ottiene un \(\omega_{bv}\) maggiore.
@@ -227,17 +237,62 @@ Bisogna quindi prestare attenzione a utilizzare guadagni troppo elevati perché 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.45\textwidth]{Immagini/colocato_v_lato_carico.png}
-    \caption{Controllo Colocato lato carico}
+    \caption{Effetto di compensazione dell'antirisonanza}
 \end{figure}
 
 \paragrafo{Risposta al gradino per vari guadagni:}
 La risposta al gradino per un sistema che abbia impostato un guadagno \(K_{pv,2}\) "ottimo" \footnote{Nè troppo elevato, per cui lato carico si ottenga picco di risonanza per eccesso di compensazione, nè troppo ridotto, per cui si ottiene una bassa banda passante} ha una sovraelongazione dovuta allo zero a causa della scelta del gradino come legge di moto, ma carico e motore mantengono andamenti simili.
-La risposta al gradino per un sistema che abbia impostato un guadagno \(K_{pv,3}\) "troppo elevato" vede grandi oscillazioni sia al motore sia al carico, non seguono nemmeno andamenti simili, perché sono peggiori al carico.
+La risposta al gradino per un sistema che abbia impostato un guadagno \(K_{pv,3}\) "troppo elevato" vede grandi oscillazioni sia al motore sia al carico, che potrebbero avere andamenti differenti, perché peggiori al carico.
 
-% inserire immagine di risposta al gradino \rho = 4 \xi = 0.7
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{Immagini/step_response_Kp2.png}
+    \includegraphics[width=0.45\textwidth]{Immagini/step_response_Kp3.png}
+    \caption{Risposte al gradino \(K_{p2}\) sx, \(K_{p3}\) dx (inversione colori per questioni grafiche)}
+\end{figure}
 
 \sottosottosezione{Risonanza in media frequenza}
+Avere risonanza in media frequenza significa \(\omega_z,\omega_p \simeq \omega_{tv},\omega_I,\omega_\pi\). Questo caso è il più complicato da gestire perché non esiste una regola euristica, il sistema non è nè sufficientemente rigido da poter fare l'analisi come visto nel capitolo precedente, nè sufficientemente elastico per poter considerare la risonanza in bassa frequenza {\color{red}Anche qui, è corretto dire che la questione è legata all'elasticità?}.
+La causa di questa complessità è legata alla presenza, in prossimità di \(\omega_p\), di una serie di poli che portano in catena aperta, \(L_v = \), a perdita repentina di fase, portando ad avere in uno degli attraversamenti margine di fase negativo, ossia ad avere sistema instabile.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{Immagini/risonanza_media_f_Gvm_vs_Lv.png}
+    \caption{Effetto trasduttore e anello di corrente su anello aperto \(L_v\)}
+\end{figure}
+
+\paragrafo{Soluzioni:}
+Ci sono diverse possibili soluzioni attuabili, che considerano il controllo, il progetto e la meccanica.
+\begin{enumerate}[label=\roman*.]
+    \item Riduzione del guadagno \(\downarrow K_{pv}\): Questo permette di abbassare il modulo di \(L_v\) andando a "eliminare" le pulsazioni di attraversamento indesiderate. Tuttavia "eliminare" la risonanza richiede guadagni molto bassi, che portano ad avere banda passante bassa \(\downarrow \omega_{bv}\), compensabile con leggi di moto dolci e feedforward.
+    In alternativa, volendo essere meno conservativi, è possibile tarare sul sistema\footnote{Vedi autotuning {\color{red} Aggiungere riferimento appena disponibile}} il valore di \(K_{pv}\) tale che si ottenga l'attraversamento in un punto in cui il margine di fase sia sufficiente, portando ad avere una banda passante maggiore. Questo secondo approccio però è rischioso, perché il cambio di fase può essere molto rapido e variazioni minime del guadagno possono avere conseguente disastrose sul sistema.
+    \item Aumento di \(\omega_{tv}\), scelta di trasduttore con risoluzione maggiore: Il trasduttore è solitamente l'elemento critico, perciò sceglierne uno con risoluzione maggiore permette di spostare la frequenza di taglio del filtro. Scegliere encoder sin/cos, in combinazione con una \(K_{pv}\) "bassa" (rispetto quello che avrei per un sistema rigido), permette di considerare l'amplificazione del rumore trascurabile.
+    \textbf{Attenzione}: utilizzare uno stimatore di velocità che non consideri l'elasticità, potrebbe portare a problemi soprattutto in stima di accelerazione dove lo stimatore lavora in alta frequenza.
+    \item Aumento di \(\omega_I\): Solitamente il trasduttore è l'elemento critico in questi sistemi, tuttavia migliorare il trasduttore potrebbe portare l'anello di corrente ad essere il nuovo elemento critico.
+    \item Aumento della rigidezza del riduttore: La rigidezza del riduttore influenza le pulsazioni di antirisonanza \(\omega_z = \sqrt{\frac{k}{J_c}}\) e risonanza \(\omega_p = \sqrt{\frac{k}{J_c}}\sqrt{1+\rho}\), tuttavia la presenza della radice porta ad un minor effetto, un aumento considerevole di rigidezza (comunque difficile da ottenere), non porta grandi benefici al sistema. 
+    \item Rapporto di inerzia minore, \(\downarrow \rho\): Utilizzare \(\downarrow \rho\) fa sì che vi sia cancellazione polo-zero \(\omega_z,\omega_p\) in \(G_{vm}, L_v\), risultando in una perdita di pulsazioni di attraversamento indesiderate, o comunque in uno spostamento in frequenza degli attraversamenti {\color{red}Spostarli in frequenza che effetto ha??}. \textbf{Nel caso di risonanza in media frequenza, lavorare con rapporto di inerzia ridotto è spesso il modo più semplice per facilitare il controllo lato motore, occorre poi fare una pianificazione del moto ad hoc per il carico.}
+    Come fare a variare il rapporto di inerzia \(\rho = \frac{\tau_R^2 J_c}{J_M}\):
+        \begin{enumerate}[label=\alph*)]
+            \item Se possibile diminuendo l'inerzia lato carico, prestando attenzione che \(J_c\) influenza \(rho\), ma anche \(\omega_z\) e \(\omega_p\)
+            \item Diminuendo il rapporto di trasmissione \(\downarrow \tau_R\), tenendo conto che questo porta a perdita dell'ottimo in termini di coppia, velocità, energia e che i riduttori multistadio sono caratterizzati da maggior \(\uparrow\) gioco e ridotta rigidezza \(\downarrow k\). Potrebbe avere senso utilizzare riduttori di nuovo tipo, vedi \ref{riduttori_speciali}.
+            \item Utilizzo di volano lato motore di modo da aumentare il denominatore, però così facendo aumenta la taglia del motore, il progetto risulta sovradimensionato, e soprattutto aggiungere alberi e una massa porta ad aggiunta di risonanza e antirisonanza meccanica.
+            \item Utilizzo di motori ad alta inerzia, sono costruttivamente diffenti rispetto i motori tradizionali, hanno un raggio maggiore e lunghezza minore, così \(J_M \uparrow \alpha R^2 \). Questa è una alternativa al volano, risulta comunque inefficiente.
+            \item Modifica virtuale di \(\rho\) con tecniche di controllo fornite dal costruttore:
+            \begin{enumerate}
+                \item Load observer (Rockwell, Bechoff)
+                \item Acceleration Feedback (Kollmorgen)
+            \end{enumerate}
+        \end{enumerate}
+        \item Utilizzo di filtri tra controllo di velocità e anello di corrente:
+        \begin{enumerate}[label=\alph*)]
+            \item Passa basso
+            \item Reti anticipatrici
+            \item Filtri notch
+            \item BIQUAD
+        \end{enumerate}
+\end{enumerate}
 
 
+% inserire immagini
 
 % meccanica delle vibrazioni, aggiungere parte su decremento logaritmico
