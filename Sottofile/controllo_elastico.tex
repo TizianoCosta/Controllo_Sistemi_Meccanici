@@ -1,4 +1,4 @@
-\capitolo{Controllo del Moto per Trasmissione Elastica}
+\capitolo{Controllo del Moto per Trasmissione Elastica Senza Gioco}
 
 \import{Immagini/}{modello_trasmissione_elastica}
 
@@ -225,7 +225,7 @@ Abbiamo visto come il controllo di velocità convenga venire effettuato con cont
 \end{figure}
 
 \paragrafo{Tipici approcci di progetto:}
-Fissato \(\omega_{bv}^{des} \simeq [0.5\div 0.7]\omega_z\), calcolo, approssimando il sistema ad un sistema rigido, \(K_{pv} \simeq \frac{\omega_{bv}^{des} J}{K_T}\) e \(\frac{1}{T_{iv}} \simeq \frac{\omega_{bv}^{des}}{4 \xi_{des}^2}\) con smorzamento del polo del sistema a catena chiusa \(\xi_{des} \geqslant 1\) (perché non conviene rischiare avendo trasmissione elastica).
+Fissato \(\omega_{bv}^{des} \simeq [0.5\div 0.7]\omega_z\), calcolo, approssimando il sistema ad un sistema rigido \footnote{Perchè risonanza e antirisonanza agiscono lontano dalla pulsazione di attraversamento, riescono a cancellarsi gli effetti e quindi si può valutare il guadagno del controllore come visto per il sistema rigido. {\color{red}Credo, non sono sicuro}}, \(K_{pv} \simeq \frac{\omega_{bv}^{des} J}{K_T}\) e \(\frac{1}{T_{iv}} \simeq \frac{\omega_{bv}^{des}}{4 \xi_{des}^2}\) con smorzamento del polo del sistema a catena chiusa \(\xi_{des} \geqslant 1\) (perché non conviene rischiare avendo trasmissione elastica).
 Alternativamente è possibile partire considerando il luogo delle radici, e cercare \(K_{pv}\) tale che siano massimizzati \(\xi_{poli}\) o \(\mathbb{R}(\text{poli})\).
 I due metodi portano a \(K_{pv}\) paragonabili e nella zona di ottimo.
 Tenendo a mente che rimane da garantire \footnote{Vedi \ref{Teq} per condizioni per sistema con trasmissione rigida. {\color{red}Perché se la trasmissione è elastica uso questa espressione per condizione rigida?}} \(\omega_{bv} > \frac{\frac{1}{T_{eq}}}{4\xi^2}\).
