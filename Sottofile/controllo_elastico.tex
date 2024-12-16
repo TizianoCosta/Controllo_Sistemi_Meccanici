@@ -199,7 +199,7 @@ Questo va diviso in più casi:
 Nel caso di risonanza in alta frequenza (circa un \(\times 2\) tra \(\omega_z\) e \(\omega_{tv},\omega_I\)) non possono essere misurate le oscillazioni dal trasduttore e il motore non può nè eccitare nè controllare le vibrazioni ad alta frequenza. Questo è il caso di un \textbf{equivalente sistema rigido} in cui le risonanza e antirisonanza sono filtrate da trasduttore e anello di corrente, perciò \(G_{vm}(s) \simeq \frac{1}{sJ}\) e l'anello aperto ha funzione di trasferimento \(L(s) \simeq \frac{1}{sJ} C_v K_T H_{trasd} W_I\).
 
 \sottosottosezione{Risonanza in bassa frequenza}
-Nel caso di risonanza in bassa frequenza (circa un \(\times 3;4\) tra \(\omega_z\) e \(\omega_{tv}, \omega_I\)) considero intanto il sistema senza gli effetti di trasduttore e anello di corrente che agiscono solo ad alta frequenza, interviene prima l'effetto \textbf{legato alla trasmissione elastica} {\color{red}E' corretto dire che questa risonanza in bassa frequenza è maggiormente influenzata, in termini di banda passante, dalla trasmissione elastica?}.
+Nel caso di risonanza in bassa frequenza (circa un \(\times 3;4\) tra \(\omega_z\) e \(\omega_{tv}, \omega_I\)) considero intanto il sistema senza gli effetti di trasduttore e anello di corrente che agiscono solo ad alta frequenza, interviene prima l'effetto \textbf{legato alla trasmissione elastica}.
 Per facilitare la realizzazione pratica si può considerare la relazione \(\omega_z < \omega_p << \omega_\pi\), perché la pulsazione di attraversamento si verifica, nel controllo colocato, per effetto di trasduttore e anello di corrente.
 
 \paragrafo{Valutazione sulla catena aperta:}
@@ -225,14 +225,29 @@ Abbiamo visto come il controllo di velocità convenga venire effettuato con cont
 \end{figure}
 
 \paragrafo{Tipici approcci di progetto:}
-Fissato \(\omega_{bv}^{des} \simeq [0.5\div 0.7]\omega_z\), calcolo, approssimando il sistema ad un sistema rigido \footnote{Perchè risonanza e antirisonanza agiscono lontano dalla pulsazione di attraversamento, riescono a cancellarsi gli effetti e quindi si può valutare il guadagno del controllore come visto per il sistema rigido. {\color{red}Credo, non sono sicuro}}, \(K_{pv} \simeq \frac{\omega_{bv}^{des} J}{K_T}\) e \(\frac{1}{T_{iv}} \simeq \frac{\omega_{bv}^{des}}{4 \xi_{des}^2}\) con smorzamento del polo del sistema a catena chiusa \(\xi_{des} \geqslant 1\) (perché non conviene rischiare avendo trasmissione elastica).
-Alternativamente è possibile partire considerando il luogo delle radici, e cercare \(K_{pv}\) tale che siano massimizzati \(\xi_{poli}\) o \(\mathbb{R}(\text{poli})\).
+Fissato \(\omega_{bv}^{des} \simeq [0.5\div 0.7]\omega_z\), calcolo, approssimando il sistema ad un sistema rigido \footnote{Perchè considero di lavorare prima di risonanza e antirisonanza.}: \(K_{pv} \simeq \frac{\omega_{bv}^{des} J}{K_T}\) e \(\frac{1}{T_{iv}} \simeq \frac{\omega_{bv}^{des}}{4 \xi_{des}^2}\) con smorzamento del polo del sistema a catena chiusa \(\xi_{des} \geqslant 1\) (perché non conviene rischiare avendo trasmissione elastica).
+Alternativamente è possibile partire considerando il luogo delle radici, e cercare \(K_{pv}\) tale che siano massimizzati \(\xi_\text{poli}\) o \(\mathbb{R}(\text{poli})\).
 I due metodi portano a \(K_{pv}\) paragonabili e nella zona di ottimo.
-Tenendo a mente che rimane da garantire \footnote{Vedi \ref{Teq} per condizioni per sistema con trasmissione rigida. {\color{red}Perché se la trasmissione è elastica uso questa espressione per condizione rigida?}} \(\omega_{bv} > \frac{\frac{1}{T_{eq}}}{4\xi^2}\).
+Tenendo a mente che rimane da garantire \footnote{Vedi \ref{Teq} per condizioni per sistema con trasmissione rigida.} \(\omega_{bv} > \frac{\frac{1}{T_{eq}}}{4\xi^2}\).
+
+\sottoparagrafo{Scelta del guadagno:}
+Per quanto riguarda \(K_{pv}\), ci sono le seguenti tipologie di situazioni:
+\begin{itemize}
+    \item \(K_{pv,1}\) guadagno "basso": Un basso guadagno porta ad avere \(\omega_{bv}\) "bassa" perché viene fatta una scelta di parte reale non ottima, che porta ad uno smorzamento non ottimale \footnote{Per valutare la stabilità col luogo delle radici si considera la distanza dall'asse immaginario (più distante più stabile) in combinazione col valore di \(\alpha\), quindi di \(\xi\).}
+    \item \(K_{pv,2}\) guadagno "ottimale": Un guadagno ottimale è associato ad una scelta di \(\xi\) massimo, quindi parte reale massima e \(\omega_{bv} < \omega_z\)
+    \item \(K_{pv,3}\) guadagno "alto": Un guadagno alto porta ad avere una cancellazione polo zero, quindi una buona compensazione dell'antirisonanza
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Immagini/rlocus_vari_guadagni_controlloVel_PI.png}
+    \caption{Luogo delle radici per guadagni \(K_{pv1},K_{pv2},K_{pv3}\)}
+\end{figure}
 
 \paragrafo{Valutazioni sul carico:}
 Il picco di risonanza della trasmissibilità "compensa" il picco di antirisonanza di \(W_v\), lato carico si ottiene un \(\omega_{bv}\) maggiore.
-Bisogna quindi prestare attenzione a utilizzare guadagni troppo elevati perché il motore potrà beneficiarne, ma questo potrebbe portare ad avere una eccessiva compensazione, da parte della trasmissibilità, lato carico, causando di picchi di risonanza.
+Bisogna quindi prestare attenzione a utilizzare guadagni troppo elevati (caso \(K_{pv,3}\)) perché, sebbene il motore possa beneficiarne, potrebbe portare ad avere una eccessiva compensazione, causata dalla trasmissibilità, lato carico, portando ad avere in uscita picchi di risonanza.
+Per guadagno ottimale, invece, avere \(\omega_{bv} < \omega_z\), permette alla trasmissibilità di compensare bene l'antirisonanza, quindi lato carico si ottiene una buona risposta con una banda passante "grande".
 
 \begin{figure}[h]
     \centering
@@ -241,8 +256,8 @@ Bisogna quindi prestare attenzione a utilizzare guadagni troppo elevati perché 
 \end{figure}
 
 \paragrafo{Risposta al gradino per vari guadagni:}
-La risposta al gradino per un sistema che abbia impostato un guadagno \(K_{pv,2}\) "ottimo" \footnote{Nè troppo elevato, per cui lato carico si ottenga picco di risonanza per eccesso di compensazione, nè troppo ridotto, per cui si ottiene una bassa banda passante} ha una sovraelongazione dovuta allo zero a causa della scelta del gradino come legge di moto, ma carico e motore mantengono andamenti simili.
-La risposta al gradino per un sistema che abbia impostato un guadagno \(K_{pv,3}\) "troppo elevato" vede grandi oscillazioni sia al motore sia al carico, che potrebbero avere andamenti differenti, perché peggiori al carico.
+La risposta al gradino per un sistema che abbia impostato un guadagno \(K_{pv,2}\) "ottimo" \footnote{Nè troppo elevato, per cui lato carico si ottenga picco di risonanza per eccesso di compensazione, nè troppo ridotto, per cui si ottenga una bassa banda passante} ha una sovraelongazione dovuta allo zero a causa della scelta del gradino come legge di moto, ma carico e motore mantengono andamenti simili.
+La risposta al gradino per un sistema che abbia impostato un guadagno \(K_{pv,3}\) "troppo elevato" vede grandi oscillazioni sia al motore sia al carico, che potrebbero avere andamenti differenti e peggiori al carico.
 
 \begin{figure}[h]
     \centering
@@ -252,8 +267,8 @@ La risposta al gradino per un sistema che abbia impostato un guadagno \(K_{pv,3}
 \end{figure}
 
 \sottosottosezione{Risonanza in media frequenza}
-Avere risonanza in media frequenza significa \(\omega_z,\omega_p \simeq \omega_{tv},\omega_I,\omega_\pi\). Questo caso è il più complicato da gestire perché non esiste una regola euristica, il sistema non è nè sufficientemente rigido da poter fare l'analisi come visto nel capitolo precedente, nè sufficientemente elastico per poter considerare la risonanza in bassa frequenza {\color{red}Anche qui, è corretto dire che la questione è legata all'elasticità?}.
-La causa di questa complessità è legata alla presenza, in prossimità di \(\omega_p\), di una serie di poli che portano in catena aperta, \(L_v = \), a perdita repentina di fase, portando ad avere in uno degli attraversamenti margine di fase negativo, ossia ad avere sistema instabile.
+Avere risonanza in media frequenza significa \(\omega_z,\omega_p \simeq \omega_{tv},\omega_I,\omega_\pi\). Questo caso è il più complicato da gestire perché non esiste una regola euristica, il sistema non è nè sufficientemente rigido da poter fare l'analisi come visto nel capitolo precedente, nè sufficientemente elastico per poter considerare la risonanza in bassa frequenza.
+La causa di questa complessità è legata alla presenza, in prossimità di \(\omega_p\), di una serie di poli che portano in catena aperta, \(L_v\), a perdita repentina di fase, portando ad avere in uno degli attraversamenti margine di fase negativo, ossia ad avere sistema instabile.
 
 \begin{figure}[h]
     \centering
@@ -270,7 +285,7 @@ Ci sono diverse possibili soluzioni attuabili, che considerano il controllo, il 
     \textbf{Attenzione}: utilizzare uno stimatore di velocità che non consideri l'elasticità, potrebbe portare a problemi soprattutto in stima di accelerazione dove lo stimatore lavora in alta frequenza.
     \item Aumento di \(\omega_I\): Solitamente il trasduttore è l'elemento critico in questi sistemi, tuttavia migliorare il trasduttore potrebbe portare l'anello di corrente ad essere il nuovo elemento critico.
     \item Aumento della rigidezza del riduttore: La rigidezza del riduttore influenza le pulsazioni di antirisonanza \(\omega_z = \sqrt{\frac{k}{J_c}}\) e risonanza \(\omega_p = \sqrt{\frac{k}{J_c}}\sqrt{1+\rho}\), tuttavia la presenza della radice porta ad un minor effetto, un aumento considerevole di rigidezza (comunque difficile da ottenere), non porta grandi benefici al sistema. 
-    \item Rapporto di inerzia minore, \(\downarrow \rho\): Utilizzare \(\downarrow \rho\) fa sì che vi sia cancellazione polo-zero \(\omega_z,\omega_p\) in \(G_{vm}, L_v\), risultando in una perdita di pulsazioni di attraversamento indesiderate, o comunque in uno spostamento in frequenza degli attraversamenti {\color{red}Spostarli in frequenza che effetto ha??}. \textbf{Nel caso di risonanza in media frequenza, lavorare con rapporto di inerzia ridotto è spesso il modo più semplice per facilitare il controllo lato motore, occorre poi fare una pianificazione del moto ad hoc per il carico.}
+    \item Rapporto di inerzia minore, \(\downarrow \rho\): Utilizzare \(\downarrow \rho\) fa sì che vi sia cancellazione polo-zero \(\omega_z,\omega_p\) in \(G_{vm}, L_v\), risultando in una perdita di pulsazioni di attraversamento indesiderate, o comunque in uno spostamento in frequenza degli attraversamenti, lontano da fase critica. \textbf{Nel caso di risonanza in media frequenza, lavorare con rapporto di inerzia ridotto è spesso il modo più semplice per facilitare il controllo lato motore, occorre poi fare una pianificazione del moto ad hoc per il carico.}
     Come fare a variare il rapporto di inerzia \(\rho = \frac{\tau_R^2 J_c}{J_M}\):
         \begin{enumerate}[label=\alph*)]
             \item Se possibile diminuendo l'inerzia lato carico, prestando attenzione che \(J_c\) influenza \(rho\), ma anche \(\omega_z\) e \(\omega_p\)
@@ -293,6 +308,6 @@ Ci sono diverse possibili soluzioni attuabili, che considerano il controllo, il 
 \end{enumerate}
 
 
-% inserire immagini
+%% immagine dei 3 Kpv da lezione 31, verificare dove vada Kp2, se xi massimo o Re massimo
 
 % meccanica delle vibrazioni, aggiungere parte su decremento logaritmico
