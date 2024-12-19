@@ -1,0 +1,32 @@
+\begin{figure}[!ht]
+    \centering
+    \resizebox{0.6\textwidth}{!}{%
+    \begin{circuitikz}
+    \tikzstyle{every node}=[font=\LARGE]
+    \draw [->, >=Stealth] (-14.25,11.75) -- (-10.25,11.75);
+    \draw  (-9,11.75) circle (1.25cm);
+    \draw [->, >=Stealth] (-7.75,11.75) -- (-4,11.75);
+    \draw  (-4,13.25) rectangle  node {\LARGE $K_{pp}$} (-0.5,10.5);
+    \draw  (3.25,13.25) rectangle  node {\LARGE Anello Velocità} (10.25,10.5);
+    \draw [->, >=Stealth] (-0.5,11.75) -- (3.25,11.75);
+    \draw  (20.25,13.25) rectangle  node {\LARGE $T$} (23.75,10.5);
+    \draw [->, >=Stealth] (23.75,11.75) -- (27.5,11.75);
+    \draw  (5,8) rectangle  node {\LARGE Trasduttore Posizione} (12,5.25);
+    \draw [->, >=Stealth] (25.75,6.5) -- (12,6.5);
+    \draw [short] (25.75,6.5) -- (25.75,11.75);
+    \draw [short] (5,6.5) -- (-9,6.5);
+    \draw [->, >=Stealth] (-9,6.5) -- (-9,10.5);
+    \node [font=\LARGE] at (-9.75,11.75) {+};
+    \node [font=\LARGE] at (-9,10.75) {-};
+    \node [font=\LARGE] at (-11.75,12.5) {$\theta_m^{des}$};
+    \node [font=\LARGE] at (-10.75,9.75) {$\theta_m^{mis}$};
+    \node [font=\LARGE] at (26,12.5) {$\theta_c$};
+    
+    \draw  (14,13.25) rectangle  node {\LARGE $\frac{1}{s}$} (16.5,10.5);
+    \draw [->, >=Stealth] (10.25,11.75) -- (14,11.75);
+    \draw [->, >=Stealth] (16.5,11.75) -- (20.25,11.75);
+    \end{circuitikz}
+    }%
+    
+    \label{fig:my_label}
+    \end{figure}
