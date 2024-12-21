@@ -356,7 +356,7 @@ I poli di \(L_p\) sono i poli della della catena chiusa, tra i poli di \(L_v\) e
 \paragrafo{Analisi dei poli, scelta del guadagno:}
 Il polo reale dell'integrale \(s=0\) per aumento del \(K_{pp}\) si muove verso lo zero reale, perciò, tanto più alto il guadagno, tanto più veloce diventa.
 Tuttavia i poli reali "ereditati" dal controllo di velocità, per aumento di \(K_{pp}\) tenderebbero agli zeri dell'antirisonanza, quindi a diventare complessi coniugati, quindi a introdurre una bassa risonanza in bassa frequenza, motivo per cui è importante limitare il guadagno.
-Per la scelta del guadagno si può utilizzare la formulazione empirica \(K_{pp} = \frac{\omega_{bv}}{4\xi_{des}^2}\), con \(\xi\in [1;1.5]\), mentre nel caso di risonanza in bassa o media frequenza è preferibile utilizzare \(\xi \simeq 1.4\), da cui \(K_{pp}\simeq \frac{\omega_{bv}}{8}\).
+Per la scelta del guadagno si può utilizzare la formulazione empirica \(K_{pp}^{co} = \frac{\omega_{bv}}{4\xi_{des}^2}\), con \(\xi\in [1;1.5]\), mentre nel caso di risonanza in bassa o media frequenza è preferibile utilizzare \(\xi \simeq 1.4\), da cui \(K_{pp}^{co}\simeq \frac{\omega_{bv}}{8}\).
 
 \begin{figure}[h]
     \centering
@@ -365,10 +365,43 @@ Per la scelta del guadagno si può utilizzare la formulazione empirica \(K_{pp} 
     \caption{Anello chiuso posizione: lato motore sx; lato carico dx}
 \end{figure}
 
+
 \sottosezione{Controllo Non Co-Locato}
 
 \import{Immagini}{anello_pos_non_colocato}
 
+I poli di \(L_p\) sono i 4 poli di \(W_v\), 2 reali 2 complessi coniugati, il polo reale in \(s=0\) dovuto all'integrazione fisica e i 2 poli della trasmissibilità, che sono anche gli zeri complessi coniugati di \(W_v\).
+Gli zeri di \(L_p\) sono i 3 zeri di \(W_v\), 2 complessi coniugati e uno reale, e lo zero della trasmissibilità.
+
+%% inserire immagine rlocus
+
+\paragrafo{Analisi controllo Non CoLocato, scelta guadagno:}
+Per l'analisi del tipo di controllo si utilizza il luogo delle radici. Si vede come l'antirisonanza si cancelli con la risonanza in trasmissibilità; i due poli complessi coniugati tendono all'asse reale per \(K_{pp}\) elevati; polo reale in \(s=0\) tende a zero reale; infine, e parte più critica di questo controllo, i due poli reali tendono all'instabilità per \(K_{pp}\) elevati.
+In modo simile al precedente, considero di dividere il controllo con un \(K_{pp}^{co}\) tra \(E_p^\text{carico}\), \(\Omega_{des}^\text{carico}\) e \(\frac{1}{\tau}\) tra \(\Omega_{des}^\text{carico}\), \(\Omega_{des}^\text{mot}\), risultando quindi in \(K_{pp}^{nc} = K_{pp}^{co} \frac{1}{\tau}\).
+Attenzione che questo non significa che il guadagno è alzato dal riduttore, perché quel \(\frac{1}{\tau}\) va a elidersi con il \(\tau\) della trasmissibilità.
+
+%% inserire immagine concetto del guadagno
+
+\sottosottosezione{CoLocato vs Non CoLocato}
+Il controllo di tipo CoLocato è incondizionatamente stabile\footnote{Teoricamente, in pratica ci sono delle dinamiche finora ignorate che renderanno instabile il controllo per \(K_{pp}\) eccessivamente elevati.}; il controllo Non CoLocato invece tende all'instabilità per \(K_{pp}\) elevati.
+Per \(K_{pp}\) bassi i due hanno comportamenti molto simili, perciò in potenziali applicazioni si può usare uno o l'altro in base alle condizioni operative.
+
+\paragrafo{Condizione di disturbo al carico:}
+Il controllo di tipo Non CoLocato è da utilizzare nel caso di forze di disturbo al carico rilevanti. 
+
+Partendo dall'equazione della dinamica lato carico \(J_c \AccAng_c = -k(\theta_c - \theta_m \tau_R) - D(\VelAng_c - \VelAng_m\tau_R) - C_c - f_c\VelAng_c\), considerando condizioni statiche, rapporto di trasmissione unitario, si ottiene \(C_c = k(\theta_c - \theta_m)\).
+Applicando un gradino di coppia di carico, si ottiene che a regime vale \(\theta_c - \theta_m = \frac{C_c}{k}\), ossia motore e carico non avranno la stessa posizione finale.
+
+Con controllo di tipo colocato questa differenza non viene percepita, perché il motore verrà correttamente portato al suo valore finale, mentre il carico sarà ad una posizione non nota e scorretta.
+Con il controllo non colocato invece, misurando la posizione del carico, questa sarà corretta, e il motore andrà a compensare la differenza.
+
+La scelta tra i due quindi è legata a valutazione del tipo \(\frac{C_c^\text{attesa}}{K^\text{stimata}} < \text{precisione desiderata lato carico}\), se viene rispettata questa disuguaglianza si può utilizzare un controllo colocato, altrimenti occorre usare uno non colocato.
+
+\paragrafo{Quando NON usare controllo non colocato:}
+Il controllo non colocato è legato a margine di fase minore e necessità di opportune scelte, dimensionamento, implementazione\footnote{L'encoder richiede installazione accurata, deve essere installato utilizzando un elemento rigido, altrimenti si potrebbe aggiungere risonanza e antirisonanza indesiderata nella misura.} di trasduttori lato carico, perciò meno di forze di disturbo al carico elevate, non è conveniente rispetto un CoLocato.
+
+Il controllo non colocato va evitato in caso di gioco elevato, perché avere gioco significa avere una zona di incertezza in cui non si può sapere esattamente dov'è il carico; però il controllo tenterebbe ugualmente di arrivare alla posizione desiderata, ma se l'incertezza è tale da portare il carico fuori dalla zona di incertezza, questo tenterebbe di riportarlo in posizione desiderata, ma con alto errore, quindi alta compensazione, quindi tenderebbe a uscire dalla zona di incertezza lato opposto, portando a oscillazione di posizione del carico oltre la zona di incertezza. Fenomeno peggiorato per \(K_{pp}\) elevato.
+Risolvere questa problematica richiede utilizzo di guadagni ulteriormente ridotti per basse velocità, quindi prossimi a regime.
 
 
 %% appendice MV aggiungere immagini
