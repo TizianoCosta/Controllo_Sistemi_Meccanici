@@ -43,10 +43,39 @@ Riprendendo il rapporto di trasmissione ottimo come visto in {\color{red} Aggiun
 
 Acceleration Feedback è una tecnica che consiste nel retroazionare l'accelerazione e portarla al motore come corrente, così facendo la relazione tra accelerazione e corrente diventa \(\frac{s^2\theta}{i} = \frac{K_T}{J + K_TK_A}\), ossia viene aumentata virtualmente l'inerzia lato motore di una quantità \(K_TK_A\), da cui si ottiene un rapporto di inerzia virtuale minore, quindi meno sensibile al gioco, \(\rho^\text{virtuale}=\frac{\tau^2 J_c}{J_m + K_TK_A}\).
 
-Tuttavia la misura di accelerazione non è possibile. L'accelerazione può essere stimata a partire dalla misura di posizione utilizzando una doppia derivata e opportuno filtro (il filtro è fondamentale perché la derivata va a amplificare il rumore) oppure utilizzando stimatori complessi (Kalman). In entrambi i casi occorre una misura della posizione molto precisa, inoltre i risultati comunque non sono particolarmente efficaci.
+Tuttavia la misura di accelerazione non è possibile. L'accelerazione può essere stimata a partire dalla misura di posizione utilizzando una doppia derivata e opportuno filtro (il filtro è fondamentale perché la derivata va a amplificare il rumore) oppure utilizzando stimatori complessi (Kalman). In entrambi i casi occorre una misura della posizione molto precisa, inoltre i risultati comunque non sono particolarmente efficaci.\label{misura_acc}
 
 \sottosezione{Load Observer}
+
+%% inserire schematico pag 87
+
+Load Observer è una tecnica che considera il sistema ideale composto dal solo motore, mentre le non idealità vengono consensate in un contributo di coppia di disturbo (gioco e elasticità della trasmissione e attrito).
+Se questo contributo di disturbo fosse determinabile, potrebbe essere cancellato (in feedback o eventualmente in feedforward), il sistema ottenuto sarebbe quello ideale solo motore, il carico non viene visto.
+
+Non vedere il carico è il maggior difetto, rimanendo in catena aperta è fondamentale effettuare una opportuna scelta della legge di moto.
+Tuttavia significa anche che \(\rho_\text{virtuale} \rightarrow 0\), quindi non c'è sensibilità a gioco, risonanza e antirisonanza virtuali si elidono quindi non c'è sensibilità all'elasticità.
+
+Anche in questo caso è fondamentale la misura di accelerazione, che però ha tutta una serie di problematiche (vedi \ref{misura_acc}).
+
+\paragrafo{Stima della corrente:}
+In ingresso al motore viene aggiunta una corrente \(i_{LO}\) tale da generare una coppia uguale e opposta alla coppia di disturbo, in modo si elidano.
+\[\begin{cases}
+    C_m = K_T i \\
+    C_m = J_m \AccAng_m + C_\text{disturbo}
+\end{cases} \ \rightarrow \ C_\text{disturbo} = C_m - J_m \AccAng_m = K_T i - J_m \AccAng_m \rightarrow i_{LO} = \frac{K_T i - J_m \AccAng_m}{K_T} \]  
 
 \sottosezione{Esercizio}
 
 \sezione{Autotuning}
+Con Autotuning si intendono le tecniche di sintonizzazione automatica del controllo a partire da misure sperimentali.
+Step:
+\begin{enumerate}
+    \item Misura di \(L_v(j\omega)\), utilizzata per cercare \(K_{pv}\) che soddisfi \(m_\phi\) e \(m_a\) desiderati o minimi
+    \item Calcolo dell'integrale \(\frac{1}{T_{iv}}\) (noi l'abbiamo visto con metodi empirici)
+    \item Misura di \(W_v(j\omega)\)
+    \item Verifica dell'utente che potrebbe utilizzare dei filtri per cercare eventualmente di migliorare quanto ottenuto
+    \item Misura di \(L_p(j\omega)\), utilizzata per sintonizzare \(K_{pp}\)
+    \item Misura di \(W_p(j\omega)\)
+\end{enumerate}
+
+Occorre prestare attenzione che l'autotuning si basa sulle misure, questo significa che occorre prestare attenzione a una serie di aspetti: scelta di un opportuno numero di misure, encoder sufficientemente risoluto, applicazione di eccitazione di giusta intensità e durata, e come questi devono essere adattati considerando la presenza di gioco. 
