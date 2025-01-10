@@ -29,7 +29,7 @@ Tuttavia la scelta di \(\rho\) non dovrebbe portare a utilizzo di riduttori con 
 \end{figure}
 
 %%%%%
-{{\color{red}}Perchè la curva grigio scuro con H alta ha quella forma, ho scritto "legata al gioco per garantire omega_bv^max < limite", ma che significa?}
+{\color{red}Perchè la curva grigio scuro con H alta ha quella forma, ho scritto "legata al gioco per garantire \(omega_{bv}^{max}<\) limite", ma che significa?}
 
 \paragrafo{Effetto del rumore:}
 Nel grafico le curve calano per \(\rho\) elevati perché aumenta il \(K_{pv}\) associato, che è quello che fa aumentare gli effetti del rumore. Tuttavia non c'è una relazione diretta tra \(\rho\) e aumento del rumore, la causa è l'inerzia totale \(J\), infatti, il calcolo del guadagno per l'anello di posizione è \(K_{pv} = \frac{J \omega_{bv}^{des}}{K_T}\), dove facilmente ci si rende conto di questa relazione. Abbassare \(\rho\) aumentando l'inerzia potrebbe peggiorare gli effetti del rumore.
@@ -65,7 +65,7 @@ In ingresso al motore viene aggiunta una corrente \(i_{LO}\) tale da generare un
 \end{cases} \ \rightarrow \ C_\text{disturbo} = C_m - J_m \AccAng_m = K_T i - J_m \AccAng_m \rightarrow i_{LO} = \frac{K_T i - J_m \AccAng_m}{K_T} \]  
 
 \sottosezione{Esercizio di controllo di un sistema con gioco}
-Dati \(J_m=0.001 kgm2, \ K_T=1 Nm/A, \ \rho = 9, \) \( \ \omega_i = 5 kHz, \ \omega_{tv}=700 Hz, \) \( \ \text{Frequenza di campionamento dell’anello di velocità} = 8 kHz\).
+Dati \(J_m=0.001 kgm2, \ K_T=1 Nm/A, \ \rho = 9, \) \( \ \omega_i = 5 kHz, \ \omega_{tv}=700 Hz, \) \( \, \text{Frequenza di campionamento dell’anello di velocità} = 8 kHz\).
 Si voglia progettare un controllo tale per cui quando il carico sia disaccoppiato venga garantito un \(m_\phi \simeq 30^\circ\) e che garantisca un margine di fase migliore quando accoppiato.
 
 In condizione di disaccoppiamento deve valere\footnote{Notare che l'inerzia è solo del motore quando carico disaccoppiato.} \(\omega_{bv}^\text{dis} = \omega_a^\text{dis} \simeq \frac{K_{pv}K_T}{J_m}\).
@@ -74,7 +74,7 @@ In generale gli aumenti di inerzia causano calo di margine di fase perché provo
 
 Nel caso disaccoppiato \(m_\phi^\text{dis} = \pi - \frac{\pi}{2} + \atan{\omega_a^\text{dis} T_{iv}} - \atan{\omega_a^\text{dis} \frac{J}{f}} - \atan{\frac{\omega_a^\text{dis}}{\omega_{tv}}} - \atan{\frac{\omega_a^\text{dis}}{\omega_I}} - \atan{\omega_a^\text{dis} \frac{T_c}{2}} \), considerando un attrito trascurabile, e raccoglieno i termini di trasduttore e anello di corrente in un periodo equivalente \(m_\phi^\text{dis} \simeq \atan{\omega_a^\text{dis} T_{iv}} - \atan{\omega_a^\text{dis} T_{eq}} \). Sostituendo la formula per la sintesi del PI, considerando \(\frac{\omega_a^\text{dis}}{\omega_a^\text{acc}} \simeq 1+\rho\) e in fine sostituendo \(\omega_a^\text{dis}\) nella seconda arcotangente si ottiene: \(m_\phi = \atan{(1+\rho) 4 \epsilon^2} - \atan{\frac{K_{pv}K_T}{J_m} T_{eq}} \geqslant \omega_\phi^\text{dis, minima}\).
 
-Da questa espressione è possibile ricavare il guadagno massimo per l'anello di velocità: \(K_{pv} \leqslant \tan{\left{\omega_\phi^\text{dis, minima} - \atan{4(1+\rho)} \right}}\frac{J_m}{K_{T}T_{eq}} \).
+Da questa espressione è possibile ricavare il guadagno massimo per l'anello di velocità: \[K_{pv} \leqslant \tan{\left\{\omega_\phi^\text{dis, min} - \atan{4(1+\rho)} \right\}}\frac{J_m}{K_T T_{eq}} \].
 
 Infine è possibile determinare il polo del PI del controllo di velocità \(\frac{1}{T_{iv}} \simeq \frac{\omega_a^\text{acc}}{4\xi^2} \simeq \frac{K_{pv}K_T}{J} \frac{1}{4\xi^2} \).
 
