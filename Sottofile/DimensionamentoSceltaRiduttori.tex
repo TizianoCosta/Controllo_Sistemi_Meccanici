@@ -53,7 +53,7 @@ dove:
 \paragrafo{Coppia Media:}
 Per determinare la coppia media si fa una media cubica ponderata lo spazio di modo che rappresenti la fatica a ciclo variabile, gli effetti termici, calcolata come:
 \[
-T_{2,media} = \sqrt[3]{\frac{\int^{T_{ciclo}}_0 \abs{T_2^3(t)\VelAng_c(t)dt}}{\int^{T_{ciclo}}_0 \abs{\VelAng_c(t)}dt}}
+T_{2,media} = \sqrt[3]{\frac{\int^{T_{ciclo}}_0 \abs{T_2^3(t)\VelAng_c(t)}dt}{\int^{T_{ciclo}}_0 \abs{\VelAng_c(t)}dt}}
 \]
 Anche per questa si va ad applicare un fattore di sicurezza rispetto il punto di funzionamento ottimale $1.2\cdot T_{2,media}<T_{2,nom}$.
 
@@ -66,7 +66,7 @@ Per forti riduzioni (1/10 e 1/100) si nota come le coppie $T_{2,B}$ e $T_{2,N}$ 
 La coppia di arresto $T_{2,not}$ è la massima coppia che il riduttore può sopportare in caso di arresto di emergenza (circa 100 volte in vita)\footnote{NB: La coppia di arresto non è quella da usare per la frenata all'interno del ciclo operativo!}.
 
 \sottosottosezione{Velocità all'albero veloce}
-Il limite di velocità massima è legato a problemi di sbilanciamento, ruotando crea una forzante armonica pari alla velocità di rotazione e cresce con velocità e sbilanciamento. 
+Il limite di velocità massima è legato a problemi di sbilanciamento (vedi \ref{sbilanciamentoStat}), ruotando crea una forzante armonica pari alla velocità di rotazione e cresce con velocità e sbilanciamento. 
 Deve valere $\max{\VelAng_m(t)}< n_{1,max}$ massima velocità ammissibile, cui aggiungere un fattore di sicurezza.
 Diventa problematica non appena $\VelAng \simeq \omega_{N, flessionale}$.
 Un aspetto da non sottovalutare è la presenza di eventuali sovraelongazioni nella forma d'onda di velocità legate a controllo reale.
@@ -241,7 +241,7 @@ I vincoli di rapporto di trasmissione massimo sono legati a diversi aspetti.
     Per \(\rho\) grande diventa più complicato il controllo del sistema in presenza di gioco o elasticità, viene quindi posto un \(\rho_{max}\) che si traduce in una limitazione del \(\tau_r\).
 \end{enumerate}
 
-In modo del tutto simile al caso di \(\tau_{min}\), anche il \(\tau_{max}\) potrebbe essere tanto stringente da escludere il valore \(\tau_{opt}^l\), libero, quindi  come prima se dovessere escluderlo occorre considerare un rapporto di trasmissione ottimo vincolato \(\tau_{opt}^v=\tau_{max}\).
+In modo del tutto simile al caso di \(\tau_{min}\), anche il \(\tau_{max}\) potrebbe essere tanto stringente da escludere il valore \(\tau_{opt}^l\), libero, quindi se come in precedenza fosse necessario escluderlo occorrerebbe considerare un rapporto di trasmissione ottimo vincolato \(\tau_{opt}^v=\tau_{max}\).
 
 \begin{figure}[h]
     \centering

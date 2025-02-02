@@ -170,7 +170,7 @@ Dal luogo delle radici è possibile verificare come, col variare di \(K_{pv}\), 
 Sussiste una relazione tra il massimo smorzamento dei poli di \(W_v\) e \(\rho\): \(\xi_{max} = \xi_p + \frac{\sqrt{1+\rho}}{2} - 1\). Questa relazione (non da sapere a memoria) evidenzia come lo smorzamento massimo dei poli di \(W_v\) sia maggiore di quello dei poli a catena aperta, ed è legato a quanto visto per il luogo delle radici in cui è evidente la dipendenza tra \(\rho\) e \(\alpha\).
 
 \sottosezione{Rapporto di inerzia nullo}
-Per \(\rho \rightarrow 0\) il controllo di motore è equivalente al controllo di un asse rigido, avente \(\omega_{bv}\) elevata. La banda elevata può portare ad avere il motore, se comandato con legge non dolce, ad eccitare il carico.
+Per \(\rho \rightarrow 0\) il controllo di motore è equivalente al controllo di un asse rigido, avente \(\omega_{bv}\) elevata. La banda elevata può portare il motore ad eccitare il carico, se comandato con legge di moto non dolce. 
 
 Considero l'errore di posizione al carico: \(e_c(t) = \theta_c^{des}(t) - \theta_c^{mis}(t)\) considerando \(\tau=1\), solo per semplificare il ragionamento, e \(\theta_c^{mis} = \theta_c\) ossia che il motore venga controllato bene (ipotesi realistica, considerando che sto lavorando con un equivalente asse rigido) \(e_c(t) = \theta_M^{des}(t) - \theta_c(t)\), passando in Laplace si ottiene \(E(s) = \theta_M (s) - \theta_c(s) = \theta_M(s) (1 - T(s)) = \theta_M(s) \frac{\frac{s^2}{\omega_z^2}}{\frac{s^2}{\omega_z^2} + \frac{2\xi_z}{\omega_z}s + 1}\), da cui si ottiene la formulazione:
 \[
@@ -203,7 +203,8 @@ Nel caso di risonanza in bassa frequenza (circa un \(\times 3;4\) tra \(\omega_z
 Per facilitare la realizzazione pratica si può considerare la relazione \(\omega_z < \omega_p << \omega_\pi\), perché la pulsazione di attraversamento si verifica, nel controllo colocato, per effetto di trasduttore e anello di corrente.
 
 \paragrafo{Valutazione sulla catena aperta:}
-La funzione di trasferimento in catena aperta è \(L_v(s) = G_{vm}K_T C_v(s) H_{tv}(s) W_I(s)\), dove entrano mobilità, costante di coppia, controllo di velocità, trasduttore e anello di corrente.
+La funzione di trasferimento in catena aperta, dove entrano mobilità, costante di coppia, controllo di velocità, trasduttore e anello di corrente: 
+\(L_v(s) = G_{vm}K_T C_v(s) H_{tv}(s) W_I(s)\)
 Guardando il Bode dell'anello aperto e confrontandolo con lo stesso sistema in cui vengano trascurati trasduttore e anello di velocità ci si accorge di come abbiano influenza solo in alta frequenza.
 
 \begin{figure}[h]
@@ -311,9 +312,9 @@ La funzione di trasferimento associata al filtro è \(F(s) = \frac{\frac{s^2}{\o
     \item Richiede conoscenza di \(\omega_p\)
     \item Ha fase negativa per \(\omega < \omega_p\)
     \item Richiede di avere \(\omega_p\) poco variabile (per esempio, non è adatto per viti a ricircolo di sfere in cui la pulsazione varia con la posizione della chiocciola)
-    \item Fissato \(\xi_p\), aumentare \(\xi_d\) porta ad un allargamento della banda di attenuazione, ma anche ad un maggior disturbo in fase
-    \item Fissato \(\frac{\xi_d}{\xi_p}\), viene mantenuta costante l'attenuazione, aumentare \(\xi_p\) porta ad allargamento della banda di attenuazione e disturbo in fase
-    \item Fissato \(\xi_d\) mantiene fissata la largezza di banda di attenuazione, aumentare \(\xi_p\) porta a {\color{red} ???}
+    \item Fissato \(\xi_p\), aumentare \(\xi_d\) porta ad un aumento dell'attenuazione e allargamento della banda di attenuazione, ma anche ad un maggior disturbo in fase
+    \item Fissato \(\frac{\xi_d}{\xi_p}\), vengono mantenute costante l'attenuazione e l'entità del disturbo in fase, aumentare \(\xi_p\) porta ad allargamento della banda di attenuazione e allargamento del disturbo di fase
+    \item Fissato \(\xi_d\) che mantiene fissata la largezza di banda di attenuazione, aumentare \(\xi_p\) porta a riduzione dell'attenuazione e riduzione del disturbo in fase
 \end{itemize}
 
 \begin{figure}[h]
@@ -400,8 +401,5 @@ La scelta tra i due quindi è legata a valutazione del tipo \(\frac{C_c^\text{at
 \paragrafo{Quando NON usare controllo non colocato:}
 Il controllo non colocato è legato a margine di fase minore e necessità di opportune scelte, dimensionamento, implementazione\footnote{L'encoder richiede installazione accurata, deve essere installato utilizzando un elemento rigido, altrimenti si potrebbe aggiungere risonanza e antirisonanza indesiderata nella misura.} di trasduttori lato carico, perciò meno di forze di disturbo al carico elevate, non è conveniente rispetto un CoLocato.
 
-Il controllo non colocato va evitato in caso di gioco elevato, perché avere gioco significa avere una zona di incertezza in cui non si può sapere esattamente dov'è il carico; però il controllo tenterebbe ugualmente di arrivare alla posizione desiderata, ma se l'incertezza è tale da portare il carico fuori dalla zona di incertezza, questo tenterebbe di riportarlo in posizione desiderata, ma con alto errore, quindi alta compensazione, quindi tenderebbe a uscire dalla zona di incertezza lato opposto, portando a oscillazione di posizione del carico oltre la zona di incertezza. Fenomeno peggiorato per \(K_{pp}\) elevato.
-Risolvere questa problematica richiede utilizzo di guadagni ulteriormente ridotti per basse velocità, quindi prossimi a regime.
-
-
-%% appendice MV aggiungere immagini
+Il controllo non colocato va evitato in caso di gioco elevato, perché avere gioco significa avere una zona di incertezza in cui non si può sapere esattamente dov'è il carico; però il controllo tenderebbe ugualmente alla posizione desiderata, ma se l'incertezza è tale da portare il carico fuori dalla zona di incertezza, questo tenterebbe di riportarlo in posizione desiderata, ma con alto errore, quindi alta compensazione, quindi tenderebbe a uscire dalla zona di incertezza lato opposto, portando a oscillazione di posizione del carico oltre la zona di incertezza. Fenomeno peggiorato per \(K_{pp}\) elevato.
+Risolvere questa problematica richiede utilizzo di guadagni variabili con la velocità e in particolare ulteriormente ridotti per basse velocità, quindi prossimi a regime.

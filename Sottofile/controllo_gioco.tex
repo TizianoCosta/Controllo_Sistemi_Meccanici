@@ -1,5 +1,5 @@
 \capitolo{Controllo del Moto in presenza di Gioco}
-Il gioco è caratterizzato da una variazione dell'inerzia equivalente legata a cambio di segno di \(T_2\) (questo non si verifica in ogni situazione, vedi {\color{red} Riferimento quando nelle viti a ricircolo si parlò di gioco}). 
+Il gioco è caratterizzato da una variazione dell'inerzia equivalente legata a cambio di segno di \(T_2\) (questo non si verifica in ogni situazione, vedi \ref{giocoViti}. 
 Motore e carico possono essere accoppiati per fianco destro o sinistro perciò \(J_{eq} = J_m + \tau^2 J_c\); motore e carico possono essere disaccoppiati \(J_{eq} = J_m\).
 
 \sezione{Problema del gioco}
@@ -28,14 +28,11 @@ Tuttavia la scelta di \(\rho\) non dovrebbe portare a utilizzo di riduttori con 
     \caption{Effetto del gioco: \(\omega_{bv}(\rho)\)}
 \end{figure}
 
-%%%%%
-{\color{red}Perchè la curva grigio scuro con H alta ha quella forma, ho scritto "legata al gioco per garantire \(omega_{bv}^{max}<\) limite", ma che significa?}
-
 \paragrafo{Effetto del rumore:}
-Nel grafico le curve calano per \(\rho\) elevati perché aumenta il \(K_{pv}\) associato, che è quello che fa aumentare gli effetti del rumore. Tuttavia non c'è una relazione diretta tra \(\rho\) e aumento del rumore, la causa è l'inerzia totale \(J\), infatti, il calcolo del guadagno per l'anello di posizione è \(K_{pv} = \frac{J \omega_{bv}^{des}}{K_T}\), dove facilmente ci si rende conto di questa relazione. Abbassare \(\rho\) aumentando l'inerzia potrebbe peggiorare gli effetti del rumore.
+Per \(\rho \rightarrow 0\) il gioco è poco rilevante, perché il motore non vede il carico. Le curve calano per \(\rho\) elevati perché portano ad aumentare il \(K_{pv}\) associato, che è quello che fa aumentare gli effetti del rumore. Tuttavia \textbf{non c'è una relazione diretta tra \(\rho\) e aumento del rumore, la causa è l'inerzia totale \(J\), infatti, il calcolo del guadagno per l'anello di posizione è \(K_{pv} = \frac{J \omega_{bv}^{des}}{K_T}\)}, dove facilmente ci si rende conto di questa relazione. Abbassare \(\rho\) aumentando l'inerzia potrebbe peggiorare gli effetti del rumore.
 
 \paragrafo{Rapporto di trasmissione ottimo:}
-Riprendendo il rapporto di trasmissione ottimo come visto in {\color{red} Aggiungere riferimento, inserire formula} si ritrova, utilizzando una logica diversa, un valore che vale anche per il controllo, dato che porta ad avere \(\rho\) ridotto {\color{red}Come si collega il rapporto di trasmissione ottimo con il rapporto di inerzia, e come mai tao opt porta ad avere rho minore?}
+Riprendendo il rapporto di trasmissione ottimo come visto in \ref{tau_ottimo}, si ottiene, utilizzando una logica diversa, un valore che funziona bene anche per il controllo, dato che porta ad avere \(\rho\) ridotto \footnote{Il motivo non è trasparente, ma intuitivamente la soluzione migliore è quella in cui il motore non ha carico sia in termini meccanici sia in termini di controllo.}.
 
 \sottosezione{Acceleration Feedback}
 
@@ -65,16 +62,16 @@ In ingresso al motore viene aggiunta una corrente \(i_{LO}\) tale da generare un
 \end{cases} \ \rightarrow \ C_\text{disturbo} = C_m - J_m \AccAng_m = K_T i - J_m \AccAng_m \rightarrow i_{LO} = \frac{K_T i - J_m \AccAng_m}{K_T} \]  
 
 \sottosezione{Esercizio di controllo di un sistema con gioco}
-Dati \(J_m=0.001 kgm2, \ K_T=1 Nm/A, \ \rho = 9, \) \( \ \omega_i = 5 kHz, \ \omega_{tv}=700 Hz, \) \( \, \text{Frequenza di campionamento dell’anello di velocità} = 8 kHz\).
+Dati \(J_m=0.001 kgm2, \ K_T=1 Nm/A, \ \rho = 9, \) \( \ \omega_i = 5 kHz, \ \omega_{tv}=700 Hz, \) \( \, \text{Frequenza di campionamento \allowbreak dell’anello di velocità} = 8 kHz\).
 Si voglia progettare un controllo tale per cui quando il carico sia disaccoppiato venga garantito un \(m_\phi \simeq 30^\circ\) e che garantisca un margine di fase migliore quando accoppiato.
 
 In condizione di disaccoppiamento deve valere\footnote{Notare che l'inerzia è solo del motore quando carico disaccoppiato.} \(\omega_{bv}^\text{dis} = \omega_a^\text{dis} \simeq \frac{K_{pv}K_T}{J_m}\).
 
 In generale gli aumenti di inerzia causano calo di margine di fase perché provocano uno spostamento della pulsazione di attraversamento che si avvicina all'integrale. Perciò il PI va progettato per carico accoppiato (da carico disaccoppiato ad accoppiato l'inerzia aumenta, inoltre è anche la condizione di lavoro desiderata): \(\frac{1}{T_{iv}} \simeq \frac{\omega_{bv}^\text{acc}}{4\xi^2}\) con \(\omega_{bv}^\text{acc} = \omega_{a}^\text{acc} \simeq \frac{K_{pv}K_T}{J} = \frac{K_{pv}K_T}{J_m (1+\rho)}\). {\color{red} Perché in questi casi la pulsazione di attraversamento è posta uguale alla banda passante di velocità?}
 
-Nel caso disaccoppiato \(m_\phi^\text{dis} = \pi - \frac{\pi}{2} + \atan{\omega_a^\text{dis} T_{iv}} - \atan{\omega_a^\text{dis} \frac{J}{f}} - \atan{\frac{\omega_a^\text{dis}}{\omega_{tv}}} - \atan{\frac{\omega_a^\text{dis}}{\omega_I}} - \atan{\omega_a^\text{dis} \frac{T_c}{2}} \), considerando un attrito trascurabile, e raccoglieno i termini di trasduttore e anello di corrente in un periodo equivalente \(m_\phi^\text{dis} \simeq \atan{\omega_a^\text{dis} T_{iv}} - \atan{\omega_a^\text{dis} T_{eq}} \). Sostituendo la formula per la sintesi del PI, considerando \(\frac{\omega_a^\text{dis}}{\omega_a^\text{acc}} \simeq 1+\rho\) e in fine sostituendo \(\omega_a^\text{dis}\) nella seconda arcotangente si ottiene: \(m_\phi = \atan{(1+\rho) 4 \epsilon^2} - \atan{\frac{K_{pv}K_T}{J_m} T_{eq}} \geqslant \omega_\phi^\text{dis, minima}\).
+Nel caso disaccoppiato \(m_\phi^\text{dis} = \pi - \frac{\pi}{2} + \atan{\omega_a^\text{dis} T_{iv}} - \atan{\omega_a^\text{dis} \frac{J}{f}} - \atan{\frac{\omega_a^\text{dis}}{\omega_{tv}}} - \atan{\frac{\omega_a^\text{dis}}{\omega_I}} - \atan{\omega_a^\text{dis} \frac{T_c}{2}} \), considerando un attrito trascurabile, e raccoglieno i termini di trasduttore e anello di corrente in un periodo equivalente \(m_\phi^\text{dis} \simeq \atan{\omega_a^\text{dis} T_{iv}} - \atan{\omega_a^\text{dis} T_{eq}} \). Sostituendo la formula per la sintesi del PI, considerando \(\frac{\omega_a^\text{dis}}{\omega_a^\text{acc}} \simeq 1+\rho\) e in fine sostituendo \(\omega_a^\text{dis}\) nella seconda arcotangente si ottiene: \(m_\phi = \atan{(1+\rho) 4 \xi^2} - \atan{\frac{K_{pv}K_T}{J_m} T_{eq}} \geqslant m_\phi^\text{dis, minima}\).
 
-Da questa espressione è possibile ricavare il guadagno massimo per l'anello di velocità: \[K_{pv} \leqslant \tan{\left\{\omega_\phi^\text{dis, min} - \atan{4(1+\rho)} \right\}}\frac{J_m}{K_T T_{eq}} \].
+Da questa espressione è possibile ricavare il guadagno massimo per l'anello di velocità, con \(\xi=1\): \[K_{pv} \leqslant \tan{\left\{\omega_\phi^\text{dis, min} - \atan{4(1+\rho)} \right\}}\frac{J_m}{K_T T_{eq}} \].
 
 Infine è possibile determinare il polo del PI del controllo di velocità \(\frac{1}{T_{iv}} \simeq \frac{\omega_a^\text{acc}}{4\xi^2} \simeq \frac{K_{pv}K_T}{J} \frac{1}{4\xi^2} \).
 
@@ -92,4 +89,4 @@ Step:
 
 Occorre prestare attenzione che l'autotuning si basa sulle misure, questo significa che occorre prestare attenzione a una serie di aspetti: scelta di un opportuno numero di misure, encoder sufficientemente risoluto, applicazione di eccitazione di giusta intensità e durata, e come questi devono essere adattati considerando la presenza di gioco.
 
-Attenzione che un controllo ottenuto per autotuning potrebbe non essere migliorato utilizzando filtri, in caso di sistema rigido o con risonanza in bassa frequenza {\color{red} Ha mostrato due casi per bassa frequenza, per il primo per qualche motivo non andavano bene i filtri, per il secondo con risonanze in media e alta frequenza per altri modi di vibrare i filtri andavano bene. In particolare in quel caso proponeva filtro notch perché lo smorzamento era ridotto, \(\rho\) era elevato, quindi risultava un picco di risonanza molto elevato}.
+Attenzione che un controllo ottenuto per autotuning non viene migliorato utilizzando filtri in caso di sistema rigido o con risonanza in bassa frequenza, a meno che non vi siano modi di vibrare di media o alta frequenza che causano problemi in bassa frequenza, in quel caso potrebbero essere utilizzati dei filtri notch (quando i modi di vibrare sono pochi) o dei filtri passa basso.

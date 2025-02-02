@@ -35,7 +35,7 @@ risultante delle forze assiali applicate alla chiocciola (equivalente a \( T_2 \
 
 \sottosottosezione{Forza assiale media}
 Anche in questo caso nel regime stazionario si fanno valutazioni sulla media, e in modo simile a \( T_{2,media} \) si ottiene:
-\[ F_{a, media} = \sqrt[3]{\frac{\int^{T_{ciclo}}_0 \abs{F_a^3(t)\dot{x}_c(t)dt}}{\int^{T_{ciclo}}_0 \abs{\dot{x}_c(t)}dt}} \]
+\[ F_{a, media} = \sqrt[3]{\frac{\int^{T_{ciclo}}_0 \abs{F_a^3(t)\dot{x}_c(t)}dt}{\int^{T_{ciclo}}_0 \abs{\dot{x}_c(t)}dt}} \]
 E anche in questo caso per moto ad andamento trapezoidale l'integrale diventerà una sommatoria.
 
 \sottosottosezione{Capacità di Carico Dinamico}
@@ -54,7 +54,7 @@ Noto \(F_{a,media}\), data dalla specifica in termini di giri sulla vita utile \
 Solitamente non è nota la vita utile in numero di giri relativi, è più comodo passare in ore di lavoro, quindi 
 \[ L_H = L_N \frac{1}{\VelAng_v} \frac{1}{60} [h] = L_N \frac{p}{3600 \cdot \dot{x}_{media}} \]
 che si traduce in una CCD richiesta: 
-\[ C_{D,rich} \geqslant F_{a,media} \sqrt[3]{\frac{L_H^{des}\dot{x}^{des} \cdot 3600}{p \cdot 10^6}} f_s \]
+\[ C_{D,rich} \geqslant F_{a,media} \sqrt[3]{\frac{L_H^{des}\dot{x}^{des} \cdot 3600}{p \cdot 10^6}} \cdot f_s \]
 
 \sottoparagrafo{Fattore di Shock/Servizio:}
 Alla CCD in esame va moltiplicato un fattore di shock o servizio \( f_s \), i cui valori possono cambiare tra \( 1.2 \div 3 \), se possibile conviene utilizzare un modello elasto-dinamico per avere una idea delle forze in gioco e evitare di sovradimensionare la chiocciola.
@@ -135,7 +135,7 @@ Disequazione per cui risulta evidente la dipendenza inversa tra passo e diametro
 \end{figure}
 
 \sottosezione{Vincoli su passo e diametro della vite}
-Andando a unire i due vincoli ricavati: \(p \geqslant \frac{\dot{x_{max}} 2\pi }{S} d\) e \( p \geqslant \frac{8\pi L^2 \dot{x}^{max} \sqrt{\rho}}{K_v \alpha \sqrt{E}} \cdot \frac{1}{d} \), la curva ottenuta sarà come in figura. Va evidenziato il forte limite per diametri ridotti.
+Andando a unire i due vincoli ricavati: \(p \geqslant \frac{\dot{x}_{max} 2\pi }{S} d\) e \( p \geqslant \frac{8\pi L^2 \dot{x}^{max} \sqrt{\rho}}{K_v \alpha \sqrt{E}} \cdot \frac{1}{d} \), la curva ottenuta sarà come in figura. Va evidenziato il forte limite per diametri ridotti.
 
 \sottosottosezione{Esempio}
 Fosse richiesto un \( C_D \) "basso", e quindi occorra utilizzare \(d\) "piccoli". In questo caso utilizzare viti acciaio e ceramica non ha senso, perché andrebbe a influenzare unicamente valori di diametro superiori. In questo caso utilizzare vincoli più rigidi potrebbe aiutare, perché porterebbero ad un aumento del numero di punti utilizzabili, tuttavia occorre valutare se i valori aggiunti possano essere utilizzati nell'applicazione in esame o meno.
@@ -203,7 +203,7 @@ Tuttavia le verifiche statiche sono meno severe delle verifiche dinamiche, il vi
     \caption{Rappresentazione vincolo p,d per antirisonanza sx, grafico di tutti i vincoli dx}
 \end{figure}
 
-\sottosezione{Gioco Assiale}
+\sottosezione{Gioco Assiale} \label{giocoViti}
 Prima ancora della scelta di p, d è opportuno scegliere il gioco, che tipicamente è indipendente da p,d perciò nei cataloghi è in sezione a sè stante.
 Il problema del gioco è legato alla grandezza delle gole rispetto le sfere, questo comporta forze che non sono esattamente assiali, ma hanno componente normale.
 
@@ -231,3 +231,7 @@ Il diametro entra nel calcolo dell'inerzia, in particolare, sostituendo la massa
     \includegraphics[width=0.3\textwidth]{Immagini/passo_ottimo_libero.png}
     \caption{Passo Ottimo Libero e Vincoli}
 \end{figure}
+
+\paragrafo{Stima coppia del motore per diversi passi e diametri:}
+Quando dovesse essere necessario fare valutazioni di varie tipologie di viti aventi diverse combinazioni di passi e diametri, per evitare di fare tutti i conti ogni volta, è possibile sfruttare la disuguaglianza triangolare per cui \(RMS(a+b) \leqslant RMS(a) + RMS(b) \). Nel caso in esame, al variare del diametro cambia \(J_v\), mentre col passo varia \(\tau_v\), per cui la disuguaglianza triangolare risulta essere:
+\[ C_m^{RMS} \leqslant (J_m + J_v) \frac{\dots{x}_{RMS}}{\tau_v} + \tau_v \frac{F_A^{RMS}}{\eta} \]

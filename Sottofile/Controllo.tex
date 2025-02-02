@@ -63,7 +63,7 @@ Per un sistema del primo ordine il guadagno in continua/regime è dato da \(\fra
 Un controllore PI è del tipo \(C_V(s)=K_{pv}\frac{1+sT_{iv}}{sT_{iv}}\), per cui il sistema a catena chiusa diventa 
 \[W_v(s)=\frac{K_{pv}K_T(1+sT_{iv})}{s^2T_{iv}J + sT_{iv}(f+K_{pv}K_T)+K_{pv}K_T}\]
 Come era voluto, il sistema così ottenuto ha guadagno in continua unitario.
-Però aumenta il numero di poli, diventa di secondo ordine\footnote{Fare riferimento a quanto presente in appendice \ref{sistemi_ordine_2}} (cosa che deve mettere in allarme per una serie di implicazione) e viene aggiunto uno zero reale (che ha anch'esso forti implicazioni). Tuttavia il grado relativo rimane 1.
+Però aumenta il numero di poli, diventa di secondo ordine\footnote{Passando da un primo a un secondo ordine occorre fare attenzione per una serie di implicazioni; fare riferimento a quanto presente in appendice \ref{sistemi_ordine_2}.} e viene aggiunto uno zero reale, che ha anch'esso forti implicazioni. Tuttavia il grado relativo rimane 1.
 
 \paragrafo{Effetto dello zero reale:}
 Per valutare bene l'effetto dello zero nel sistema a catena chiusa adotto una parametrizzazione:
@@ -78,7 +78,7 @@ Utilizzare \(\alpha\) permette di valutare dove si trova lo zero rispetto i poli
 \]
 In particolare si nota come la presenza dello zero vada a incrementare la sovraelongazione.
 
-\textbf{La sovraelongazione dipende da \(\xi\) e dalla posizione dello zero.}
+\textbf{La sovraelongazione dipende da \(\xi\) e dalla posizione dello zero.} Di seguito un immagine con relazione tra picco di sovraelongazione \(M_p\) e posizione dello zero \(\alpha\).
 
 \begin{figure}[h]
     \centering
@@ -340,7 +340,7 @@ Analisi dei poli: \(\omega_{n,p} = \sqrt{K_{pp} \omega_{b,v}}\) e \(\xi_p = \fra
 Privilegiare la sovraelongazione di posizione porta ad un peggioramento di \(\omega_{b,p}\) che possono venire compensati in feedforward di velocità, che va direttamente all'anello di velocità e quindi non risente della ridotta \(\omega_{b,p}\).
 
 \sottosottosezione{Sintonizzazione}
-Per effettuare la sintonizzazione dell'anello di posizione vengono considerati \(\xi^{des}_p = 1\div 1.5\) e l'anello di velocità ben sintonizzato, perciò valgono:
+Per effettuare la sintonizzazione dell'anello di posizione vengono considerati \(\xi^{des}_p = 1\div 1.5\) e l'anello di velocità ben sintonizzato, perciò valgono\footnote{\(\omega_b = \omega_n \sqrt{1-2\xi^2+\sqrt{2-4\xi^2+4\xi^4}}\simeq \frac{\omega_{n,p}}{\xi} 0.65\)}:
 \[\begin{cases}
     K_{pp} = \frac{\omega_{b,v}}{4(\xi^{des})^2} \\
     \omega_{b,p} \simeq \frac{\omega_{n,p}}{\xi} 0.65 \\
