@@ -36,7 +36,7 @@ Riprendendo il rapporto di trasmissione ottimo come visto in \ref{tau_ottimo}, s
 
 \sottosezione{Acceleration Feedback}
 
-%% inserire schematico pag 86
+\import{Immagini/}{acceleration_feedback}
 
 Acceleration Feedback è una tecnica che consiste nel retroazionare l'accelerazione e portarla al motore come corrente, così facendo la relazione tra accelerazione e corrente diventa \(\frac{s^2\theta}{i} = \frac{K_T}{J + K_TK_A}\), ossia viene aumentata virtualmente l'inerzia lato motore di una quantità \(K_TK_A\), da cui si ottiene un rapporto di inerzia virtuale minore, quindi meno sensibile al gioco, \(\rho^\text{virtuale}=\frac{\tau^2 J_c}{J_m + K_TK_A}\).
 
@@ -44,7 +44,11 @@ Tuttavia la misura di accelerazione non è possibile. L'accelerazione può esser
 
 \sottosezione{Load Observer}
 
-%% inserire schematico pag 87
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Immagini/load_observer.png}
+    \caption{Load observer, schema implementativo}
+\end{figure}
 
 Load Observer è una tecnica che considera il sistema ideale composto dal solo motore, mentre le non idealità vengono consensate in un contributo di coppia di disturbo (gioco e elasticità della trasmissione e attrito).
 Se questo contributo di disturbo fosse determinabile, potrebbe essere cancellato (in feedback o eventualmente in feedforward), il sistema ottenuto sarebbe quello ideale solo motore, il carico non viene visto.
@@ -67,7 +71,7 @@ Si voglia progettare un controllo tale per cui quando il carico sia disaccoppiat
 
 In condizione di disaccoppiamento deve valere\footnote{Notare che l'inerzia è solo del motore quando carico disaccoppiato.} \(\omega_{bv}^\text{dis} = \omega_a^\text{dis} \simeq \frac{K_{pv}K_T}{J_m}\).
 
-In generale gli aumenti di inerzia causano calo di margine di fase perché provocano uno spostamento della pulsazione di attraversamento che si avvicina all'integrale. Perciò il PI va progettato per carico accoppiato (da carico disaccoppiato ad accoppiato l'inerzia aumenta, inoltre è anche la condizione di lavoro desiderata): \(\frac{1}{T_{iv}} \simeq \frac{\omega_{bv}^\text{acc}}{4\xi^2}\) con \(\omega_{bv}^\text{acc} = \omega_{a}^\text{acc} \simeq \frac{K_{pv}K_T}{J} = \frac{K_{pv}K_T}{J_m (1+\rho)}\). {\color{red} Perché in questi casi la pulsazione di attraversamento è posta uguale alla banda passante di velocità?}
+In generale gli aumenti di inerzia causano calo di margine di fase perché provocano uno spostamento della pulsazione di attraversamento che si avvicina all'integrale. Perciò il PI va progettato per carico accoppiato (da carico disaccoppiato ad accoppiato l'inerzia aumenta, inoltre è anche la condizione di lavoro desiderata): \(\frac{1}{T_{iv}} \simeq \frac{\omega_{bv}^\text{acc}}{4\xi^2}\) con \(\omega_{bv}^\text{acc} = \omega_{a}^\text{acc} \simeq \frac{K_{pv}K_T}{J} = \frac{K_{pv}K_T}{J_m (1+\rho)}\).
 
 Nel caso disaccoppiato \(m_\phi^\text{dis} = \pi - \frac{\pi}{2} + \atan{\omega_a^\text{dis} T_{iv}} - \atan{\omega_a^\text{dis} \frac{J}{f}} - \atan{\frac{\omega_a^\text{dis}}{\omega_{tv}}} - \atan{\frac{\omega_a^\text{dis}}{\omega_I}} - \atan{\omega_a^\text{dis} \frac{T_c}{2}} \), considerando un attrito trascurabile, e raccoglieno i termini di trasduttore e anello di corrente in un periodo equivalente \(m_\phi^\text{dis} \simeq \atan{\omega_a^\text{dis} T_{iv}} - \atan{\omega_a^\text{dis} T_{eq}} \). Sostituendo la formula per la sintesi del PI, considerando \(\frac{\omega_a^\text{dis}}{\omega_a^\text{acc}} \simeq 1+\rho\) e in fine sostituendo \(\omega_a^\text{dis}\) nella seconda arcotangente si ottiene: \(m_\phi = \atan{(1+\rho) 4 \xi^2} - \atan{\frac{K_{pv}K_T}{J_m} T_{eq}} \geqslant m_\phi^\text{dis, minima}\).
 
