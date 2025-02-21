@@ -89,7 +89,7 @@ In alternativa alle sfere solo di acciaio, esistono viti a ricircolo di sfere in
 
 \sottosottosezione{Vincolo 1 su p,d}
 A partire da \( d\cdot \VelAng_v \leqslant S = \DperN_{lim} \alpha \), sostituendo la velocità della vite con la velocità del carico traslante, ed esplicitando il passo della vite, si ottiene una relazione di vincolo per passo e diametro della vite:
-\[ p \geqslant \frac{\dot{x}_{max} 2\pi }{S} d \]
+\[ p \geqslant \frac{\dot{x}_{max} 2\pi }{S} \cdot d = \frac{\dot{x}_{max} \unitamisura{m}{s} 60 }{S \left[ m \cdot \text{rpm} \right] } \cdot d \]
 
 Nota bene che \(\dot{x}_{max}\) solitamente non è un dato progettuale, è possibile sceglierlo entro limiti termici/strutturali.
 
@@ -98,7 +98,7 @@ La vite è naturalmente sbilanciata, ruotando crea una forzante armonica alla fr
 Per ridurre gli effetti delle vibrazioni si possono adottare due soluzioni.
 
 \sottosottosezione{Viti smorzate}
-Per limitare le vibrazioni è possibile utilizzare viti con un anima in elastomero che vada a smorzare le vibrazioni, inoltre essendo al centro del diametro della vite non andrà a comprometterne la rigidità. Valori tipici di smorzamento di viti smorzate sono \(\epsilon \simeq 0.3 \div 0.5\), contro i \(\epsilon \simeq 0.0x \) di viti normali.
+Per limitare le vibrazioni è possibile utilizzare viti con un anima in elastomero che vada a smorzare le vibrazioni, inoltre essendo al centro del diametro della vite non andrà a comprometterne la rigidità. Valori tipici di smorzamento di viti smorzate sono \(\xi \simeq 0.3 \div 0.5\), contro i \(\xi \simeq 0.0x \) di viti normali.
 
 \sottosottosezione{Limitare la velocità di rotazione}
 Per evitare di ottenere sulla vite vibrazioni elevate basta evitare di passare per frequenze naturali, cioè \( \VelAng_v < \omega_{N,flex}(x) \), dove \( \omega_{N,flex}(x) \) è dipendente dalla posizione in cui si trova la chiocciola, perché questa solitamente scorre su di una guida in modo da evitare sia la vite a dover sopportare il peso del carico, e quindi va ad aumentare la rigidezza localmente. Il problema risulta complicato.
@@ -127,11 +127,14 @@ Queste tre possibilità risultano in 4 combinazioni:
 A partire dalla disequazione \( \VelAng_v^{max} \leqslant \omega_{N,flex}^{min} \alpha \), con \( \alpha \simeq 0.6\div 0.8 \) coefficiente di sicurezza che considera come l'ampiezza inizi a salire prima del valore esatto di pulsazione naturale, sostituisco i vari elementi, effettuo qualche manipolazione e si ottiene:
 \[ p \geqslant \frac{8\pi L^2 \dot{x}^{max} \sqrt{\rho}}{K_v \alpha \sqrt{E}} \cdot \frac{1}{d} \]
 Disequazione per cui risulta evidente la dipendenza inversa tra passo e diametro; quindi che per velocità superiori il vincolo peggiora; che per lunghezze superiori il vincolo peggiora quadraticamente; che per coefficienti di vincoli inferiori il vincolo peggiora.
+Solitamente nei datasheet sono presenti i valori di velocità critica \(N_c\) per i vari diametri, da cui si ottiene la disequazione:
+\[ p \geqslant \frac{\dot{x}_{max} \unitamisura{m}{s} 60 }{N_c \left[\text{rpm} \right] } \]
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.4\textwidth]{Immagini/vel_critica_vite_2sol.png}
     \includegraphics[width=0.2\textwidth]{Immagini/vite_guida_MV.png}
+    \caption{Frequenza naturale flessionale in funzione di posizione della chiocciola}
 \end{figure}
 
 \sottosezione{Vincoli su passo e diametro della vite}
@@ -183,7 +186,7 @@ La rigidezza ha minimo in corrispondenza di \(K_\text{ass,vite}^\text{min} = \fr
 \end{figure}
 
 \paragrafo{Usare rigidezza equivalente:}
-Il valore di \(K_eq\) di per sè non crea problemi, tuttavia considerando il modello a 2 gdl e considerando il motore incastrato, si otterrà una pulsazione di antirisonanza \(\omega_z = \sqrt{\frac{K_{eq}}{M_{eq}}}\) relativa alla funzione di trasferimento data da \( \frac{\Theta(s)}{C_m(s)} \).
+Il valore di \(K_{eq}\) di per sè non crea problemi, tuttavia considerando il modello a 2 gdl e considerando il motore incastrato, si otterrà una pulsazione di antirisonanza \(\omega_z = \sqrt{\frac{K_{eq}}{M_{eq}}}\) relativa alla funzione di trasferimento data da \( \frac{\Theta(s)}{C_m(s)} \).
 La massa equivalente è data da \( M_{eq}(d) \simeq M_\text{carico} + M_\text{chiocciola} + \frac{M_\text{vite}}{3} \); la rigidezza è funzione di \( K_{eq}(p,d,x) \), perciò \(\omega_z (p,d,x)\), e la pulsazione di antirisonanza ha implicazioni sulla banda passante \( \omega_{bv} \leqslant \omega_z \cdot [50\% \div 70\%] \), quindi su inseguimento del riferimento.
 
 \paragrafo{Rappresentazioni in grafico p,d:}
@@ -234,4 +237,4 @@ Il diametro entra nel calcolo dell'inerzia, in particolare, sostituendo la massa
 
 \paragrafo{Stima coppia del motore per diversi passi e diametri:}
 Quando dovesse essere necessario fare valutazioni di varie tipologie di viti aventi diverse combinazioni di passi e diametri, per evitare di fare tutti i conti ogni volta, è possibile sfruttare la disuguaglianza triangolare per cui \(RMS(a+b) \leqslant RMS(a) + RMS(b) \). Nel caso in esame, al variare del diametro cambia \(J_v\), mentre col passo varia \(\tau_v\), per cui la disuguaglianza triangolare risulta essere:
-\[ C_m^{RMS} \leqslant (J_m + J_v) \frac{\dots{x}_{RMS}}{\tau_v} + \tau_v \frac{F_A^{RMS}}{\eta} \]
+\[ C_m^{RMS} \leqslant (J_m + J_v) \frac{\Ddot{x}_{RMS}}{\tau_v} + \tau_v \frac{F_A^{RMS}}{\eta} \]
