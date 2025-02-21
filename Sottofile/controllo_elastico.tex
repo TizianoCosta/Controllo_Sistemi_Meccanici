@@ -29,7 +29,7 @@ Dove \(J = J_M + \tau_R^2 J_c\).
 
 \paragrafo{Trasmissibilità:}
 La trasmissibilità è la funzione di trasferimento che lega posizione angolare del motore \(\theta_M\) e la posizione angolare del carico \(\theta_c\). Se in un sistema rigido vale esattamente il rapporto di trasmissione \(\tau\), considerando la rigidezza e lo smorzamento che caratterizzano qualsiasi riduttore, diventa:
-\[ T(s) := \frac{\theta_c(s)}{\theta_M(s)}=\tau \frac{D s + k}{J_c s^2 + D s +k} = \tau \frac{2\frac{2\xi_z}{\omega_z} s + 1}{\frac{s^2}{\omega_p^2} + \frac{2\xi_p}{\omega_p} s + 1}\]
+\[ T(s) := \frac{\theta_c(s)}{\theta_M(s)}=\tau \frac{D s + k}{J_c s^2 + D s +k} = \tau \frac{\frac{2\xi_z}{\omega_z} s + 1}{\frac{s^2}{\omega_p^2} + \frac{2\xi_p}{\omega_p} s + 1}\]
 
 \sottosezione{Ricettanza, Mobilità, Inertanza}
 La ricettanza è la relazione che lega posizione in uscita e coppia in ingresso; di nostro interesse c'è la mobilità, che relaziona la velocità e la coppia; mentre l'inertanza lega accelerazione e coppia.
@@ -374,14 +374,16 @@ Per la scelta del guadagno si può utilizzare la formulazione empirica \(K_{pp}^
 I poli di \(L_p\) sono i 4 poli di \(W_v\), 2 reali 2 complessi coniugati, il polo reale in \(s=0\) dovuto all'integrazione fisica e i 2 poli della trasmissibilità, che sono anche gli zeri complessi coniugati di \(W_v\).
 Gli zeri di \(L_p\) sono i 3 zeri di \(W_v\), 2 complessi coniugati e uno reale, e lo zero della trasmissibilità.
 
-%% inserire immagine rlocus
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{Immagini/rlocus_non_colocato_posizione.png}
+    \caption{Luogo delle radici di anello di posizione non colocato}
+\end{figure}
 
 \paragrafo{Analisi controllo Non CoLocato, scelta guadagno:}
 Per l'analisi del tipo di controllo si utilizza il luogo delle radici. Si vede come l'antirisonanza si cancelli con la risonanza in trasmissibilità; i due poli complessi coniugati tendono all'asse reale per \(K_{pp}\) elevati; polo reale in \(s=0\) tende a zero reale; infine, e parte più critica di questo controllo, i due poli reali tendono all'instabilità per \(K_{pp}\) elevati.
 In modo simile al precedente, considero di dividere il controllo con un \(K_{pp}^{co}\) tra \(E_p^\text{carico}\), \(\Omega_{des}^\text{carico}\) e \(\frac{1}{\tau}\) tra \(\Omega_{des}^\text{carico}\), \(\Omega_{des}^\text{mot}\), risultando quindi in \(K_{pp}^{nc} = K_{pp}^{co} \frac{1}{\tau}\).
 Attenzione che questo non significa che il guadagno è alzato dal riduttore, perché quel \(\frac{1}{\tau}\) va a elidersi con il \(\tau\) della trasmissibilità.
-
-%% inserire immagine concetto del guadagno
 
 \sottosottosezione{CoLocato vs Non CoLocato}
 Il controllo di tipo CoLocato è incondizionatamente stabile\footnote{Teoricamente, in pratica ci sono delle dinamiche finora ignorate che renderanno instabile il controllo per \(K_{pp}\) eccessivamente elevati.}; il controllo Non CoLocato invece tende all'instabilità per \(K_{pp}\) elevati.
