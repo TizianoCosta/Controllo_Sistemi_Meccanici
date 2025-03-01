@@ -20,7 +20,7 @@ jobs:
 
       - name: Compile LaTeX with latexmk
         run: |
-          latexmk -pdf main.tex  # Usa latexmk per compilare il file .tex
+          latexmk -pdf -f main.tex  # Usa latexmk per compilare il file .tex
           latexmk -c  # Pulisce i file temporanei generati (opzionale, per mantenerlo pulito)
 
       - name: Deploy PDF to GitHub Pages
