@@ -16,7 +16,7 @@ jobs:
       - name: Install LaTeX and latexmk
         run: |
           sudo apt-get update
-          sudo apt-get install -y latexmk texlive-full texlive-mathtools texlive-extra  # Installa latexmk
+          sudo apt-get install -y latexmk texlive-full  # Installa latexmk
 
       - name: Compile LaTeX with latexmk
         run: |
