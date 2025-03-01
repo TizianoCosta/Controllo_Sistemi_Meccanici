@@ -1,0 +1,36 @@
+name: Compile and Deploy PDF
+
+on:
+  push:
+    branches:
+      - main  # La Action si attiva al push su main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install LaTeX and latexmk
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk  # Installa latexmk
+
+      - name: Compile LaTeX with latexmk
+        run: |
+          latexmk -pdf main.tex  # Usa latexmk per compilare il file .tex
+          latexmk -c  # Pulisce i file temporanei generati (opzionale, per mantenerlo pulito)
+
+      - name: Deploy PDF to GitHub Pages
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          git clone --depth 1 --branch gh-pages https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
+          mv main.pdf gh-pages/  # Sposta il PDF compilato nella branch gh-pages
+          cd gh-pages
+          git add main.pdf
+          git commit -m "Update compiled PDF" || echo "No changes to commit"
+          git push
