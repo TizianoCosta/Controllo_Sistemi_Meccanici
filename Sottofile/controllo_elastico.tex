@@ -96,6 +96,8 @@ Nel controllo di stato, lavorando in MIMO, permette di scegliere entrambe le gra
 Per valutare quale controllo utilizzare vado a studiare intanto il controllo Co-Locato e in particolare l'inertanza (per semplicità di analisi) \(sG_{vm}(s)\) e la mobilità \(G_{vm}(s)\). Per il tracciamento si consiglia di studiare gli asintoti e quindi tracciare la funzione di trasferimento collegandoli.
 Si notano in particolare \(m_\phi > 90^\circ\) e, non arrivando mai a \(-180^\circ\), vale anche \(m_a = \infty\). Questo è un ottimo segnale in termini di stabilità del sistema.\footnote{In fase, variazione tra \(-360^\circ\rightarrow -180^\circ\) equivale alla variazione \(0^\circ\rightarrow 180^\circ\) vista in aula}
 
+\[G_{vm} = \frac{1}{sJ}\frac{\frac{s^2}{\omega^2_z} + \frac{2\xi_z}{\omega_z}s + 1}{\frac{s^2}{\omega^2_p} + \frac{2\xi_p}{\omega_p}s + 1}\]
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.45\textwidth]{Immagini/Inertanza_gvm.png}
@@ -105,6 +107,8 @@ Si notano in particolare \(m_\phi > 90^\circ\) e, non arrivando mai a \(-180^\ci
 
 \paragrafo{Controllo non Co-Locato:}
 Per quanto riguarda il controllo non Co-Locato, facendo lo stesso ci si accorge di come la mobilità, complessivamente sia un sistema con polo del secondo ordine, inoltre il polo agisce prima dello zero, quindi in un certo tratto la fase potrebbe andare al di sotto dei \(-180^\circ\). Come risulta più chiaro dal grafico, questo aspetto ha conseguenze sulla stabilità del sistema: \textbf{Non si può fare un controllo non co-locato in velocità.}
+
+\[G_{vc} = \frac{1}{sJ}\frac{\frac{2\xi_z}{\omega_z}s + 1}{\frac{s^2}{\omega^2_p} + \frac{2\xi_p}{\omega_p}s + 1}\]
 
 \begin{figure}[h]
     \centering
@@ -392,7 +396,7 @@ Per \(K_{pp}\) bassi i due hanno comportamenti molto simili, perciò in potenzia
 \paragrafo{Condizione di disturbo al carico:}
 Il controllo di tipo Non CoLocato è da utilizzare nel caso di forze di disturbo al carico rilevanti. 
 
-Partendo dall'equazione della dinamica lato carico \(J_c \AccAng_c = -k(\theta_c - \theta_m \tau_R) - D(\VelAng_c - \VelAng_m\tau_R) - C_c - f_c\VelAng_c\), considerando condizioni statiche, rapporto di trasmissione unitario, si ottiene \(C_c = k(\theta_c - \theta_m)\).
+Partendo dall'equazione della dinamica lato carico \(J_c \AccAng_c = k(\theta_c - \theta_m \tau_R) + D(\VelAng_c - \VelAng_m\tau_R) - C_c - f_c\VelAng_c\), considerando condizioni statiche, rapporto di trasmissione unitario, si ottiene \(C_c = k(\theta_c - \theta_m)\).
 Applicando un gradino di coppia di carico, si ottiene che a regime vale \(\theta_c - \theta_m = \frac{C_c}{k}\), ossia motore e carico non avranno la stessa posizione finale.
 
 Con controllo di tipo colocato questa differenza non viene percepita, perché il motore verrà correttamente portato al suo valore finale, mentre il carico sarà ad una posizione non nota e scorretta.

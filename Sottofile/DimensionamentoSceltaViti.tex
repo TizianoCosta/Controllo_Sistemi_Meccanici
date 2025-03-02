@@ -84,7 +84,7 @@ In alternativa alle sfere solo di acciaio, esistono viti a ricircolo di sfere in
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.12\textwidth]{Immagini/Viti_A_C.png}
-    \caption{Viti a ricircolo di sfere in acciaio e ceramica}
+    \caption{Viti a ricircolo di sfere acciaio acciaio (sx) vs acciaio e ceramica (dx)}
 \end{figure}
 
 \sottosottosezione{Vincolo 1 su p,d}
@@ -150,7 +150,7 @@ Fosse richiesto un \( C_D \) "basso", e quindi occorra utilizzare \(d\) "piccoli
     \caption{1-3 relative a vincolo e dipendenze, 4 relativa all'esempio}
 \end{figure}
 
-\sottosezione{Rigidezza Assiale}
+\sottosezione{Rigidezza nelle Viti}
 Il moto assiale del carico porta a vibrazioni nel sistema, che possono causare problemi di precisione e accuratezza nel moto del carico.
 Un sistema reale ha infiniti modi di vibrare, tuttavia la conoscenza dei parametri è tale per cui una semplificazione con un modello a 2gdl è comparabile con risultati con modelli a più gdl.
 
@@ -172,12 +172,13 @@ In particolare a seconda del tipo di vincolo sulla vite cambia sensibilmente.
 Se sulla vite è posto un unico vincolo assiale (AA,AI,IL), allora un estremo è libero di muoversi assialmente, perciò non sarà interessato dalla rigidezza assiale.
 In questo caso la lunghezza assiale è determinata dalla distanza tra motore e chiocciola.
 In termini di rigidezza minima questa si verifica per lunghezza assiale massima, ossia quando la chiocciola è posta in prossimità dell'estremo assialmente libero.
+Mentre varrà per \(L_\text{assiale} = 0 \rightarrow K_\text{assiale}=\infty\).
 
 \paragrafo{Caso doppio vincolo assiale:}
 Se sulla vite è posto un doppio vincolo assiale (II), allora entrambi gli estremi saranno interessati dalla rigidezza assiale.
 In questo caso la vite viene divisa in due molle equivalenti poste in parallelo, di lunghezze \(x\) (posizione della chiocciola), \(L_v - x\) (resto della vite)\footnote{In realtà la lunghezza assiale considera non la lunghezza totale della vite ma da vincolo a vincolo, tuttavia è spesso una buona approssimazione.}: \(K_\text{ass,vite}(x) \simeq \frac{EA}{x} + \frac{EA}{L_v - x} \).
 La rigidezza ha massimo in corrispondenza di \( K_\text{ass,vite}^\text{max} (x=0,L_v) \rightarrow \infty \), nota bene che se questa rigidezza è infinita, nel calcolo della rigidezza equivalente per il modello a 2gdl i parametri prima ritenuti trascurabili non potranno più esserlo.
-La rigidezza ha minimo in corrispondenza di \(K_\text{ass,vite}^\text{min} = \frac{4EA}{L_v} \).
+La rigidezza ha minimo in corrispondenza del punto medio della vite per cui si ottiene \(K_\text{ass,vite}^\text{min} = \frac{4EA}{L_v} \).
 
 \begin{figure}[h]
     \centering
@@ -214,8 +215,9 @@ Il problema del gioco è legato alla grandezza delle gole rispetto le sfere, que
 Utilizzo di sfere maggiorate, che vadano a occupare più spazio all'interno delle gole, tuttavia questo comporta un aumento dell'attrito e maggior richiesta di manutenzione.
 
 \paragrafo{Soluzione 2:}
-Utilizzo di Precarico o Shift di passo, in questo caso va introdotto un certo \(\Delta\) in un passo, di modo che le forze normali si annullino. Per poter utilizzare un precarico occorre utilizzare una chiocciola apposita che, tramite una molla regolabile, forza il contatto delle sfere con le gole. Questo aumenta di conseguenza l'attrito, è sempre applicata, e viene fissata non oltre il \(10\%\) di \(C_D\), il cui calcolo va modificato di conseguenza: \( C_D \geqslant \frac{f_s F_a}{0.9} \sqrt[3]{\frac{L_N}{10^6}} \).
-
+Utilizzo di Precarico o Shift di passo.
+Per lo shift di passo viene introdotto un certo \(\Delta\) in un passo, tale per cui le forze normali si annullino. 
+Per poter il precarico occorre utilizzare una chiocciola apposita che, tramite una molla regolabile, forza il contatto delle sfere con le gole. Questi metodi, però, aumentano di conseguenza l'attrito, perciò il carico dinamico viene fissato non oltre il \(10\%\) di \(C_D\), il cui calcolo va modificato di conseguenza: \( C_D \geqslant \frac{f_s F_a}{0.9} \sqrt[3]{\frac{L_N}{10^6}} \).
 In alcuni casi il sistema è precaricato per configurazione, per esempio quando la vite è posta verticalmente.
 
 \begin{figure}[h]
