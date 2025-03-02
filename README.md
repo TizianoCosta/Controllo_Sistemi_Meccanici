@@ -16,4 +16,4 @@ In caso di problemi domandate a qualche motore di ricerca/intelligenza artificia
 
 ## Licenza
 
-Questi appunti sono disponibili sotto la [MIT License](LICENSE).
+Questi appunti sono disponibili sotto la [AGPL 3.0 License](LICENSE).
